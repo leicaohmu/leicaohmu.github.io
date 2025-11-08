@@ -1,0 +1,29 @@
+# Jekyll Ignore Patterns
+
+# Jekyll generated files
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# macOS system files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+
+# Log files
+*.log
+
+# IDE directories
+.vscode/
+.idea/
+
+# Swap files
+*.swp
+*.swo
+
+# Temporary files
+*~
+*#*
