@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lei Laboratory | Biostatistics and AI Medicine</title>
+    <title>Lei Laboratory | 雷曹实验室</title>
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="icon" type="image/png" href="assets/images/logo.png">
 </head>
 <body>
     <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button id="lang-en" class="active">English</button>
-        <button id="lang-zh">中文</button>
+        <button id="lang-en">English</button>
+        <button id="lang-zh" class="active">中文</button>
     </div>
 
     <!-- Navigation -->
@@ -19,175 +19,200 @@
         <div class="container">
             <div class="nav-brand">
                 <img src="assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
-                <span class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</span>
+                <span class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">雷曹实验室</span>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" data-en="Home" data-zh="首页">Home</a></li>
-                <li><a href="pages/members.html" data-en="Team" data-zh="成员">Team</a></li>
-                <li><a href="pages/research.html" data-en="Research" data-zh="研究">Research</a></li>
-                <li><a href="pages/publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                <li><a href="pages/news.html" data-en="News" data-zh="动态">News</a></li>
-                <li><a href="pages/courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
-                <li><a href="pages/resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
-                <li><a href="pages/join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                <li><a href="index.html" data-en="Home" data-zh="首页" class="active">首页</a></li>
+                <li><a href="pages/members.html" data-en="Team" data-zh="成员">成员</a></li>
+                <li><a href="pages/research.html" data-en="Research" data-zh="研究">研究</a></li>
+                <li><a href="pages/publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                <li><a href="pages/news.html" data-en="News" data-zh="动态">动态</a></li>
+                <li><a href="pages/courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                <li><a href="pages/resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                <li><a href="pages/join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-home">
-        <div class="hero-overlay"></div>
-        <div class="container hero-container">
-            <img src="assets/images/logo.png" alt="Lei Laboratory Logo" class="hero-logo-large">
-            <h1 class="hero-title" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</h1>
-            <p class="hero-subtitle" data-en="Biostatistics & AI Methods in Medicine" data-zh="生物统计与人工智能医学方法">
-                Biostatistics & AI Methods in Medicine
-            </p>
-            <p class="hero-motto">
-                <span data-en="RIGOR • INNOVATION • FUTURE" data-zh="严谨 • 创新 • 未来">RIGOR • INNOVATION • FUTURE</span>
-            </p>
-            <div class="hero-affiliation">
-                <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+    <!-- Hero Banner with Content -->
+    <section class="hero-banner">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-text">
+                    <h1 class="hero-title" data-en="Lei Laboratory" data-zh="雷曹实验室">雷曹实验室</h1>
+                    <p class="hero-tagline" data-en="Biostatistics & AI Methods in Medicine" 
+                       data-zh="生物统计与人工智能医学方法">
+                        生物统计与人工智能医学方法
+                    </p>
+                    <p class="hero-motto">
+                        <span data-en="RIGOR • INNOVATION • FUTURE" data-zh="严谨 • 创新 • 未来">严谨 • 创新 • 未来</span>
+                    </p>
+                    <p class="hero-affiliation" data-en="Harbin Medical University" data-zh="哈尔滨医科大学">
+                        哈尔滨医科大学
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="pages/research.html" class="btn-primary" data-en="Our Research" data-zh="研究方向">研究方向</a>
+                        <a href="pages/join.html" class="btn-secondary" data-en="Join Us" data-zh="加入我们">加入我们</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img src="assets/images/logo.png" alt="Lei Laboratory Logo" class="hero-logo-main">
+                    <div class="hero-stats-mini">
+                        <div class="stat-mini">
+                            <span class="stat-mini-num">20+</span>
+                            <span class="stat-mini-label" data-en="Members" data-zh="成员">成员</span>
+                        </div>
+                        <div class="stat-mini">
+                            <span class="stat-mini-num">30+</span>
+                            <span class="stat-mini-label" data-en="Papers" data-zh="论文">论文</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission-section">
+    <!-- Quick Intro -->
+    <section class="intro-section">
         <div class="container">
-            <h2 class="section-title-main" data-en="Our Mission" data-zh="我们的使命">Our Mission</h2>
-            <div class="mission-content">
-                <p class="mission-text" data-en="Lei Laboratory is dedicated to advancing precision medicine through innovative biostatistical methods and artificial intelligence. We develop cutting-edge computational tools and statistical frameworks to unlock insights from complex biomedical data, ultimately improving patient care and health outcomes."
-                   data-zh="雷曹实验室致力于通过创新的生物统计方法和人工智能推进精准医学。我们开发前沿的计算工具和统计框架，从复杂的生物医学数据中获取洞察，最终改善患者护理和健康结果。">
-                    Lei Laboratory is dedicated to advancing precision medicine through innovative biostatistical methods and artificial intelligence. We develop cutting-edge computational tools and statistical frameworks to unlock insights from complex biomedical data, ultimately improving patient care and health outcomes.
+            <div class="intro-content">
+                <h2 data-en="About Our Laboratory" data-zh="关于实验室">关于实验室</h2>
+                <p data-en="Lei Laboratory, established in 2023, is dedicated to advancing precision medicine through innovative biostatistical methods and artificial intelligence. We develop cutting-edge computational tools to unlock insights from complex biomedical data."
+                   data-zh="雷曹实验室成立于2023年，致力于通过创新的生物统计方法和人工智能推进精准医学。我们开发前沿的计算工具，从复杂的生物医学数据中获取洞察。">
+                    雷曹实验室成立于2023年，致力于通过创新的生物统计方法和人工智能推进精准医学。我们开发前沿的计算工具，从复杂的生物医学数据中获取洞察。
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Research Highlights -->
-    <section class="highlights-section">
+    <!-- Research Areas -->
+    <section class="research-preview">
         <div class="container">
-            <h2 class="section-title-main" data-en="Research Highlights" data-zh="研究亮点">Research Highlights</h2>
-            <div class="highlights-grid">
-                <div class="highlight-card">
-                    <div class="highlight-icon">📊</div>
-                    <h3 data-en="Statistical Innovation" data-zh="统计创新">Statistical Innovation</h3>
-                    <p data-en="Novel biostatistical methods for high-dimensional data analysis and causal inference"
-                       data-zh="高维数据分析和因果推断的新型生物统计方法">
-                        Novel biostatistical methods for high-dimensional data analysis and causal inference
+            <h2 class="section-title" data-en="Research Focus" data-zh="研究方向">研究方向</h2>
+            <div class="research-grid">
+                <div class="research-item">
+                    <div class="research-icon">📊</div>
+                    <h3 data-en="Biostatistical Methods" data-zh="生物统计方法">生物统计方法</h3>
+                    <p data-en="Novel statistical approaches for complex biomedical data"
+                       data-zh="复杂生物医学数据的新型统计方法">
+                        复杂生物医学数据的新型统计方法
                     </p>
                 </div>
-
-                <div class="highlight-card">
-                    <div class="highlight-icon">🤖</div>
-                    <h3 data-en="AI in Healthcare" data-zh="医疗人工智能">AI in Healthcare</h3>
-                    <p data-en="Machine learning applications for disease prediction and diagnosis"
-                       data-zh="用于疾病预测和诊断的机器学习应用">
-                        Machine learning applications for disease prediction and diagnosis
+                <div class="research-item">
+                    <div class="research-icon">🤖</div>
+                    <h3 data-en="AI in Healthcare" data-zh="医疗人工智能">医疗人工智能</h3>
+                    <p data-en="Machine learning for disease prediction and diagnosis"
+                       data-zh="疾病预测和诊断的机器学习">
+                        疾病预测和诊断的机器学习
                     </p>
                 </div>
-
-                <div class="highlight-card">
-                    <div class="highlight-icon">🧬</div>
-                    <h3 data-en="Precision Medicine" data-zh="精准医学">Precision Medicine</h3>
+                <div class="research-item">
+                    <div class="research-icon">🧬</div>
+                    <h3 data-en="Genomics" data-zh="基因组学">基因组学</h3>
                     <p data-en="Integrative analysis of genomic and clinical data"
-                       data-zh="基因组和临床数据的整合分析">
-                        Integrative analysis of genomic and clinical data
+                       data-zh="基因组与临床数据整合分析">
+                        基因组与临床数据整合分析
                     </p>
                 </div>
-
-                <div class="highlight-card">
-                    <div class="highlight-icon">💊</div>
-                    <h3 data-en="Clinical Research" data-zh="临床研究">Clinical Research</h3>
-                    <p data-en="Statistical design and analysis of clinical trials"
-                       data-zh="临床试验的统计设计与分析">
-                        Statistical design and analysis of clinical trials
+                <div class="research-item">
+                    <div class="research-icon">💊</div>
+                    <h3 data-en="Clinical Trials" data-zh="临床试验">临床试验</h3>
+                    <p data-en="Statistical design and analysis of clinical studies"
+                       data-zh="临床研究的统计设计与分析">
+                        临床研究的统计设计与分析
                     </p>
                 </div>
+            </div>
+            <div class="section-cta">
+                <a href="pages/research.html" class="link-more" data-en="Learn More →" data-zh="了解更多 →">了解更多 →</a>
             </div>
         </div>
     </section>
 
-    <!-- Lab Stats -->
-    <section class="stats-section">
+    <!-- Latest Updates -->
+    <section class="updates-section">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">20+</div>
-                    <div class="stat-label" data-en="Team Members" data-zh="团队成员">Team Members</div>
+            <h2 class="section-title" data-en="Latest Updates" data-zh="最新动态">最新动态</h2>
+            <div class="updates-grid">
+                <div class="update-card">
+                    <span class="update-badge" data-en="News" data-zh="新闻">新闻</span>
+                    <div class="update-date">2025-01-08</div>
+                    <h3 data-en="Website Launch" data-zh="网站上线">网站上线</h3>
+                    <p data-en="Our new laboratory website is now online!"
+                       data-zh="我们的新实验室网站现已上线！">
+                        我们的新实验室网站现已上线！
+                    </p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">14</div>
-                    <div class="stat-label" data-en="Current Students" data-zh="在读学生">Current Students</div>
+                <div class="update-card">
+                    <span class="update-badge publication" data-en="Publication" data-zh="论文">论文</span>
+                    <div class="update-date">2024-12-15</div>
+                    <h3 data-en="New Paper Published" data-zh="发表新论文">发表新论文</h3>
+                    <p data-en="AI-based disease prediction in top journal"
+                       data-zh="基于AI的疾病预测研究发表于顶级期刊">
+                        基于AI的疾病预测研究发表于顶级期刊
+                    </p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">6</div>
-                    <div class="stat-label" data-en="Alumni" data-zh="毕业生">Alumni</div>
+                <div class="update-card">
+                    <span class="update-badge award" data-en="Award" data-zh="获奖">获奖</span>
+                    <div class="update-date">2024-11-20</div>
+                    <h3 data-en="Student Excellence Award" data-zh="学生优秀奖">学生优秀奖</h3>
+                    <p data-en="Outstanding Graduate Student Award received"
+                       data-zh="获得优秀研究生奖">
+                        获得优秀研究生奖
+                    </p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label" data-en="Publications" data-zh="发表论文">Publications</div>
-                </div>
+            </div>
+            <div class="section-cta">
+                <a href="pages/news.html" class="link-more" data-en="View All News →" data-zh="查看所有动态 →">查看所有动态 →</a>
             </div>
         </div>
     </section>
 
-    <!-- Latest News -->
-    <section class="news-section-home">
+    <!-- Team Preview -->
+    <section class="team-preview">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title-main" data-en="Latest News" data-zh="最新动态">Latest News</h2>
-                <a href="pages/news.html" class="view-all-link" data-en="View All →" data-zh="查看全部 →">View All →</a>
+            <h2 class="section-title" data-en="Our Team" data-zh="我们的团队">我们的团队</h2>
+            <div class="team-stats">
+                <div class="team-stat-item">
+                    <div class="team-stat-icon">🎓</div>
+                    <div class="team-stat-number">5</div>
+                    <div class="team-stat-label" data-en="PhD Students" data-zh="博士生">博士生</div>
+                </div>
+                <div class="team-stat-item">
+                    <div class="team-stat-icon">📚</div>
+                    <div class="team-stat-number">9</div>
+                    <div class="team-stat-label" data-en="Master Students" data-zh="硕士生">硕士生</div>
+                </div>
+                <div class="team-stat-item">
+                    <div class="team-stat-icon">🎉</div>
+                    <div class="team-stat-number">6</div>
+                    <div class="team-stat-label" data-en="Alumni" data-zh="毕业生">毕业生</div>
+                </div>
             </div>
-            
-            <div class="news-grid-home">
-                <div class="news-card-home">
-                    <div class="news-date">2025-01-08</div>
-                    <h3 data-en="Welcome to Our New Website!" data-zh="欢迎访问我们的新网站！">
-                        Welcome to Our New Website!
-                    </h3>
-                    <p data-en="Our laboratory website is now live with updated information."
-                       data-zh="我们的实验室网站现已上线，包含最新信息。">
-                        Our laboratory website is now live with updated information.
-                    </p>
-                </div>
-
-                <div class="news-card-home">
-                    <div class="news-date">2024-12-15</div>
-                    <h3 data-en="New Publication" data-zh="发表新论文">
-                        New Publication
-                    </h3>
-                    <p data-en="Groundbreaking research on AI-based disease prediction."
-                       data-zh="关于基于人工智能的疾病预测的突破性研究。">
-                        Groundbreaking research on AI-based disease prediction.
-                    </p>
-                </div>
-
-                <div class="news-card-home">
-                    <div class="news-date">2024-11-20</div>
-                    <h3 data-en="Student Award" data-zh="学生获奖">
-                        Student Award
-                    </h3>
-                    <p data-en="Outstanding Graduate Student Award for research excellence."
-                       data-zh="因研究卓越获得优秀研究生奖。">
-                        Outstanding Graduate Student Award for research excellence.
-                    </p>
-                </div>
+            <p class="team-desc" data-en="Our interdisciplinary team combines expertise in statistics, computer science, and medicine to advance precision healthcare."
+               data-zh="我们的跨学科团队结合统计学、计算机科学和医学专业知识，推进精准医疗。">
+                我们的跨学科团队结合统计学、计算机科学和医学专业知识，推进精准医疗。
+            </p>
+            <div class="section-cta">
+                <a href="pages/members.html" class="link-more" data-en="Meet the Team →" data-zh="认识团队 →">认识团队 →</a>
             </div>
         </div>
     </section>
 
     <!-- Call to Action -->
-    <section class="cta-section">
+    <section class="join-cta">
         <div class="container">
-            <div class="cta-content">
-                <h2 data-en="Join Our Team" data-zh="加入我们的团队">Join Our Team</h2>
-                <p data-en="We are always looking for talented individuals passionate about biostatistics and AI in medicine."
-                   data-zh="我们一直在寻找对生物统计和医学人工智能充满热情的优秀人才。">
-                    We are always looking for talented individuals passionate about biostatistics and AI in medicine.
+            <div class="join-content">
+                <h2 data-en="Join Our Research" data-zh="加入我们的研究">加入我们的研究</h2>
+                <p data-en="We are recruiting motivated PhD and Master students passionate about biostatistics and AI in medicine."
+                   data-zh="我们正在招募对生物统计和医学人工智能充满热情的博士和硕士研究生。">
+                    我们正在招募对生物统计和医学人工智能充满热情的博士和硕士研究生。
                 </p>
-                <a href="pages/join.html" class="cta-button" data-en="Learn More" data-zh="了解更多">Learn More</a>
+                <div class="join-buttons">
+                    <a href="pages/join.html" class="btn-join" data-en="View Positions" data-zh="查看职位">查看职位</a>
+                    <a href="mailto:caolei@hrbmu.edu.cn" class="btn-contact" data-en="Contact Us" data-zh="联系我们">联系我们</a>
+                </div>
             </div>
         </div>
     </section>
@@ -195,20 +220,27 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-main">
                 <div class="footer-col">
-                    <h3 data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</h3>
-                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
-                    <p>📧 caolei@hrbmu.edu.cn</p>
+                    <img src="assets/images/logo.png" alt="Logo" class="footer-logo">
+                    <h3 data-en="Lei Laboratory" data-zh="雷曹实验室">雷曹实验室</h3>
+                    <p data-en="Biostatistics & AI Methods in Medicine" data-zh="生物统计与人工智能医学方法">
+                        生物统计与人工智能医学方法
+                    </p>
                 </div>
                 <div class="footer-col">
-                    <h3 data-en="Quick Links" data-zh="快速链接">Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="pages/members.html" data-en="Team" data-zh="团队">Team</a></li>
-                        <li><a href="pages/research.html" data-en="Research" data-zh="研究">Research</a></li>
-                        <li><a href="pages/publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                        <li><a href="pages/join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                    <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
+                    <ul>
+                        <li><a href="pages/research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="pages/publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="pages/members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="pages/join.html" data-en="Join Us" data-zh="加入">加入</a></li>
                     </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Contact" data-zh="联系方式">联系方式</h4>
+                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</p>
+                    <p>📧 caolei@hrbmu.edu.cn</p>
                 </div>
             </div>
             <div class="footer-bottom">
