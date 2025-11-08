@@ -1,0 +1,173 @@
+# Current Members (在读学生)
+current:
+  phd:
+    - name: "PhD Student 1"
+      name_zh: "博士生1"
+      year: 2023
+      research: "AI methods in genomics"
+      research_zh: "基因组学中的人工智能方法"
+      photo: "assets/images/members/phd1.jpg"
+      email: "phd1@example.com"
+    
+    - name: "PhD Student 2"
+      name_zh: "博士生2"
+      year: 2022
+      research: "Biostatistical methodology"
+      research_zh: "生物统计方法学"
+      photo: "assets/images/members/phd2.jpg"
+      email: "phd2@example.com"
+    
+    - name: "PhD Student 3"
+      name_zh: "博士生3"
+      year: 2024
+      research: "Medical image analysis"
+      research_zh: "医学影像分析"
+      photo: "assets/images/members/phd3.jpg"
+      email: "phd3@example.com"
+    
+    - name: "PhD Student 4"
+      name_zh: "博士生4"
+      year: 2023
+      research: "Clinical data science"
+      research_zh: "临床数据科学"
+      photo: "assets/images/members/phd4.jpg"
+      email: "phd4@example.com"
+    
+    - name: "PhD Student 5"
+      name_zh: "博士生5"
+      year: 2024
+      research: "Precision medicine"
+      research_zh: "精准医学"
+      photo: "assets/images/members/phd5.jpg"
+      email: "phd5@example.com"
+
+  master:
+    - name: "Master Student 1"
+      name_zh: "硕士生1"
+      year: 2024
+      research: "Machine learning in medicine"
+      research_zh: "医学机器学习"
+      photo: "assets/images/members/master1.jpg"
+      email: "master1@example.com"
+    
+    - name: "Master Student 2"
+      name_zh: "硕士生2"
+      year: 2024
+      research: "Survival analysis"
+      research_zh: "生存分析"
+      photo: "assets/images/members/master2.jpg"
+      email: "master2@example.com"
+    
+    - name: "Master Student 3"
+      name_zh: "硕士生3"
+      year: 2023
+      research: "Longitudinal data analysis"
+      research_zh: "纵向数据分析"
+      photo: "assets/images/members/master3.jpg"
+      email: "master3@example.com"
+    
+    - name: "Master Student 4"
+      name_zh: "硕士生4"
+      year: 2024
+      research: "Drug discovery"
+      research_zh: "药物发现"
+      photo: "assets/images/members/master4.jpg"
+      email: "master4@example.com"
+    
+    - name: "Master Student 5"
+      name_zh: "硕士生5"
+      year: 2023
+      research: "Causal inference"
+      research_zh: "因果推断"
+      photo: "assets/images/members/master5.jpg"
+      email: "master5@example.com"
+    
+    - name: "Master Student 6"
+      name_zh: "硕士生6"
+      year: 2024
+      research: "Genomic data analysis"
+      research_zh: "基因组数据分析"
+      photo: "assets/images/members/master6.jpg"
+      email: "master6@example.com"
+    
+    - name: "Master Student 7"
+      name_zh: "硕士生7"
+      year: 2023
+      research: "Deep learning applications"
+      research_zh: "深度学习应用"
+      photo: "assets/images/members/master7.jpg"
+      email: "master7@example.com"
+    
+    - name: "Master Student 8"
+      name_zh: "硕士生8"
+      year: 2024
+      research: "Biomarker discovery"
+      research_zh: "生物标志物发现"
+      photo: "assets/images/members/master8.jpg"
+      email: "master8@example.com"
+    
+    - name: "Master Student 9"
+      name_zh: "硕士生9"
+      year: 2024
+      research: "Clinical trial design"
+      research_zh: "临床试验设计"
+      photo: "assets/images/members/master9.jpg"
+      email: "master9@example.com"
+
+# Alumni (已毕业学生)
+alumni:
+  phd:
+    - name: "Dr. Alumni 1"
+      name_zh: "博士校友1"
+      year_graduated: 2024
+      current_position: "Postdoctoral Researcher, University X"
+      current_position_zh: "博士后研究员，X大学"
+      research: "Machine learning in cancer genomics"
+      research_zh: "癌症基因组学中的机器学习"
+      photo: "assets/images/members/alumni_phd1.jpg"
+  
+  master:
+    - name: "Alumni 2"
+      name_zh: "硕士校友2"
+      year_graduated: 2024
+      current_position: "Data Scientist, Company Y"
+      current_position_zh: "数据科学家，Y公司"
+      research: "Predictive modeling for disease risk"
+      research_zh: "疾病风险预测建模"
+      photo: "assets/images/members/alumni_master1.jpg"
+    
+    - name: "Alumni 3"
+      name_zh: "硕士校友3"
+      year_graduated: 2024
+      current_position: "PhD Student, University Z"
+      current_position_zh: "博士生，Z大学"
+      research: "Statistical methods for omics data"
+      research_zh: "组学数据统计方法"
+      photo: "assets/images/members/alumni_master2.jpg"
+    
+    - name: "Alumni 4"
+      name_zh: "硕士校友4"
+      year_graduated: 2023
+      current_position: "Biostatistician, Hospital A"
+      current_position_zh: "生物统计师，A医院"
+      research: "Clinical trial analysis"
+      research_zh: "临床试验分析"
+      photo: "assets/images/members/alumni_master3.jpg"
+    
+    - name: "Alumni 5"
+      name_zh: "硕士校友5"
+      year_graduated: 2023
+      current_position: "Research Assistant, Institute B"
+      current_position_zh: "研究助理，B研究所"
+      research: "Medical image processing"
+      research_zh: "医学图像处理"
+      photo: "assets/images/members/alumni_master4.jpg"
+    
+    - name: "Alumni 6"
+      name_zh: "硕士校友6"
+      year_graduated: 2023
+      current_position: "AI Engineer, Company C"
+      current_position_zh: "人工智能工程师，C公司"
+      research: "Deep learning for diagnosis"
+      research_zh: "诊断深度学习"
+      photo: "assets/images/members/alumni_master5.jpg"

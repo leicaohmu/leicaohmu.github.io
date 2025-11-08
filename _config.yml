@@ -1,0 +1,55 @@
+# Lei Laboratory Website Configuration
+
+# Site Settings
+title: Lei Laboratory
+title_zh: 雷曹实验室
+description: Biostatistics and AI Methods in Medicine
+description_zh: 生物统计与人工智能医学方法
+url: "https://leicaohmu.github.io"
+baseurl: ""
+
+# Lab Information
+lab:
+  name: Lei Laboratory
+  name_zh: 雷曹实验室
+  established: 2023
+  motto: "RIGOR, INNOVATION, FUTURE"
+  motto_zh: "严谨、创新、未来"
+
+# PI Information
+pi:
+  name: Lei Cao
+  name_zh: 曹雷
+  title: Associate Researcher
+  title_zh: 副研究员
+  email: caolei@hrbmu.edu.cn
+  research: Biostatistics and AI methods in Medicine
+  research_zh: 生物统计与人工智能医学方法
+
+# Build Settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  members:
+    output: true
+    permalink: /members/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+      lang: "en"
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md

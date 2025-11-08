@@ -1,0 +1,28 @@
+news:
+  - date: "2025-01-08"
+    title: "Welcome to Lei Laboratory Website!"
+    title_zh: "欢迎访问雷曹实验室网站！"
+    content: "Our new laboratory website is now live. Here you can find information about our research, team members, publications, and more. Stay tuned for regular updates!"
+    content_zh: "我们的新实验室网站现已上线。您可以在这里找到关于我们研究、团队成员、发表论文等信息。敬请关注定期更新！"
+    image: ""
+
+  - date: "2024-12-15"
+    title: "New Paper Published in Journal X"
+    title_zh: "新论文发表于X期刊"
+    content: "Congratulations to our team for publishing a research paper on AI-based disease prediction in Journal X."
+    content_zh: "祝贺我们团队在X期刊上发表关于基于人工智能的疾病预测的研究论文。"
+    image: ""
+
+  - date: "2024-11-20"
+    title: "Student A Receives Outstanding Graduate Award"
+    title_zh: "学生A获得优秀研究生奖"
+    content: "We are proud to announce that our PhD student received the Outstanding Graduate Student Award from Harbin Medical University."
+    content_zh: "我们自豪地宣布，我们的博士生获得哈尔滨医科大学优秀研究生奖。"
+    image: ""
+
+  - date: "2024-10-10"
+    title: "New Research Grant Awarded"
+    title_zh: "获得新研究基金"
+    content: "Our laboratory has been awarded a research grant from the National Natural Science Foundation of China."
+    content_zh: "我们实验室获得国家自然科学基金资助。"
+    image: ""

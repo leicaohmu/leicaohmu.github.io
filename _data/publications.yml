@@ -1,0 +1,48 @@
+publications:
+  - year: 2025
+    papers:
+      - title: "AI-based Prediction Model for Disease X"
+        title_zh: "基于人工智能的X疾病预测模型"
+        authors: "Student A, Student B, Lei Cao*"
+        journal: "Journal of Medical Research"
+        journal_zh: "医学研究杂志"
+        volume: "123(4)"
+        pages: "567-580"
+        doi: "10.xxxx/xxxxx"
+        pdf: "#"
+        pubmed: "#"
+
+  - year: 2024
+    papers:
+      - title: "Novel Biostatistical Method for High-Dimensional Survival Analysis"
+        title_zh: "高维生存分析的新型生物统计方法"
+        authors: "Lei Cao, Collaborator X, Student C"
+        journal: "Biometrics"
+        journal_zh: "生物统计学"
+        volume: "80(2)"
+        pages: "123-135"
+        doi: "10.xxxx/xxxxx"
+        pdf: "#"
+        code: "#"
+      
+      - title: "Deep Learning for Medical Image Segmentation: A Comprehensive Review"
+        title_zh: "医学图像分割的深度学习：综述"
+        authors: "Student D, Student E, Lei Cao*"
+        journal: "Medical Image Analysis"
+        journal_zh: "医学图像分析"
+        volume: "75"
+        pages: "102-118"
+        doi: "10.xxxx/xxxxx"
+        pdf: "#"
+
+  - year: 2023
+    papers:
+      - title: "Precision Medicine Approaches for Cardiovascular Disease Risk Prediction"
+        title_zh: "心血管疾病风险预测的精准医学方法"
+        authors: "Lei Cao*, Student F, Collaborator Y"
+        journal: "Circulation Research"
+        journal_zh: "循环研究"
+        volume: "132(8)"
+        pages: "890-905"
+        doi: "10.xxxx/xxxxx"
+        pdf: "#"

@@ -1,79 +1,209 @@
 <!DOCTYPE html>
-<html lang="en" data-zh="简体中文">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Members</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Assuming there's a standard stylesheet -->
+    <title>Team Members | Lei Laboratory</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .members-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .member-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .member-photo {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: var(--light-bg);
+        }
+        
+        .member-info {
+            padding: 20px;
+        }
+        
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .member-year {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .member-research {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        
+        .degree-section {
+            margin-bottom: 60px;
+        }
+        
+        .degree-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation structure copied from index.html -->
-    <nav>
-        <ul>
-            <li><a href="index.html" data-en="Home" data-zh="首页"></a></li>
-            <li><a href="about.html" data-en="About" data-zh="关于"></a></li>
-            <li><a href="research.html" data-en="Research" data-zh="研究"></a></li>
-            <li><a href="pages/members.html" data-en="Members" data-zh="成员"></a></li>
-            <li><a href="contact.html" data-en="Contact" data-zh="联系"></a></li>
-        </ul>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button id="lang-en" class="active">English</button>
+        <button id="lang-zh">中文</button>
+    </div>
+
+    <!-- Navigation (same as index.html) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
+                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
+                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
+                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
+                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
+                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
+                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
+                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <h1 data-en="Team Members" data-zh="团队成员"></h1>
+    <!-- Current Members -->
+    <section class="members-section">
+        <div class="container">
+            <h1 class="section-title" data-en="Team Members" data-zh="团队成员">Team Members</h1>
+            
+            <!-- PhD Students -->
+            <div class="degree-section">
+                <h2 class="degree-title" data-en="PhD Students (5)" data-zh="博士研究生 (5人)">PhD Students (5)</h2>
+                <div class="members-grid">
+                    <!-- Template for PhD student cards -->
+                    <div class="member-card">
+                        <img src="../assets/images/members/phd1.jpg" alt="Student Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
+                        <div class="member-info">
+                            <h3 class="member-name" data-en="Student Name" data-zh="学生姓名">Student Name</h3>
+                            <p class="member-year" data-en="PhD, Class of 2023" data-zh="博士生，2023级">PhD, Class of 2023</p>
+                            <p class="member-research" data-en="Research: AI methods in genomics" data-zh="研究方向：基因组学中的人工智能方法">
+                                Research: AI methods in genomics
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Repeat for 5 PhD students -->
+                </div>
+            </div>
 
-    <section id="current-phd-students">
-        <h2 data-en="Current PhD Students" data-zh="现任博士生"></h2>
-        <div class="grid">
-            <!-- PhD member cards -->
-            <div class="member-card" data-en="John Doe" data-zh="约翰·多">
-                <img src="path/to/photo1.jpg" alt="John Doe">
-                <p data-en="Year: 2021" data-zh="入学年份: 2021"></p>
-                <p data-en="Research Direction: Machine Learning" data-zh="研究方向: 机器学习"></p>
+            <!-- Master Students -->
+            <div class="degree-section">
+                <h2 class="degree-title" data-en="Master Students (9)" data-zh="硕士研究生 (9人)">Master Students (9)</h2>
+                <div class="members-grid">
+                    <!-- Template for Master student cards -->
+                    <div class="member-card">
+                        <img src="../assets/images/members/master1.jpg" alt="Student Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
+                        <div class="member-info">
+                            <h3 class="member-name" data-en="Student Name" data-zh="学生姓名">Student Name</h3>
+                            <p class="member-year" data-en="Master, Class of 2024" data-zh="硕士生，2024级">Master, Class of 2024</p>
+                            <p class="member-research" data-en="Research: Biostatistical modeling" data-zh="研究方向：生物统计建模">
+                                Research: Biostatistical modeling
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Repeat for 9 Master students -->
+                </div>
             </div>
-            <div class="member-card" data-en="Jane Smith" data-zh="简·史密斯">
-                <img src="path/to/photo2.jpg" alt="Jane Smith">
-                <p data-en="Year: 2020" data-zh="入学年份: 2020"></p>
-                <p data-en="Research Direction: Data Science" data-zh="研究方向: 数据科学"></p>
-            </div>
-            <!-- Add 3 more members -->
         </div>
     </section>
 
-    <section id="current-master-students">
-        <h2 data-en="Current Master Students" data-zh="现任硕士生"></h2>
-        <div class="grid">
-            <!-- Master member cards -->
-            <div class="member-card" data-en="Alice Johnson" data-zh="艾丽斯·约翰逊">
-                <img src="path/to/photo3.jpg" alt="Alice Johnson">
-                <p data-en="Year: 2022" data-zh="入学年份: 2022"></p>
-                <p data-en="Research Direction: Cloud Computing" data-zh="研究方向: 云计算"></p>
+    <!-- Alumni -->
+    <section class="members-section" style="background: var(--light-bg);">
+        <div class="container">
+            <h1 class="section-title" data-en="Alumni" data-zh="已毕业学生">Alumni</h1>
+            
+            <!-- PhD Alumni -->
+            <div class="degree-section">
+                <h2 class="degree-title" data-en="PhD Alumni (1)" data-zh="博士毕业生 (1人)">PhD Alumni (1)</h2>
+                <div class="members-grid">
+                    <div class="member-card">
+                        <img src="../assets/images/members/alumni_phd1.jpg" alt="Alumni Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
+                        <div class="member-info">
+                            <h3 class="member-name" data-en="Alumni Name" data-zh="校友姓名">Alumni Name</h3>
+                            <p class="member-year" data-en="PhD, Graduated 2024" data-zh="博士，2024年毕业">PhD, Graduated 2024</p>
+                            <p class="member-research" data-en="Currently: Postdoctoral Researcher" data-zh="现任：博士后研究员">
+                                Currently: Postdoctoral Researcher
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Add 8 more members -->
-        </div>
-    </section>
 
-    <section id="phd-alumni">
-        <h2 data-en="PhD Alumni" data-zh="博士校友"></h2>
-        <div class="member-card" data-en="Dr. Emily Davis" data-zh="艾米莉·戴维斯">
-            <img src="path/to/photo4.jpg" alt="Dr. Emily Davis">
-            <p data-en="Graduated: 2019" data-zh="毕业年份: 2019"></p>
-            <p data-en="Research Direction: Computer Vision" data-zh="研究方向: 计算机视觉"></p>
-        </div>
-    </section>
-
-    <section id="master-alumni">
-        <h2 data-en="Master Alumni" data-zh="硕士校友"></h2>
-        <div class="grid">
-            <div class="member-card" data-en="Tom Brown" data-zh="汤姆·布朗">
-                <img src="path/to/photo5.jpg" alt="Tom Brown">
-                <p data-en="Graduated: 2020" data-zh="毕业年份: 2020"></p>
-                <p data-en="Research Direction: Artificial Intelligence" data-zh="研究方向: 人工智能"></p>
+            <!-- Master Alumni -->
+            <div class="degree-section">
+                <h2 class="degree-title" data-en="Master Alumni (5)" data-zh="硕士毕业生 (5人)">Master Alumni (5)</h2>
+                <div class="members-grid">
+                    <!-- Repeat for 5 Master alumni -->
+                    <div class="member-card">
+                        <img src="../assets/images/members/alumni_master1.jpg" alt="Alumni Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
+                        <div class="member-info">
+                            <h3 class="member-name" data-en="Alumni Name" data-zh="校友姓名">Alumni Name</h3>
+                            <p class="member-year" data-en="Master, Graduated 2024" data-zh="硕士，2024年毕业">Master, Graduated 2024</p>
+                            <p class="member-research" data-en="Currently: Data Scientist" data-zh="现任：数据科学家">
+                                Currently: Data Scientist
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Add 4 more alumni members -->
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p data-en="Back to main site" data-zh="返回主站"><a href="index.html">Main Site</a></p>
+        <div class="container">
+            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+        </div>
     </footer>
+
+    <script src="../assets/js/main.js"></script>
 </body>
 </html>

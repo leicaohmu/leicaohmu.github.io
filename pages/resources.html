@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | Lei Laboratory</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .resources-section {
+            padding: 80px 0;
+        }
+        
+        .resource-category {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .resource-category h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .resource-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: var(--light-bg);
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .resource-item.locked::before {
+            content: "🔒 ";
+        }
+        
+        .resource-item.open::before {
+            content: "📂 ";
+        }
+        
+        .access-form {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--secondary-color);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same structure as other pages) -->
+    <div class="lang-toggle">
+        <button id="lang-en" class="active">English</button>
+        <button id="lang-zh">中文</button>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
+                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
+                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
+                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
+                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
+                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
+                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
+                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="resources-section">
+        <div class="container">
+            <h1 class="section-title" data-en="Resources" data-zh="资源中心">Resources</h1>
+
+            <!-- Open Resources -->
+            <div class="resource-category">
+                <h2 data-en="📂 Open Resources" data-zh="📂 公开资源">📂 Open Resources</h2>
+                <p data-en="These resources are publicly available for download and use." 
+                   data-zh="这些资源公开可用，可直接下载使用。">
+                    These resources are publicly available for download and use.
+                </p>
+                <ul class="resource-list">
+                    <li class="resource-item open">
+                        <span data-en="Tutorial: Introduction to Biostatistics" data-zh="教程：生物统计学入门">Tutorial: Introduction to Biostatistics</span>
+                        <a href="#" class="btn">Download</a>
+                    </li>
+                    <li class="resource-item open">
+                        <span data-en="Sample Datasets for Practice" data-zh="练习数据集">Sample Datasets for Practice</span>
+                        <a href="#" class="btn">Download</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Restricted Resources -->
+            <div class="resource-category">
+                <h2 data-en="🔒 Restricted Resources" data-zh="🔒 受限资源">🔒 Restricted Resources</h2>
+                <p data-en="Access to these resources requires approval. Please fill out the application form below." 
+                   data-zh="访问这些资源需要申请批准。请填写下方申请表。">
+                    Access to these resources requires approval. Please fill out the application form below.
+                </p>
+                <ul class="resource-list">
+                    <li class="resource-item locked">
+                        <span data-en="Literature Reading Notes (Internal)" data-zh="文献抄读笔记（内部）">Literature Reading Notes (Internal)</span>
+                        <span data-en="Requires Access" data-zh="需要申请">Requires Access</span>
+                    </li>
+                    <li class="resource-item locked">
+                        <span data-en="Project Code Repository" data-zh="项目代码库">Project Code Repository</span>
+                        <span data-en="Requires Access" data-zh="需要申请">Requires Access</span>
+                    </li>
+                    <li class="resource-item locked">
+                        <span data-en="Research Data Archive" data-zh="研究数据档案">Research Data Archive</span>
+                        <span data-en="Requires Access" data-zh="需要申请">Requires Access</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Access Application Form -->
+            <div class="access-form">
+                <h2 data-en="Apply for Resource Access" data-zh="资源访问申请">Apply for Resource Access</h2>
+                <p data-en="Please complete this form to request access to restricted resources." 
+                   data-zh="请填写此表格以申请访问受限资源。">
+                    Please complete this form to request access to restricted resources.
+                </p>
+                
+                <form id="access-form" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST">
+                    <div class="form-group">
+                        <label data-en="Full Name *" data-zh="姓名 *">Full Name *</label>
+                        <input type="text" name="entry.name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Email *" data-zh="邮箱 *">Email *</label>
+                        <input type="email" name="entry.email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Institution/Organization *" data-zh="单位/机构 *">Institution/Organization *</label>
+                        <input type="text" name="entry.institution" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="GitHub Username (if applicable)" data-zh="GitHub 用户名（如有）">GitHub Username (if applicable)</label>
+                        <input type="text" name="entry.github">
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Resource Requested *" data-zh="申请的资源 *">Resource Requested *</label>
+                        <select name="entry.resource" required>
+                            <option value="">-- Select --</option>
+                            <option value="reading-notes" data-en="Literature Reading Notes" data-zh="文献抄读笔记">Literature Reading Notes</option>
+                            <option value="code-repo" data-en="Project Code Repository" data-zh="项目代码库">Project Code Repository</option>
+                            <option value="data-archive" data-en="Research Data Archive" data-zh="研究数据档案">Research Data Archive</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Purpose of Use *" data-zh="使用目的 *">Purpose of Use *</label>
+                        <textarea name="entry.purpose" required placeholder="Please describe how you plan to use the requested resources"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Expected Outcomes" data-zh="预期成果">Expected Outcomes</label>
+                        <textarea name="entry.outcomes" placeholder="Optional: Describe any expected research outcomes or publications"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" data-en="Submit Application" data-zh="提交申请">Submit Application</button>
+                </form>
+
+                <p style="margin-top: 20px; color: #666; font-size: 0.9rem;">
+                    <span data-en="Note: Applications are typically reviewed within 3-5 business days. You will receive an email notification once your application is processed." 
+                          data-zh="注意：申请通常在3-5个工作日内审核。申请处理完成后您将收到邮件通知。">
+                        Note: Applications are typically reviewed within 3-5 business days. You will receive an email notification once your application is processed.
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
