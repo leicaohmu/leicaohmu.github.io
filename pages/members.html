@@ -1,206 +1,763 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Members | Lei Laboratory</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>团队成员 - 雷曹实验室 | Team Members - Lei Laboratory</title>
+    <meta name="description" content="雷曹实验室团队成员介绍，包括导师、博士生、硕士生和校友信息。Meet our team of researchers and students.">
+    <meta name="keywords" content="实验室团队,研究人员,博士生,硕士生,生物统计,AI医学">
+    
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    
     <style>
+        /* 成员页面特定样式 */
+        .members-hero {
+            background: linear-gradient(135deg, #8C1515 0%, #006B81 100%);
+            padding: 80px 0 60px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .members-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        .members-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .members-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        
+        .members-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         .members-section {
+            padding: 80px 0;
+            background: var(--bg-cream);
+        }
+        
+        .section-divider {
+            text-align: center;
+            margin: 80px 0 60px;
+        }
+        
+        .section-divider h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+        
+        .section-divider .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        
+        /* PI卡片 */
+        .pi-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .pi-photo-wrapper {
+            position: relative;
+        }
+        
+        .pi-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        .pi-badge {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(140, 21, 21, 0.3);
+            white-space: nowrap;
+        }
+        
+        .pi-info h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+        
+        .pi-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .pi-bio {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+        
+        .pi-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .pi-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+        
+        .pi-contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-light);
+            border-radius: 50%;
+            font-size: 14px;
+        }
+        
+        .pi-research-interests {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 2px solid var(--bg-light);
+        }
+        
+        .pi-research-interests h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .research-tag {
+            padding: 8px 16px;
+            background: var(--bg-cream);
+            color: var(--text);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .research-tag:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+        
+        /* 学生网格 */
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        .student-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .student-photo-wrapper {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: var(--bg-light);
+        }
+        
+        .student-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .student-card:hover .student-photo {
+            transform: scale(1.1);
+        }
+        
+        .student-year-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(140, 21, 21, 0.95);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+        
+        .student-info {
+            padding: 24px;
+        }
+        
+        .student-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .student-name-en {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        
+        .student-research {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+        
+        .student-contact {
+            display: flex;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-light);
+        }
+        
+        .student-contact a {
+            color: var(--text-light);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .student-contact a:hover {
+            color: var(--primary);
+        }
+        
+        /* 校友区域 */
+        .alumni-section {
+            background: white;
             padding: 80px 0;
         }
         
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--primary-color);
-        }
-        
-        .members-grid {
+        .alumni-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
         }
         
-        .member-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
+        .alumni-card {
+            background: var(--bg-cream);
+            padding: 32px;
+            border-radius: 16px;
+            border-left: 4px solid var(--secondary);
+            transition: var(--transition);
+        }
+        
+        .alumni-card:hover {
+            transform: translateX(10px);
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
         }
         
-        .member-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        .alumni-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
         }
         
-        .member-photo {
-            width: 100%;
-            height: 280px;
+        .alumni-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             object-fit: cover;
-            background: var(--light-bg);
+            background: white;
         }
         
-        .member-info {
-            padding: 20px;
+        .alumni-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
         }
         
-        .member-name {
-            font-size: 1.3rem;
+        .alumni-year {
+            font-size: 0.85rem;
+            color: var(--secondary);
             font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--primary-color);
         }
         
-        .member-year {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-        
-        .member-research {
+        .alumni-position {
+            color: var(--text-light);
+            line-height: 1.6;
             font-size: 0.95rem;
-            color: var(--text-color);
-            line-height: 1.5;
+            margin-bottom: 12px;
         }
         
-        .degree-section {
-            margin-bottom: 60px;
+        .alumni-research {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-style: italic;
         }
         
-        .degree-title {
-            font-size: 1.8rem;
-            color: var(--secondary-color);
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--secondary-color);
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .members-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .pi-card {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+                gap: 30px;
+            }
+            
+            .pi-info h3 {
+                font-size: 2rem;
+            }
+            
+            .students-grid,
+            .alumni-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-divider h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button id="lang-en" class="active">English</button>
-        <button id="lang-zh">中文</button>
+        <button id="lang-en" aria-label="Switch to English">EN</button>
+        <button id="lang-zh" class="active" aria-label="切换到中文">中文</button>
     </div>
 
-    <!-- Navigation (same as index.html) -->
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="返回顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
                 <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
-                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+                <div class="brand-info">
+                    <span class="brand-name" data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</span>
+                    <span class="brand-subtitle" data-en="Biostatistics & AI Medicine" data-zh="生物统计与AI医学">生物统计与AI医学</span>
+                </div>
             </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="菜单" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-menu">
-                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
-                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
-                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
-                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
-                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
-                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
-                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                <li><a href="../index.html" data-en="Home" data-zh="首页">首页</a></li>
+                <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                <li><a href="members.html" class="active" data-en="Team" data-zh="团队">团队</a></li>
+                <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                <li><a href="join.html" data-en="Join" data-zh="加入">加入</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Current Members -->
+    <!-- Hero Section -->
+    <section class="members-hero">
+        <div class="container">
+            <span class="section-subtitle" data-en="Our Team" data-zh="我们的团队">我们的团队</span>
+            <h1 data-en="Meet Our Team" data-zh="团队成员">团队成员</h1>
+            <p data-en="A diverse group of talented researchers dedicated to advancing biostatistics and AI in medicine"
+               data-zh="一支致力于推进生物统计和医学人工智能的多元化优秀研究团队">
+                一支致力于推进生物统计和医学人工智能的多元化优秀研究团队
+            </p>
+        </div>
+    </section>
+
+    <!-- PI Section -->
     <section class="members-section">
         <div class="container">
-            <h1 class="section-title" data-en="Team Members" data-zh="团队成员">Team Members</h1>
-            
-            <!-- PhD Students -->
-            <div class="degree-section">
-                <h2 class="degree-title" data-en="PhD Students (5)" data-zh="博士研究生 (5人)">PhD Students (5)</h2>
-                <div class="members-grid">
-                    <!-- Template for PhD student cards -->
-                    <div class="member-card">
-                        <img src="../assets/images/members/phd1.jpg" alt="Student Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
-                        <div class="member-info">
-                            <h3 class="member-name" data-en="Student Name" data-zh="学生姓名">Student Name</h3>
-                            <p class="member-year" data-en="PhD, Class of 2023" data-zh="博士生，2023级">PhD, Class of 2023</p>
-                            <p class="member-research" data-en="Research: AI methods in genomics" data-zh="研究方向：基因组学中的人工智能方法">
-                                Research: AI methods in genomics
-                            </p>
+            <div class="pi-card" data-aos="fade-up">
+                <div class="pi-photo-wrapper">
+                    <img src="../assets/images/pi-photo.jpg" alt="Lei Cao" class="pi-photo" 
+                         onerror="this.src='https://via.placeholder.com/300x300/8C1515/FFFFFF?text=Lei+Cao'">
+                    <div class="pi-badge" data-en="Principal Investigator" data-zh="课题组长">课题组长</div>
+                </div>
+                <div class="pi-info">
+                    <h3 data-en="Lei Cao, Ph.D." data-zh="曹雷 博士">曹雷 博士</h3>
+                    <div class="pi-title" data-en="Associate Researcher" data-zh="副研究员">副研究员</div>
+                    
+                    <p class="pi-bio" data-en="Dr. Lei Cao is an Associate Researcher specializing in biostatistical methods and artificial intelligence applications in medicine. His research focuses on developing innovative statistical approaches for high-dimensional data analysis and precision medicine."
+                       data-zh="曹雷博士是生物统计方法和医学人工智能应用领域的副研究员。他的研究重点是开发用于高维数据分析和精准医学的创新统计方法。">
+                        曹雷博士是生物统计方法和医学人工智能应用领域的副研究员。他的研究重点是开发用于高维数据分析和精准医学的创新统计方法。
+                    </p>
+                    
+                    <div class="pi-contact">
+                        <div class="pi-contact-item">
+                            <span class="pi-contact-icon">📧</span>
+                            <a href="mailto:caolei@hrbmu.edu.cn">caolei@hrbmu.edu.cn</a>
+                        </div>
+                        <div class="pi-contact-item">
+                            <span class="pi-contact-icon">🏢</span>
+                            <span data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</span>
+                        </div>
+                        <div class="pi-contact-item">
+                            <span class="pi-contact-icon">📍</span>
+                            <span data-en="Harbin, Heilongjiang, China" data-zh="中国黑龙江省哈尔滨市">中国黑龙江省哈尔滨市</span>
                         </div>
                     </div>
                     
-                    <!-- Repeat for 5 PhD students -->
+                    <div class="pi-research-interests">
+                        <h4 data-en="Research Interests" data-zh="研究方向">研究方向</h4>
+                        <div class="research-tags">
+                            <span class="research-tag" data-en="Biostatistics" data-zh="生物统计学">生物统计学</span>
+                            <span class="research-tag" data-en="Machine Learning" data-zh="机器学习">机器学习</span>
+                            <span class="research-tag" data-en="Precision Medicine" data-zh="精准医学">精准医学</span>
+                            <span class="research-tag" data-en="Survival Analysis" data-zh="生存分析">生存分析</span>
+                            <span class="research-tag" data-en="Causal Inference" data-zh="因果推断">因果推断</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PhD Students -->
+            <div class="section-divider">
+                <span class="section-subtitle" data-en="Doctoral Students" data-zh="博士研究生">博士研究生</span>
+                <h2 data-en="PhD Students" data-zh="博士生">博士生</h2>
+                <p class="subtitle" data-en="5 PhD students pursuing cutting-edge research" 
+                   data-zh="5名博士生从事前沿研究">5名博士生从事前沿研究</p>
+            </div>
+
+            <div class="students-grid">
+                <!-- PhD Student 1 -->
+                <div class="student-card" data-aos="fade-up">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/phd1.jpg" alt="PhD Student 1" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/006B81/FFFFFF?text=PhD+1'">
+                        <span class="student-year-badge">2023级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="博士生1">博士生1</div>
+                        <div class="student-name-en">PhD Student 1</div>
+                        <p class="student-research" data-en="AI methods in genomics" data-zh="基因组学中的人工智能方法">
+                            基因组学中的人工智能方法
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:phd1@example.com">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PhD Student 2 -->
+                <div class="student-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/phd2.jpg" alt="PhD Student 2" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/006B81/FFFFFF?text=PhD+2'">
+                        <span class="student-year-badge">2022级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="博士生2">博士生2</div>
+                        <div class="student-name-en">PhD Student 2</div>
+                        <p class="student-research" data-en="Biostatistical methodology" data-zh="生物统计方法学">
+                            生物统计方法学
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:phd2@example.com">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PhD Student 3 -->
+                <div class="student-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/phd3.jpg" alt="PhD Student 3" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/006B81/FFFFFF?text=PhD+3'">
+                        <span class="student-year-badge">2024级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="博士生3">博士生3</div>
+                        <div class="student-name-en">PhD Student 3</div>
+                        <p class="student-research" data-en="Medical image analysis" data-zh="医学影像分析">
+                            医学影像分析
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:phd3@example.com">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PhD Student 4 -->
+                <div class="student-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/phd4.jpg" alt="PhD Student 4" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/006B81/FFFFFF?text=PhD+4'">
+                        <span class="student-year-badge">2023级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="博士生4">博士生4</div>
+                        <div class="student-name-en">PhD Student 4</div>
+                        <p class="student-research" data-en="Clinical data science" data-zh="临床数据科学">
+                            临床数据科学
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:phd4@example.com">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PhD Student 5 -->
+                <div class="student-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/phd5.jpg" alt="PhD Student 5" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/006B81/FFFFFF?text=PhD+5'">
+                        <span class="student-year-badge">2024级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="博士生5">博士生5</div>
+                        <div class="student-name-en">PhD Student 5</div>
+                        <p class="student-research" data-en="Precision medicine" data-zh="精准医学">
+                            精准医学
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:phd5@example.com">📧</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Master Students -->
-            <div class="degree-section">
-                <h2 class="degree-title" data-en="Master Students (9)" data-zh="硕士研究生 (9人)">Master Students (9)</h2>
-                <div class="members-grid">
-                    <!-- Template for Master student cards -->
-                    <div class="member-card">
-                        <img src="../assets/images/members/master1.jpg" alt="Student Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
-                        <div class="member-info">
-                            <h3 class="member-name" data-en="Student Name" data-zh="学生姓名">Student Name</h3>
-                            <p class="member-year" data-en="Master, Class of 2024" data-zh="硕士生，2024级">Master, Class of 2024</p>
-                            <p class="member-research" data-en="Research: Biostatistical modeling" data-zh="研究方向：生物统计建模">
-                                Research: Biostatistical modeling
-                            </p>
+            <div class="section-divider">
+                <span class="section-subtitle" data-en="Master's Students" data-zh="硕士研究生">硕士研究生</span>
+                <h2 data-en="Master Students" data-zh="硕士生">硕士生</h2>
+                <p class="subtitle" data-en="9 Master students conducting innovative research" 
+                   data-zh="9名硕士生从事创新研究">9名硕士生从事创新研究</p>
+            </div>
+
+            <div class="students-grid">
+                <!-- Master Student 1-9 (示例3个，其余类似) -->
+                <div class="student-card" data-aos="fade-up">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/master1.jpg" alt="Master Student 1" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/8C1515/FFFFFF?text=MS+1'">
+                        <span class="student-year-badge">2024级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="硕士生1">硕士生1</div>
+                        <div class="student-name-en">Master Student 1</div>
+                        <p class="student-research" data-en="Machine learning in medicine" data-zh="医学机器学习">
+                            医学机器学习
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:master1@example.com">📧</a>
                         </div>
                     </div>
-                    
-                    <!-- Repeat for 9 Master students -->
                 </div>
+
+                <div class="student-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/master2.jpg" alt="Master Student 2" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/8C1515/FFFFFF?text=MS+2'">
+                        <span class="student-year-badge">2024级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="硕士生2">硕士生2</div>
+                        <div class="student-name-en">Master Student 2</div>
+                        <p class="student-research" data-en="Survival analysis" data-zh="生存分析">
+                            生存分析
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:master2@example.com">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="student-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="student-photo-wrapper">
+                        <img src="../assets/images/members/master3.jpg" alt="Master Student 3" class="student-photo"
+                             onerror="this.src='https://via.placeholder.com/300x300/8C1515/FFFFFF?text=MS+3'">
+                        <span class="student-year-badge">2023级</span>
+                    </div>
+                    <div class="student-info">
+                        <div class="student-name" data-en="Student Name" data-zh="硕士生3">硕士生3</div>
+                        <div class="student-name-en">Master Student 3</div>
+                        <p class="student-research" data-en="Longitudinal data analysis" data-zh="纵向数据分析">
+                            纵向数据分析
+                        </p>
+                        <div class="student-contact">
+                            <a href="mailto:master3@example.com">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 继续添加其他6个硕士生... -->
             </div>
         </div>
     </section>
 
-    <!-- Alumni -->
-    <section class="members-section" style="background: var(--light-bg);">
+    <!-- Alumni Section -->
+    <section class="alumni-section">
         <div class="container">
-            <h1 class="section-title" data-en="Alumni" data-zh="已毕业学生">Alumni</h1>
-            
-            <!-- PhD Alumni -->
-            <div class="degree-section">
-                <h2 class="degree-title" data-en="PhD Alumni (1)" data-zh="博士毕业生 (1人)">PhD Alumni (1)</h2>
-                <div class="members-grid">
-                    <div class="member-card">
-                        <img src="../assets/images/members/alumni_phd1.jpg" alt="Alumni Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
-                        <div class="member-info">
-                            <h3 class="member-name" data-en="Alumni Name" data-zh="校友姓名">Alumni Name</h3>
-                            <p class="member-year" data-en="PhD, Graduated 2024" data-zh="博士，2024年毕业">PhD, Graduated 2024</p>
-                            <p class="member-research" data-en="Currently: Postdoctoral Researcher" data-zh="现任：博士后研究员">
-                                Currently: Postdoctoral Researcher
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="section-divider">
+                <span class="section-subtitle" data-en="Where They Are Now" data-zh="他们的去向">他们的去向</span>
+                <h2 data-en="Alumni" data-zh="实验室校友">实验室校友</h2>
+                <p class="subtitle" data-en="Proud of our graduates making impact worldwide" 
+                   data-zh="我们为在世界各地产生影响的毕业生感到自豪">我们为在世界各地产生影响的毕业生感到自豪</p>
             </div>
 
-            <!-- Master Alumni -->
-            <div class="degree-section">
-                <h2 class="degree-title" data-en="Master Alumni (5)" data-zh="硕士毕业生 (5人)">Master Alumni (5)</h2>
-                <div class="members-grid">
-                    <!-- Repeat for 5 Master alumni -->
-                    <div class="member-card">
-                        <img src="../assets/images/members/alumni_master1.jpg" alt="Alumni Name" class="member-photo" onerror="this.src='../assets/images/placeholder.png'">
-                        <div class="member-info">
-                            <h3 class="member-name" data-en="Alumni Name" data-zh="校友姓名">Alumni Name</h3>
-                            <p class="member-year" data-en="Master, Graduated 2024" data-zh="硕士，2024年毕业">Master, Graduated 2024</p>
-                            <p class="member-research" data-en="Currently: Data Scientist" data-zh="现任：数据科学家">
-                                Currently: Data Scientist
-                            </p>
+            <div class="alumni-grid">
+                <div class="alumni-card" data-aos="fade-up">
+                    <div class="alumni-header">
+                        <img src="../assets/images/members/alumni_phd1.jpg" alt="Alumni" class="alumni-avatar"
+                             onerror="this.src='https://via.placeholder.com/60x60/006B81/FFFFFF?text=Dr'">
+                        <div>
+                            <div class="alumni-name" data-en="Dr. Alumni Name" data-zh="博士校友1">博士校友1</div>
+                            <div class="alumni-year" data-en="PhD, 2024" data-zh="2024届博士">2024届博士</div>
                         </div>
                     </div>
+                    <p class="alumni-position" data-en="Postdoctoral Researcher, University X" 
+                       data-zh="博士后研究员，X大学">博士后研究员，X大学</p>
+                    <p class="alumni-research" data-en="Machine learning in cancer genomics" 
+                       data-zh="癌症基因组学中的机器学习">癌症基因组学中的机器学习</p>
+                </div>
+
+                <div class="alumni-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="alumni-header">
+                        <img src="../assets/images/members/alumni_master1.jpg" alt="Alumni" class="alumni-avatar"
+                             onerror="this.src='https://via.placeholder.com/60x60/8C1515/FFFFFF?text=MS'">
+                        <div>
+                            <div class="alumni-name" data-en="Alumni Name" data-zh="硕士校友2">硕士校友2</div>
+                            <div class="alumni-year" data-en="MS, 2024" data-zh="2024届硕士">2024届硕士</div>
+                        </div>
+                    </div>
+                    <p class="alumni-position" data-en="Data Scientist, Company Y" 
+                       data-zh="数据科学家，Y公司">数据科学家，Y公司</p>
+                    <p class="alumni-research" data-en="Predictive modeling for disease risk" 
+                       data-zh="疾病风险预测建模">疾病风险预测建模</p>
+                </div>
+
+                <div class="alumni-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="alumni-header">
+                        <img src="../assets/images/members/alumni_master2.jpg" alt="Alumni" class="alumni-avatar"
+                             onerror="this.src='https://via.placeholder.com/60x60/8C1515/FFFFFF?text=MS'">
+                        <div>
+                            <div class="alumni-name" data-en="Alumni Name" data-zh="硕士校友3">硕士校友3</div>
+                            <div class="alumni-year" data-en="MS, 2024" data-zh="2024届硕士">2024届硕士</div>
+                        </div>
+                    </div>
+                    <p class="alumni-position" data-en="PhD Student, University Z" 
+                       data-zh="博士生，Z大学">博士生，Z大学</p>
+                    <p class="alumni-research" data-en="Statistical methods for omics data" 
+                       data-zh="组学数据统计方法">组学数据统计方法</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
-            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+            <div class="footer-content">
+                <div class="footer-col footer-col-main">
+                    <div class="footer-brand">
+                        <img src="../assets/images/logo.png" alt="Lei Laboratory" class="footer-logo">
+                        <h4 data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</h4>
+                    </div>
+                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</p>
+                    <p>📧 caolei@hrbmu.edu.cn</p>
+                    <p>📍 <span data-en="Harbin, Heilongjiang, China" data-zh="中国黑龙江省哈尔滨市">中国黑龙江省哈尔滨市</span></p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
+                    <ul>
+                        <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-zh="资源">资源</h4>
+                    <ul>
+                        <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                        <li><a href="resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                        <li><a href="join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" data-en="Privacy Policy" data-zh="隐私政策">隐私政策</a>
+                    <span>·</span>
+                    <a href="#" data-en="Terms of Use" data-zh="使用条款">使用条款</a>
+                </div>
+            </div>
         </div>
     </footer>
 
