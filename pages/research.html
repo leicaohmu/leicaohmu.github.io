@@ -1,165 +1,705 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research | Lei Laboratory</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>研究方向 - 雷曹实验室 | Research - Lei Laboratory</title>
+    <meta name="description" content="雷曹实验室的研究方向包括生物统计方法学、医学人工智能、基因组学与精准医学等前沿领域。">
+    <meta name="keywords" content="研究方向,生物统计,机器学习,精准医学,基因组学,临床数据科学">
+    
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    
+    <style>
+        /* 研究页面特定样式 */
+        .research-hero {
+            background: linear-gradient(135deg, #8C1515 0%, #006B81 100%);
+            padding: 100px 0 80px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .research-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        .research-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .research-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .research-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        .research-intro {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .intro-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .intro-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .research-areas-section {
+            padding: 100px 0;
+            background: var(--bg-cream);
+        }
+        
+        .area-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .area-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .area-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .area-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .area-icon {
+            font-size: 4rem;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-cream);
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+        
+        .area-header-text h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .area-header-text p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+        }
+        
+        .area-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        
+        .area-description p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .area-keywords {
+            background: var(--bg-cream);
+            padding: 30px;
+            border-radius: 16px;
+        }
+        
+        .area-keywords h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .keyword-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .keyword-item::before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .projects-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .project-card {
+            background: var(--bg-cream);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .project-tag {
+            padding: 6px 16px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .project-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .meta-item strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .collaboration-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .collaboration-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .collaboration-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .collaboration-content p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .collaboration-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .collab-logo {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .collab-logo:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .research-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .area-card {
+                padding: 40px 30px;
+            }
+            
+            .area-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .area-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .area-header-text h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button id="lang-en" class="active">English</button>
-        <button id="lang-zh">中文</button>
+        <button id="lang-en" aria-label="Switch to English">EN</button>
+        <button id="lang-zh" class="active" aria-label="切换到中文">中文</button>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="返回顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
                 <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
-                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+                <div class="brand-info">
+                    <span class="brand-name" data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</span>
+                    <span class="brand-subtitle" data-en="Biostatistics & AI Medicine" data-zh="生物统计与AI医学">生物统计与AI医学</span>
+                </div>
             </div>
+            
+            <button class="mobile-menu-toggle" aria-label="菜单" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-menu">
-                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
-                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
-                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
-                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
-                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
-                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
-                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                <li><a href="../index.html" data-en="Home" data-zh="首页">首页</a></li>
+                <li><a href="research.html" class="active" data-en="Research" data-zh="研究">研究</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                <li><a href="join.html" data-en="Join" data-zh="加入">加入</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Research Content -->
-    <section class="members-section">
+    <!-- Hero Section -->
+    <section class="research-hero">
         <div class="container">
-            <h1 class="section-title" data-en="Research Areas" data-zh="研究方向">Research Areas</h1>
-            
-            <div class="about-text" style="max-width: 900px; margin: 0 auto 60px;">
+            <span class="section-subtitle" data-en="What We Do" data-zh="我们的工作">我们的工作</span>
+            <h1 data-en="Research Areas" data-zh="研究方向">研究方向</h1>
+            <p data-en="Pioneering innovative solutions at the intersection of statistics, AI, and medicine"
+               data-zh="在统计学、人工智能和医学的交叉领域开创创新解决方案">
+                在统计学、人工智能和医学的交叉领域开创创新解决方案
+            </p>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="research-intro">
+        <div class="container">
+            <div class="intro-content">
                 <p data-en="Our laboratory focuses on developing and applying cutting-edge biostatistical methods and artificial intelligence techniques to address critical challenges in medical research and clinical practice."
                    data-zh="我们实验室专注于开发和应用前沿生物统计方法和人工智能技术，以解决医学研究和临床实践中的关键挑战。">
-                    Our laboratory focuses on developing and applying cutting-edge biostatistical methods and artificial intelligence techniques to address critical challenges in medical research and clinical practice.
+                    我们实验室专注于开发和应用前沿生物统计方法和人工智能技术，以解决医学研究和临床实践中的关键挑战。
+                </p>
+                <p data-en="Through rigorous methodology and innovative approaches, we strive to transform healthcare and improve patient outcomes."
+                   data-zh="通过严谨的方法论和创新的方法，我们努力改变医疗保健并改善患者预后。">
+                    通过严谨的方法论和创新的方法，我们努力改变医疗保健并改善患者预后。
                 </p>
             </div>
+        </div>
+    </section>
 
-            <div class="research-areas">
-                <!-- Research Area 1 -->
-                <div class="research-card">
-                    <div class="research-icon">📊</div>
-                    <h3 data-en="Biostatistical Methodology" data-zh="生物统计方法学">Biostatistical Methodology</h3>
-                    <p data-en="Development of novel statistical methods for analyzing complex biomedical data, including survival analysis, longitudinal data analysis, and causal inference."
-                       data-zh="开发用于分析复杂生物医学数据的新型统计方法，包括生存分析、纵向数据分析和因果推断。">
-                        Development of novel statistical methods for analyzing complex biomedical data, including survival analysis, longitudinal data analysis, and causal inference.
-                    </p>
+    <!-- Research Areas -->
+    <section class="research-areas-section">
+        <div class="container">
+            <div class="section-header-center" style="margin-bottom: 60px;">
+                <h2 class="section-title" data-en="Research Focus Areas" data-zh="核心研究领域">核心研究领域</h2>
+            </div>
+
+            <!-- Area 1: Biostatistical Methodology -->
+            <div class="area-card" data-aos="fade-up">
+                <div class="area-header">
+                    <div class="area-icon">📊</div>
+                    <div class="area-header-text">
+                        <h3 data-en="Biostatistical Methodology" data-zh="生物统计方法学">生物统计方法学</h3>
+                        <p data-en="Advanced Statistical Methods for Biomedical Research" 
+                           data-zh="生物医学研究的高级统计方法">生物医学研究的高级统计方法</p>
+                    </div>
                 </div>
-
-                <!-- Research Area 2 -->
-                <div class="research-card">
-                    <div class="research-icon">🤖</div>
-                    <h3 data-en="Machine Learning in Medicine" data-zh="医学机器学习">Machine Learning in Medicine</h3>
-                    <p data-en="Applying machine learning and deep learning techniques for disease prediction, diagnosis, and prognosis using multi-modal medical data."
-                       data-zh="应用机器学习和深度学习技术，利用多模态医学数据进行疾病预测、诊断和预后评估。">
-                        Applying machine learning and deep learning techniques for disease prediction, diagnosis, and prognosis using multi-modal medical data.
-                    </p>
-                </div>
-
-                <!-- Research Area 3 -->
-                <div class="research-card">
-                    <div class="research-icon">🧬</div>
-                    <h3 data-en="Genomics and Precision Medicine" data-zh="基因组学与精准医学">Genomics and Precision Medicine</h3>
-                    <p data-en="Integrative analysis of genomic, transcriptomic, and clinical data to identify biomarkers and develop personalized treatment strategies."
-                       data-zh="整合基因组、转录组和临床数据，识别生物标志物并制定个性化治疗策略。">
-                        Integrative analysis of genomic, transcriptomic, and clinical data to identify biomarkers and develop personalized treatment strategies.
-                    </p>
-                </div>
-
-                <!-- Research Area 4 -->
-                <div class="research-card">
-                    <div class="research-icon">🏥</div>
-                    <h3 data-en="Clinical Data Science" data-zh="临床数据科学">Clinical Data Science</h3>
-                    <p data-en="Mining electronic health records and real-world data to generate clinical evidence and improve healthcare decision-making."
-                       data-zh="挖掘电子健康记录和真实世界数据，生成临床证据并改善医疗决策。">
-                        Mining electronic health records and real-world data to generate clinical evidence and improve healthcare decision-making.
-                    </p>
-                </div>
-
-                <!-- Research Area 5 -->
-                <div class="research-card">
-                    <div class="research-icon">🖼️</div>
-                    <h3 data-en="Medical Image Analysis" data-zh="医学影像分析">Medical Image Analysis</h3>
-                    <p data-en="Developing AI algorithms for automated medical image segmentation, classification, and quantitative analysis."
-                       data-zh="开发用于自动医学影像分割、分类和定量分析的人工智能算法。">
-                        Developing AI algorithms for automated medical image segmentation, classification, and quantitative analysis.
-                    </p>
-                </div>
-
-                <!-- Research Area 6 -->
-                <div class="research-card">
-                    <div class="research-icon">💊</div>
-                    <h3 data-en="Drug Discovery and Development" data-zh="药物发现与开发">Drug Discovery and Development</h3>
-                    <p data-en="Statistical design and analysis of clinical trials, pharmacokinetics/pharmacodynamics modeling, and drug repurposing using AI."
-                       data-zh="临床试验的统计设计与分析、药代动力学/药效学建模，以及使用人工智能进行药物重新定位。">
-                        Statistical design and analysis of clinical trials, pharmacokinetics/pharmacodynamics modeling, and drug repurposing using AI.
-                    </p>
+                <div class="area-content">
+                    <div class="area-description">
+                        <p data-en="We develop novel statistical methods for analyzing complex biomedical data, including survival analysis, longitudinal data analysis, and causal inference. Our methods address challenges in high-dimensional data, missing data, and heterogeneous populations."
+                           data-zh="我们开发用于分析复杂生物医学数据的新型统计方法，包括生存分析、纵向数据分析和因果推断。我们的方法解决高维数据、缺失数据和异质群体中的挑战。">
+                            我们开发用于分析复杂生物医学数据的新型统计方法，包括生存分析、纵向数据分析和因果推断。我们的方法解决高维数据、缺失数据和异质群体中的挑战。
+                        </p>
+                        <p data-en="Our research emphasizes theoretical rigor combined with practical applicability to real-world medical problems."
+                           data-zh="我们的研究强调理论严谨性与现实世界医学问题的实际适用性相结合。">
+                            我们的研究强调理论严谨性与现实世界医学问题的实际适用性相结合。
+                        </p>
+                    </div>
+                    <div class="area-keywords">
+                        <h4 data-en="Key Topics" data-zh="关键主题">关键主题</h4>
+                        <div class="keywords-list">
+                            <div class="keyword-item" data-en="Survival Analysis" data-zh="生存分析">生存分析</div>
+                            <div class="keyword-item" data-en="Causal Inference" data-zh="因果推断">因果推断</div>
+                            <div class="keyword-item" data-en="Longitudinal Data" data-zh="纵向数据">纵向数据</div>
+                            <div class="keyword-item" data-en="High-Dimensional Statistics" data-zh="高维统计">高维统计</div>
+                            <div class="keyword-item" data-en="Missing Data Methods" data-zh="缺失数据方法">缺失数据方法</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Current Projects -->
-            <div style="margin-top: 80px;">
-                <h2 class="section-title" data-en="Current Projects" data-zh="在研项目">Current Projects</h2>
+            <!-- Area 2: Machine Learning in Medicine -->
+            <div class="area-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="area-header">
+                    <div class="area-icon">🤖</div>
+                    <div class="area-header-text">
+                        <h3 data-en="Machine Learning in Medicine" data-zh="医学机器学习">医学机器学习</h3>
+                        <p data-en="AI-Powered Disease Prediction and Diagnosis" 
+                           data-zh="人工智能驱动的疾病预测和诊断">人工智能驱动的疾病预测和诊断</p>
+                    </div>
+                </div>
+                <div class="area-content">
+                    <div class="area-description">
+                        <p data-en="We apply machine learning and deep learning techniques for disease prediction, diagnosis, and prognosis using multi-modal medical data including clinical records, imaging, and genomics."
+                           data-zh="我们应用机器学习和深度学习技术，利用包括临床记录、影像和基因组学在内的多模态医学数据进行疾病预测、诊断和预后评估。">
+                            我们应用机器学习和深度学习技术，利用包括临床记录、影像和基因组学在内的多模态医学数据进行疾病预测、诊断和预后评估。
+                        </p>
+                        <p data-en="Our focus is on developing interpretable AI models that can be trusted by clinicians and integrated into clinical workflows."
+                           data-zh="我们的重点是开发可解释的人工智能模型，这些模型可以被临床医生信任并整合到临床工作流程中。">
+                            我们的重点是开发可解释的人工智能模型，这些模型可以被临床医生信任并整合到临床工作流程中。
+                        </p>
+                    </div>
+                    <div class="area-keywords">
+                        <h4 data-en="Key Topics" data-zh="关键主题">关键主题</h4>
+                        <div class="keywords-list">
+                            <div class="keyword-item" data-en="Deep Learning" data-zh="深度学习">深度学习</div>
+                            <div class="keyword-item" data-en="Disease Prediction" data-zh="疾病预测">疾病预测</div>
+                            <div class="keyword-item" data-en="Interpretable AI" data-zh="可解释AI">可解释AI</div>
+                            <div class="keyword-item" data-en="Multi-Modal Learning" data-zh="多模态学习">多模态学习</div>
+                            <div class="keyword-item" data-en="Clinical Decision Support" data-zh="临床决策支持">临床决策支持</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area 3: Genomics & Precision Medicine -->
+            <div class="area-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="area-header">
+                    <div class="area-icon">🧬</div>
+                    <div class="area-header-text">
+                        <h3 data-en="Genomics & Precision Medicine" data-zh="基因组学与精准医学">基因组学与精准医学</h3>
+                        <p data-en="Personalized Treatment Based on Genetic Profiles" 
+                           data-zh="基于基因谱的个性化治疗">基于基因谱的个性化治疗</p>
+                    </div>
+                </div>
+                <div class="area-content">
+                    <div class="area-description">
+                        <p data-en="We conduct integrative analysis of genomic, transcriptomic, and clinical data to identify biomarkers and develop personalized treatment strategies for complex diseases."
+                           data-zh="我们对基因组、转录组和临床数据进行整合分析，以识别生物标志物并为复杂疾病开发个性化治疗策略。">
+                            我们对基因组、转录组和临床数据进行整合分析，以识别生物标志物并为复杂疾病开发个性化治疗策略。
+                        </p>
+                        <p data-en="Our work bridges the gap between genomic discoveries and clinical applications, enabling precision medicine."
+                           data-zh="我们的工作在基因组发现和临床应用之间架起桥梁，实现精准医学。">
+                            我们的工作在基因组发现和临床应用之间架起桥梁，实现精准医学。
+                        </p>
+                    </div>
+                    <div class="area-keywords">
+                        <h4 data-en="Key Topics" data-zh="关键主题">关键主题</h4>
+                        <div class="keywords-list">
+                            <div class="keyword-item" data-en="Biomarker Discovery" data-zh="生物标志物发现">生物标志物发现</div>
+                            <div class="keyword-item" data-en="Genomic Data Integration" data-zh="基因组数据整合">基因组数据整合</div>
+                            <div class="keyword-item" data-en="Pharmacogenomics" data-zh="药物基因组学">药物基因组学</div>
+                            <div class="keyword-item" data-en="Risk Stratification" data-zh="风险分层">风险分层</div>
+                            <div class="keyword-item" data-en="Personalized Therapy" data-zh="个性化治疗">个性化治疗</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area 4: Clinical Data Science -->
+            <div class="area-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="area-header">
+                    <div class="area-icon">🏥</div>
+                    <div class="area-header-text">
+                        <h3 data-en="Clinical Data Science" data-zh="临床数据科学">临床数据科学</h3>
+                        <p data-en="Real-World Evidence from Electronic Health Records" 
+                           data-zh="来自电子健康记录的真实世界证据">来自电子健康记录的真实世界证据</p>
+                    </div>
+                </div>
+                <div class="area-content">
+                    <div class="area-description">
+                        <p data-en="We mine electronic health records and real-world data to generate clinical evidence and improve healthcare decision-making. Our research addresses data quality, privacy, and integration challenges."
+                           data-zh="我们挖掘电子健康记录和真实世界数据，以生成临床证据并改善医疗决策。我们的研究解决数据质量、隐私和整合挑战。">
+                            我们挖掘电子健康记录和真实世界数据，以生成临床证据并改善医疗决策。我们的研究解决数据质量、隐私和整合挑战。
+                        </p>
+                    </div>
+                    <div class="area-keywords">
+                        <h4 data-en="Key Topics" data-zh="关键主题">关键主题</h4>
+                        <div class="keywords-list">
+                            <div class="keyword-item" data-en="EHR Data Mining" data-zh="电子病历数据挖掘">电子病历数据挖掘</div>
+                            <div class="keyword-item" data-en="Real-World Evidence" data-zh="真实世界证据">真实世界证据</div>
+                            <div class="keyword-item" data-en="Clinical Trial Design" data-zh="临床试验设计">临床试验设计</div>
+                            <div class="keyword-item" data-en="Healthcare Analytics" data-zh="医疗分析">医疗分析</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area 5: Medical Image Analysis -->
+            <div class="area-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="area-header">
+                    <div class="area-icon">🖼️</div>
+                    <div class="area-header-text">
+                        <h3 data-en="Medical Image Analysis" data-zh="医学影像分析">医学影像分析</h3>
+                        <p data-en="AI-Powered Image Segmentation and Diagnosis" 
+                           data-zh="人工智能驱动的图像分割和诊断">人工智能驱动的图像分割和诊断</p>
+                    </div>
+                </div>
+                <div class="area-content">
+                    <div class="area-description">
+                        <p data-en="We develop AI algorithms for automated medical image segmentation, classification, and quantitative analysis across various imaging modalities."
+                           data-zh="我们开发用于各种成像模态的自动医学图像分割、分类和定量分析的人工智能算法。">
+                            我们开发用于各种成像模态的自动医学图像分割、分类和定量分析的人工智能算法。
+                        </p>
+                    </div>
+                    <div class="area-keywords">
+                        <h4 data-en="Key Topics" data-zh="关键主题">关键主题</h4>
+                        <div class="keywords-list">
+                            <div class="keyword-item" data-en="Image Segmentation" data-zh="图像分割">图像分割</div>
+                            <div class="keyword-item" data-en="Computer Vision" data-zh="计算机视觉">计算机视觉</div>
+                            <div class="keyword-item" data-en="Radiomics" data-zh="影像组学">影像组学</div>
+                            <div class="keyword-item" data-en="3D Imaging" data-zh="三维成像">三维成像</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Projects -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="section-header-center" style="margin-bottom: 60px;">
+                <span class="section-subtitle" data-en="Active Projects" data-zh="在研项目">在研项目</span>
+                <h2 class="section-title" data-en="Current Research Projects" data-zh="当前研究项目">当前研究项目</h2>
+            </div>
+
+            <div class="project-card" data-aos="fade-up">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title" data-en="AI-Based Early Cancer Detection" 
+                            data-zh="基于人工智能的癌症早期检测">基于人工智能的癌症早期检测</h3>
+                    </div>
+                    <span class="project-tag" data-en="Funded" data-zh="已资助">已资助</span>
+                </div>
+                <p class="project-description" data-en="Developing machine learning models for early detection of multiple cancer types using multi-omics data and imaging biomarkers. This project aims to improve cancer screening and enable earlier intervention."
+                   data-zh="开发机器学习模型，利用多组学数据和影像生物标志物实现多种癌症类型的早期检测。该项目旨在改善癌症筛查并实现更早的干预。">
+                    开发机器学习模型，利用多组学数据和影像生物标志物实现多种癌症类型的早期检测。该项目旨在改善癌症筛查并实现更早的干预。
+                </p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <strong data-en="Funding:" data-zh="资助方：">资助方：</strong>
+                        <span data-en="National Natural Science Foundation of China" 
+                              data-zh="国家自然科学基金">国家自然科学基金</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong data-en="Duration:" data-zh="周期：">周期：</strong>
+                        <span>2023-2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title" data-en="Biostatistical Methods for High-Dimensional Data" 
+                            data-zh="高维数据生物统计方法">高维数据生物统计方法</h3>
+                    </div>
+                    <span class="project-tag" data-en="Active" data-zh="进行中">进行中</span>
+                </div>
+                <p class="project-description" data-en="Developing novel statistical methods for variable selection, dimension reduction, and inference in high-dimensional biomedical studies."
+                   data-zh="开发用于高维生物医学研究中变量选择、降维和推断的新型统计方法。">
+                    开发用于高维生物医学研究中变量选择、降维和推断的新型统计方法。
+                </p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <strong data-en="Duration:" data-zh="周期：">周期：</strong>
+                        <span>2024-2027</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title" data-en="Precision Medicine for Cardiovascular Diseases" 
+                            data-zh="心血管疾病精准医学">心血管疾病精准医学</h3>
+                    </div>
+                    <span class="project-tag" data-en="Active" data-zh="进行中">进行中</span>
+                </div>
+                <p class="project-description" data-en="Integrating genomic, clinical, and lifestyle data to develop personalized risk prediction models and treatment strategies for cardiovascular diseases."
+                   data-zh="整合基因组、临床和生活方式数据，开发心血管疾病个性化风险预测模型和治疗策略。">
+                    整合基因组、临床和生活方式数据，开发心血管疾病个性化风险预测模型和治疗策略。
+                </p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <strong data-en="Duration:" data-zh="周期：">周期：</strong>
+                        <span>2024-2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration Section -->
+    <section class="collaboration-section">
+        <div class="container">
+            <div class="collaboration-content">
+                <span class="section-subtitle" data-en="Partners" data-zh="合作伙伴">合作伙伴</span>
+                <h2 data-en="Collaborations" data-zh="合作单位">合作单位</h2>
+                <p data-en="We actively collaborate with leading research institutions and hospitals both nationally and internationally, including medical schools, cancer centers, and biotechnology companies."
+                   data-zh="我们积极与国内外领先的研究机构和医院合作，包括医学院、癌症中心和生物技术公司。">
+                    我们积极与国内外领先的研究机构和医院合作，包括医学院、癌症中心和生物技术公司。
+                </p>
                 
-                <div class="news-grid">
-                    <div class="news-item">
-                        <h3 data-en="AI-based Early Cancer Detection" data-zh="基于人工智能的癌症早期检测">AI-based Early Cancer Detection</h3>
-                        <p data-en="Developing machine learning models for early detection of multiple cancer types using multi-omics data and imaging biomarkers."
-                           data-zh="开发机器学习模型，利用多组学数据和影像生物标志物实现多种癌症类型的早期检测。">
-                            Developing machine learning models for early detection of multiple cancer types using multi-omics data and imaging biomarkers.
-                        </p>
-                        <p style="margin-top: 10px; color: #666;">
-                            <strong data-en="Funding:" data-zh="资助方：">Funding:</strong> 
-                            <span data-en="National Natural Science Foundation of China" data-zh="国家自然科学基金">National Natural Science Foundation of China</span>
-                        </p>
+                <div class="collaboration-logos">
+                    <div class="collab-logo">
+                        <p data-en="Major Medical Centers" data-zh="主要医疗中心">主要医疗中心</p>
                     </div>
-
-                    <div class="news-item">
-                        <h3 data-en="Biostatistical Methods for High-Dimensional Data" data-zh="高维数据生物统计方法">Biostatistical Methods for High-Dimensional Data</h3>
-                        <p data-en="Developing novel statistical methods for variable selection, dimension reduction, and inference in high-dimensional biomedical studies."
-                           data-zh="开发用于高维生物医学研究中变量选择、降维和推断的新型统计方法。">
-                            Developing novel statistical methods for variable selection, dimension reduction, and inference in high-dimensional biomedical studies.
-                        </p>
+                    <div class="collab-logo">
+                        <p data-en="Research Institutes" data-zh="研究机构">研究机构</p>
                     </div>
-
-                    <div class="news-item">
-                        <h3 data-en="Precision Medicine for Cardiovascular Diseases" data-zh="心血管疾病精准医学">Precision Medicine for Cardiovascular Diseases</h3>
-                        <p data-en="Integrating genomic, clinical, and lifestyle data to develop personalized risk prediction models and treatment strategies for cardiovascular diseases."
-                           data-zh="整合基因组、临床和生活方式数据，开发心血管疾病个性化风险预测模型和治疗策略。">
-                            Integrating genomic, clinical, and lifestyle data to develop personalized risk prediction models and treatment strategies for cardiovascular diseases.
-                        </p>
+                    <div class="collab-logo">
+                        <p data-en="Universities" data-zh="大学">大学</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Collaborations -->
-            <div style="margin-top: 80px;">
-                <h2 class="section-title" data-en="Collaborations" data-zh="合作单位">Collaborations</h2>
-                <div class="about-text" style="max-width: 900px; margin: 0 auto;">
-                    <p data-en="We actively collaborate with leading research institutions and hospitals both nationally and internationally, including medical schools, cancer centers, and biotechnology companies."
-                       data-zh="我们积极与国内外领先的研究机构和医院合作，包括医学院、癌症中心和生物技术公司。">
-                        We actively collaborate with leading research institutions and hospitals both nationally and internationally, including medical schools, cancer centers, and biotechnology companies.
-                    </p>
+                    <div class="collab-logo">
+                        <p data-en="Biotech Companies" data-zh="生物技术公司">生物技术公司</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
-            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+            <div class="footer-content">
+                <div class="footer-col footer-col-main">
+                    <div class="footer-brand">
+                        <img src="../assets/images/logo.png" alt="Lei Laboratory" class="footer-logo">
+                        <h4 data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</h4>
+                    </div>
+                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</p>
+                    <p>📧 caolei@hrbmu.edu.cn</p>
+                    <p>📍 <span data-en="Harbin, Heilongjiang, China" data-zh="中国黑龙江省哈尔滨市">中国黑龙江省哈尔滨市</span></p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
+                    <ul>
+                        <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-zh="资源">资源</h4>
+                    <ul>
+                        <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                        <li><a href="resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                        <li><a href="join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" data-en="Privacy Policy" data-zh="隐私政策">隐私政策</a>
+                    <span>·</span>
+                    <a href="#" data-en="Terms of Use" data-zh="使用条款">使用条款</a>
+                </div>
+            </div>
         </div>
     </footer>
 
