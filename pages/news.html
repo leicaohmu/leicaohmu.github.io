@@ -1,161 +1,654 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News | Lei Laboratory</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>新闻动态 - 雷曹实验室 | News - Lei Laboratory</title>
+    <meta name="description" content="雷曹实验室最新动态、研究进展、论文发表和获奖信息。Latest news, publications, and achievements from Lei Laboratory.">
+    <meta name="keywords" content="实验室动态,研究新闻,论文发表,学术会议,获奖信息">
+    
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    
+    <style>
+        /* 新闻页面特定样式 */
+        .news-hero {
+            background: linear-gradient(135deg, #8C1515 0%, #006B81 100%);
+            padding: 100px 0 80px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        .news-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .news-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .news-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .news-filter-section {
+            padding: 40px 0;
+            background: white;
+            border-bottom: 2px solid var(--bg-light);
+            position: sticky;
+            top: 100px;
+            z-index: 100;
+        }
+        
+        .news-filters {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 24px;
+            border: 2px solid var(--bg-light);
+            background: white;
+            color: var(--text);
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .news-content-section {
+            padding: 80px 0;
+            background: var(--bg-cream);
+            min-height: 60vh;
+        }
+        
+        .news-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .news-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 3;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot-wrapper {
+            grid-column: 2;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            grid-column: 1;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot-wrapper {
+            grid-column: 2;
+        }
+        
+        .timeline-dot-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary);
+            z-index: 2;
+        }
+        
+        .timeline-date {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary);
+            box-shadow: var(--shadow);
+            white-space: nowrap;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            transform: rotate(45deg);
+            box-shadow: -2px -2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+        }
+        
+        .news-tag-inline {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        
+        .news-tag-publication {
+            background: var(--secondary);
+        }
+        
+        .news-tag-award {
+            background: var(--accent);
+        }
+        
+        .news-tag-event {
+            background: #c69840;
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .timeline-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+        
+        .timeline-content .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        
+        .timeline-content .read-more:hover {
+            gap: 10px;
+        }
+        
+        .featured-news {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-news::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .featured-news .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .featured-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        
+        .featured-news h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        
+        .featured-news p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            max-width: 700px;
+        }
+        
+        .featured-news .btn {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .news-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .news-timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                grid-template-columns: 60px 1fr;
+                gap: 20px;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(odd) .timeline-content {
+                grid-column: 2;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-dot-wrapper,
+            .timeline-item:nth-child(odd) .timeline-dot-wrapper {
+                grid-column: 1;
+            }
+            
+            .timeline-content::before {
+                left: -10px !important;
+            }
+            
+            .timeline-content {
+                padding: 24px;
+            }
+            
+            .featured-news {
+                padding: 40px 30px;
+            }
+            
+            .featured-news h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button id="lang-en" class="active">English</button>
-        <button id="lang-zh">中文</button>
+        <button id="lang-en" aria-label="Switch to English">EN</button>
+        <button id="lang-zh" class="active" aria-label="切换到中文">中文</button>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="返回顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
                 <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
-                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+                <div class="brand-info">
+                    <span class="brand-name" data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</span>
+                    <span class="brand-subtitle" data-en="Biostatistics & AI Medicine" data-zh="生物统计与AI医学">生物统计与AI医学</span>
+                </div>
             </div>
+            
+            <button class="mobile-menu-toggle" aria-label="菜单" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-menu">
-                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
-                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
-                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
-                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
-                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
-                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
-                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                <li><a href="../index.html" data-en="Home" data-zh="首页">首页</a></li>
+                <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                <li><a href="news.html" class="active" data-en="News" data-zh="动态">动态</a></li>
+                <li><a href="join.html" data-en="Join" data-zh="加入">加入</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- News Content -->
-    <section class="members-section">
+    <!-- Hero Section -->
+    <section class="news-hero">
         <div class="container">
-            <h1 class="section-title" data-en="News and Events" data-zh="新闻动态">News and Events</h1>
+            <span class="section-subtitle" data-en="Stay Updated" data-zh="保持更新">保持更新</span>
+            <h1 data-en="News & Updates" data-zh="新闻动态">新闻动态</h1>
+            <p data-en="The latest news, publications, and achievements from our laboratory"
+               data-zh="实验室的最新消息、论文发表和成就">
+                实验室的最新消息、论文发表和成就
+            </p>
+        </div>
+    </section>
 
-            <div class="news-grid" style="max-width: 900px; margin: 0 auto;">
-                
+    <!-- Filter Section -->
+    <section class="news-filter-section">
+        <div class="container">
+            <div class="news-filters">
+                <button class="filter-btn active" data-filter="all" data-en="All News" data-zh="全部动态">全部动态</button>
+                <button class="filter-btn" data-filter="publication" data-en="Publications" data-zh="论文发表">论文发表</button>
+                <button class="filter-btn" data-filter="award" data-en="Awards" data-zh="获奖信息">获奖信息</button>
+                <button class="filter-btn" data-filter="announcement" data-en="Announcements" data-zh="公告">公告</button>
+                <button class="filter-btn" data-filter="event" data-en="Events" data-zh="活动">活动</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Content -->
+    <section class="news-content-section">
+        <div class="container">
+            <!-- Featured News -->
+            <div class="featured-news" data-aos="fade-up">
+                <span class="featured-badge" data-en="Featured" data-zh="特别推荐">特别推荐</span>
+                <h2 data-en="Laboratory Website Launch" data-zh="实验室网站上线">实验室网站上线</h2>
+                <p data-en="We are excited to announce the launch of our new laboratory website! This platform will serve as a hub for sharing our research, connecting with collaborators, and recruiting talented students."
+                   data-zh="我们很高兴宣布实验室新网站正式上线！这个平台将作为分享我们研究成果、与合作者联系以及招募优秀学生的中心。">
+                    我们很高兴宣布实验室新网站正式上线！这个平台将作为分享我们研究成果、与合作者联系以及招募优秀学生的中心。
+                </p>
+                <a href="#" class="btn btn-light" data-en="Learn More" data-zh="了解更多">
+                    <span data-en="Learn More" data-zh="了解更多">了解更多</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Timeline -->
+            <div class="news-timeline">
                 <!-- News Item 1 -->
-                <div class="news-item">
-                    <div class="news-date">2025-01-08</div>
-                    <h3 data-en="Welcome to Lei Laboratory Website!"
-                        data-zh="欢迎访问雷曹实验室网站！">
-                        Welcome to Lei Laboratory Website!
-                    </h3>
-                    <p data-en="Our new laboratory website is now live. Here you can find information about our research, team members, publications, and more. Stay tuned for regular updates!"
-                       data-zh="我们的新实验室网站现已上线。您可以在这里找到关于我们研究、团队成员、发表论文等信息。敬请关注定期更新！">
-                        Our new laboratory website is now live. Here you can find information about our research, team members, publications, and more. Stay tuned for regular updates!
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-category="announcement">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline" data-en="Announcement" data-zh="公告">公告</span>
+                        <h3 data-en="Website Launch" data-zh="网站上线">网站上线</h3>
+                        <p data-en="Our new laboratory website is now live! Explore our research, team, and opportunities."
+                           data-zh="我们的新实验室网站现已上线！探索我们的研究、团队和机会。">
+                            我们的新实验室网站现已上线！探索我们的研究、团队和机会。
+                        </p>
+                        <a href="#" class="read-more" data-en="Read More →" data-zh="阅读更多 →">阅读更多 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2025-01-08</div>
+                    </div>
                 </div>
 
                 <!-- News Item 2 -->
-                <div class="news-item">
-                    <div class="news-date">2024-12-15</div>
-                    <h3 data-en="New Paper Published in Journal X"
-                        data-zh="新论文发表于X期刊">
-                        New Paper Published in Journal X
-                    </h3>
-                    <p data-en="Congratulations to our team for publishing a research paper on AI-based disease prediction in Journal X. This work represents a significant advancement in precision medicine."
-                       data-zh="祝贺我们团队在X期刊上发表关于基于人工智能的疾病预测的研究论文。这项工作代表了精准医学的重要进展。">
-                        Congratulations to our team for publishing a research paper on AI-based disease prediction in Journal X. This work represents a significant advancement in precision medicine.
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100" data-category="publication">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline news-tag-publication" data-en="Publication" data-zh="论文">论文</span>
+                        <h3 data-en="New Paper Published in Biometrics" data-zh="在Biometrics期刊发表新论文">在Biometrics期刊发表新论文</h3>
+                        <p data-en="Our paper on novel biostatistical methods for high-dimensional survival analysis has been published in Biometrics."
+                           data-zh="我们关于高维生存分析的新型生物统计方法的论文在Biometrics期刊上发表。">
+                            我们关于高维生存分析的新型生物统计方法的论文在Biometrics期刊上发表。
+                        </p>
+                        <a href="publications.html" class="read-more" data-en="View Publication →" data-zh="查看论文 →">查看论文 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024-12-15</div>
+                    </div>
                 </div>
 
                 <!-- News Item 3 -->
-                <div class="news-item">
-                    <div class="news-date">2024-11-20</div>
-                    <h3 data-en="Student A Receives Outstanding Graduate Award"
-                        data-zh="学生A获得优秀研究生奖">
-                        Student A Receives Outstanding Graduate Award
-                    </h3>
-                    <p data-en="We are proud to announce that our PhD student received the Outstanding Graduate Student Award from Harbin Medical University for exceptional research achievements."
-                       data-zh="我们自豪地宣布，我们的博士生因杰出的研究成果获得哈尔滨医科大学优秀研究生奖。">
-                        We are proud to announce that our PhD student received the Outstanding Graduate Student Award from Harbin Medical University for exceptional research achievements.
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200" data-category="award">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline news-tag-award" data-en="Award" data-zh="奖项">奖项</span>
+                        <h3 data-en="Student Receives Outstanding Graduate Award" data-zh="学生获得优秀研究生奖">学生获得优秀研究生奖</h3>
+                        <p data-en="Congratulations to our PhD student for receiving the Outstanding Graduate Student Award!"
+                           data-zh="祝贺我们的博士生获得优秀研究生奖！">
+                            祝贺我们的博士生获得优秀研究生奖！
+                        </p>
+                        <a href="#" class="read-more" data-en="Read More →" data-zh="阅读更多 →">阅读更多 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024-11-20</div>
+                    </div>
                 </div>
 
                 <!-- News Item 4 -->
-                <div class="news-item">
-                    <div class="news-date">2024-10-10</div>
-                    <h3 data-en="New Research Grant Awarded"
-                        data-zh="获得新研究基金">
-                        New Research Grant Awarded
-                    </h3>
-                    <p data-en="Our laboratory has been awarded a research grant from the National Natural Science Foundation of China to investigate novel biostatistical methods for cancer genomics."
-                       data-zh="我们实验室获得国家自然科学基金资助，用于研究癌症基因组学的新型生物统计方法。">
-                        Our laboratory has been awarded a research grant from the National Natural Science Foundation of China to investigate novel biostatistical methods for cancer genomics.
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300" data-category="publication">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline news-tag-publication" data-en="Publication" data-zh="论文">论文</span>
+                        <h3 data-en="AI Research Paper Accepted" data-zh="人工智能研究论文被接收">人工智能研究论文被接收</h3>
+                        <p data-en="Our research on AI-based disease prediction has been accepted for publication in Medical Image Analysis."
+                           data-zh="我们关于基于人工智能的疾病预测研究已被Medical Image Analysis期刊接收。">
+                            我们关于基于人工智能的疾病预测研究已被Medical Image Analysis期刊接收。
+                        </p>
+                        <a href="publications.html" class="read-more" data-en="View Publication →" data-zh="查看论文 →">查看论文 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024-10-08</div>
+                    </div>
                 </div>
 
                 <!-- News Item 5 -->
-                <div class="news-item">
-                    <div class="news-date">2024-09-01</div>
-                    <h3 data-en="Welcome New Students!"
-                        data-zh="欢迎新同学！">
-                        Welcome New Students!
-                    </h3>
-                    <p data-en="We warmly welcome 4 new graduate students (2 PhD and 2 Master students) joining our laboratory this fall. We look forward to great research collaborations!"
-                       data-zh="我们热烈欢迎4名新研究生（2名博士生和2名硕士生）今秋加入我们实验室。期待精彩的研究合作！">
-                        We warmly welcome 4 new graduate students (2 PhD and 2 Master students) joining our laboratory this fall. We look forward to great research collaborations!
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400" data-category="event">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline news-tag-event" data-en="Event" data-zh="活动">活动</span>
+                        <h3 data-en="Lab Seminar Series Begins" data-zh="实验室研讨会系列启动">实验室研讨会系列启动</h3>
+                        <p data-en="Our weekly lab seminar series has started, featuring presentations from lab members and invited speakers."
+                           data-zh="我们的每周实验室研讨会系列已经开始，包括实验室成员和特邀演讲者的报告。">
+                            我们的每周实验室研讨会系列已经开始，包括实验室成员和特邀演讲者的报告。
+                        </p>
+                        <a href="#" class="read-more" data-en="Read More →" data-zh="阅读更多 →">阅读更多 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024-09-15</div>
+                    </div>
                 </div>
 
                 <!-- News Item 6 -->
-                <div class="news-item">
-                    <div class="news-date">2024-07-15</div>
-                    <h3 data-en="Lab Seminar Series Launched"
-                        data-zh="实验室研讨会系列启动">
-                        Lab Seminar Series Launched
-                    </h3>
-                    <p data-en="We have launched a weekly seminar series featuring invited speakers from leading institutions discussing latest advances in biostatistics and AI medicine."
-                       data-zh="我们启动了每周研讨会系列，邀请来自顶尖机构的演讲者讨论生物统计和人工智能医学的最新进展。">
-                        We have launched a weekly seminar series featuring invited speakers from leading institutions discussing latest advances in biostatistics and AI medicine.
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="500" data-category="announcement">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline" data-en="Announcement" data-zh="公告">公告</span>
+                        <h3 data-en="New Research Grant Awarded" data-zh="获得新的研究资助">获得新的研究资助</h3>
+                        <p data-en="We are pleased to announce that our lab has been awarded a new research grant from the National Natural Science Foundation of China."
+                           data-zh="我们很高兴地宣布，我们的实验室获得了国家自然科学基金的新研究资助。">
+                            我们很高兴地宣布，我们的实验室获得了国家自然科学基金的新研究资助。
+                        </p>
+                        <a href="research.html" class="read-more" data-en="View Projects →" data-zh="查看项目 →">查看项目 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024-08-20</div>
+                    </div>
                 </div>
 
                 <!-- News Item 7 -->
-                <div class="news-item">
-                    <div class="news-date">2024-06-20</div>
-                    <h3 data-en="Presentation at International Conference"
-                        data-zh="在国际会议上演讲">
-                        Presentation at International Conference
-                    </h3>
-                    <p data-en="Dr. Lei Cao presented our latest research findings at the International Conference on Biostatistics and Bioinformatics in Beijing."
-                       data-zh="曹雷博士在北京举行的国际生物统计与生物信息学会议上展示了我们的最新研究成果。">
-                        Dr. Lei Cao presented our latest research findings at the International Conference on Biostatistics and Bioinformatics in Beijing.
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="600" data-category="event">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline news-tag-event" data-en="Event" data-zh="活动">活动</span>
+                        <h3 data-en="Conference Presentation" data-zh="会议报告">会议报告</h3>
+                        <p data-en="Dr. Lei Cao presented our latest research at the International Biometric Society Conference."
+                           data-zh="曹雷博士在国际生物统计学会会议上展示了我们的最新研究。">
+                            曹雷博士在国际生物统计学会会议上展示了我们的最新研究。
+                        </p>
+                        <a href="#" class="read-more" data-en="Read More →" data-zh="阅读更多 →">阅读更多 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024-07-12</div>
+                    </div>
                 </div>
 
                 <!-- News Item 8 -->
-                <div class="news-item">
-                    <div class="news-date">2023-12-01</div>
-                    <h3 data-en="Lei Laboratory Established"
-                        data-zh="雷曹实验室成立">
-                        Lei Laboratory Established
-                    </h3>
-                    <p data-en="Lei Laboratory was officially established at Harbin Medical University, focusing on biostatistics and AI methods in medicine with the motto 'RIGOR, INNOVATION, FUTURE'."
-                       data-zh="雷曹实验室在哈尔滨医科大学正式成立，专注于生物统计和人工智能医学方法，秉持'严谨、创新、未来'的理念。">
-                        Lei Laboratory was officially established at Harbin Medical University, focusing on biostatistics and AI methods in medicine with the motto "RIGOR, INNOVATION, FUTURE".
-                    </p>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="700" data-category="announcement">
+                    <div class="timeline-content">
+                        <span class="news-tag-inline" data-en="Announcement" data-zh="公告">公告</span>
+                        <h3 data-en="Welcome New Students!" data-zh="欢迎新同学！">欢迎新同学！</h3>
+                        <p data-en="We are excited to welcome 5 new PhD and Master students joining our lab this fall."
+                           data-zh="我们很高兴欢迎今年秋季加入我们实验室的5名新博士和硕士生。">
+                            我们很高兴欢迎今年秋季加入我们实验室的5名新博士和硕士生。
+                        </p>
+                        <a href="members.html" class="read-more" data-en="Meet the Team →" data-zh="认识团队 →">认识团队 →</a>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024-09-01</div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
-            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+            <div class="footer-content">
+                <div class="footer-col footer-col-main">
+                    <div class="footer-brand">
+                        <img src="../assets/images/logo.png" alt="Lei Laboratory" class="footer-logo">
+                        <h4 data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</h4>
+                    </div>
+                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</p>
+                    <p>📧 caolei@hrbmu.edu.cn</p>
+                    <p>📍 <span data-en="Harbin, Heilongjiang, China" data-zh="中国黑龙江省哈尔滨市">中国黑龙江省哈尔滨市</span></p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
+                    <ul>
+                        <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-zh="资源">资源</h4>
+                    <ul>
+                        <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                        <li><a href="resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                        <li><a href="join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" data-en="Privacy Policy" data-zh="隐私政策">隐私政策</a>
+                    <span>·</span>
+                    <a href="#" data-en="Terms of Use" data-zh="使用条款">使用条款</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="../assets/js/main.js"></script>
+    <script>
+        // 新闻过滤功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 更新按钮状态
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // 过滤新闻项
+                    timelineItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'grid';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
