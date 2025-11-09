@@ -1,194 +1,850 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses | Lei Laboratory</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>课程教学 - 雷曹实验室 | Courses - Lei Laboratory</title>
+    <meta name="description" content="雷曹实验室提供的生物统计学、机器学习和数据科学课程。Biostatistics, machine learning, and data science courses offered by Lei Laboratory.">
+    <meta name="keywords" content="课程,教学,生物统计学,机器学习,数据科学,统计方法">
+    
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    
+    <style>
+        /* 课程页面特定样式 */
+        .courses-hero {
+            background: linear-gradient(135deg, #8C1515 0%, #006B81 100%);
+            padding: 100px 0 80px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .courses-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 40% 60%, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        .courses-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .courses-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .courses-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .courses-content {
+            padding: 80px 0;
+            background: var(--bg-cream);
+        }
+        
+        .course-category {
+            margin-bottom: 80px;
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px;
+        }
+        
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        
+        .category-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 40px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .course-header {
+            padding: 40px 35px 30px;
+            background: linear-gradient(135deg, rgba(140, 21, 21, 0.05) 0%, rgba(0, 107, 129, 0.05) 100%);
+            position: relative;
+        }
+        
+        .course-level {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 16px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .course-level-intermediate {
+            background: var(--secondary);
+        }
+        
+        .course-level-advanced {
+            background: var(--accent);
+        }
+        
+        .course-code {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .course-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .course-title-en {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+        
+        .course-body {
+            padding: 30px 35px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            flex: 1;
+        }
+        
+        .course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-light);
+            margin-bottom: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .meta-icon {
+            font-size: 1.1rem;
+        }
+        
+        .course-topics {
+            margin-bottom: 20px;
+        }
+        
+        .topics-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        
+        .topics-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .topic-tag {
+            padding: 6px 14px;
+            background: var(--bg-cream);
+            color: var(--text);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .course-footer {
+            padding: 0 35px 35px;
+        }
+        
+        .course-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+        
+        .course-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .teaching-philosophy {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .philosophy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .philosophy-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .philosophy-card {
+            padding: 30px;
+            background: var(--bg-cream);
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .philosophy-card-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        .philosophy-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        
+        .philosophy-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .resources-section {
+            padding: 100px 0;
+            background: var(--bg-cream);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .resource-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-cream);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .resource-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        
+        .resource-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .resource-link {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        
+        .resource-link:hover {
+            gap: 10px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .courses-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-card {
+                margin: 0 10px;
+            }
+            
+            .category-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button id="lang-en" class="active">English</button>
-        <button id="lang-zh">中文</button>
+        <button id="lang-en" aria-label="Switch to English">EN</button>
+        <button id="lang-zh" class="active" aria-label="切换到中文">中文</button>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="返回顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
                 <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
-                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+                <div class="brand-info">
+                    <span class="brand-name" data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</span>
+                    <span class="brand-subtitle" data-en="Biostatistics & AI Medicine" data-zh="生物统计与AI医学">生物统计与AI医学</span>
+                </div>
             </div>
+            
+            <button class="mobile-menu-toggle" aria-label="菜单" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-menu">
-                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
-                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
-                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
-                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
-                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
-                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
-                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                <li><a href="../index.html" data-en="Home" data-zh="首页">首页</a></li>
+                <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                <li><a href="join.html" data-en="Join" data-zh="加入">加入</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Courses Content -->
-    <section class="members-section">
+    <!-- Hero Section -->
+    <section class="courses-hero">
         <div class="container">
-            <h1 class="section-title" data-en="Courses and Seminars" data-zh="课程与讲座">Courses and Seminars</h1>
+            <span class="section-subtitle" data-en="Education" data-zh="教育教学">教育教学</span>
+            <h1 data-en="Courses & Teaching" data-zh="课程教学">课程教学</h1>
+            <p data-en="Comprehensive training in biostatistics, machine learning, and data science for medical research"
+               data-zh="为医学研究提供生物统计学、机器学习和数据科学的全面培训">
+                为医学研究提供生物统计学、机器学习和数据科学的全面培训
+            </p>
+        </div>
+    </section>
 
-            <!-- Regular Courses -->
-            <div style="margin-bottom: 80px;">
-                <h2 class="degree-title" data-en="📚 Regular Courses" data-zh="📚 常规课程">📚 Regular Courses</h2>
-                
-                <div class="research-card" style="margin-bottom: 30px;">
-                    <h3 data-en="Advanced Biostatistics" data-zh="高级生物统计学">Advanced Biostatistics</h3>
-                    <p><strong data-en="Instructor:" data-zh="授课教师：">Instructor:</strong> 
-                       <span data-en="Dr. Lei Cao" data-zh="曹雷 博士">Dr. Lei Cao</span>
-                    </p>
-                    <p><strong data-en="Term:" data-zh="学期：">Term:</strong> 
-                       <span data-en="Fall Semester" data-zh="秋季学期">Fall Semester</span>
-                    </p>
-                    <p><strong data-en="Level:" data-zh="层次：">Level:</strong> 
-                       <span data-en="Graduate" data-zh="研究生">Graduate</span>
-                    </p>
-                    <p data-en="This course covers advanced topics in biostatistics including survival analysis, longitudinal data analysis, and causal inference with applications to biomedical research."
-                       data-zh="本课程涵盖生物统计学的高级主题，包括生存分析、纵向数据分析和因果推断，并应用于生物医学研究。">
-                        This course covers advanced topics in biostatistics including survival analysis, longitudinal data analysis, and causal inference with applications to biomedical research.
-                    </p>
-                </div>
-
-                <div class="research-card" style="margin-bottom: 30px;">
-                    <h3 data-en="Machine Learning in Medicine" data-zh="医学机器学习">Machine Learning in Medicine</h3>
-                    <p><strong data-en="Instructor:" data-zh="授课教师：">Instructor:</strong> 
-                       <span data-en="Dr. Lei Cao" data-zh="曹雷 博士">Dr. Lei Cao</span>
-                    </p>
-                    <p><strong data-en="Term:" data-zh="学期：">Term:</strong> 
-                       <span data-en="Spring Semester" data-zh="春季学期">Spring Semester</span>
-                    </p>
-                    <p><strong data-en="Level:" data-zh="层次：">Level:</strong> 
-                       <span data-en="Graduate" data-zh="研究生">Graduate</span>
-                    </p>
-                    <p data-en="An introduction to machine learning methods with emphasis on medical applications. Topics include supervised and unsupervised learning, deep learning, and model evaluation."
-                       data-zh="机器学习方法入门，重点关注医学应用。主题包括监督和非监督学习、深度学习和模型评估。">
-                        An introduction to machine learning methods with emphasis on medical applications. Topics include supervised and unsupervised learning, deep learning, and model evaluation.
-                    </p>
-                </div>
-
-                <div class="research-card">
-                    <h3 data-en="Statistical Computing with R" data-zh="R语言统计计算">Statistical Computing with R</h3>
-                    <p><strong data-en="Instructor:" data-zh="授课教师：">Instructor:</strong> 
-                       <span data-en="Dr. Lei Cao & Lab Members" data-zh="曹雷 博士 及实验室成员">Dr. Lei Cao & Lab Members</span>
-                    </p>
-                    <p><strong data-en="Term:" data-zh="学期：">Term:</strong> 
-                       <span data-en="Fall Semester" data-zh="秋季学期">Fall Semester</span>
-                    </p>
-                    <p><strong data-en="Level:" data-zh="层次：">Level:</strong> 
-                       <span data-en="Undergraduate/Graduate" data-zh="本科生/研究生">Undergraduate/Graduate</span>
-                    </p>
-                    <p data-en="Hands-on course covering data manipulation, visualization, and statistical analysis using R programming language."
-                       data-zh="实践课程，涵盖使用R编程语言进行数据处理、可视化和统计分析。">
-                        Hands-on course covering data manipulation, visualization, and statistical analysis using R programming language.
-                    </p>
-                </div>
+    <!-- Teaching Philosophy -->
+    <section class="teaching-philosophy">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="section-subtitle" data-en="Our Approach" data-zh="我们的方法">我们的方法</span>
+                <h2 class="section-title" data-en="Teaching Philosophy" data-zh="教学理念">教学理念</h2>
+            </div>
+            <div class="philosophy-content">
+                <p data-en="We believe in hands-on, project-based learning that bridges theory and practice. Our courses emphasize critical thinking, computational skills, and real-world applications."
+                   data-zh="我们相信将理论与实践相结合的实践性、项目式学习。我们的课程强调批判性思维、计算技能和实际应用。">
+                    我们相信将理论与实践相结合的实践性、项目式学习。我们的课程强调批判性思维、计算技能和实际应用。
+                </p>
+                <p data-en="Students work with real medical data, develop analytical pipelines, and present their findings to the research community."
+                   data-zh="学生使用真实的医学数据，开发分析流程，并向研究界展示他们的发现。">
+                    学生使用真实的医学数据，开发分析流程，并向研究界展示他们的发现。
+                </p>
             </div>
 
-            <!-- Lab Seminars -->
-            <div style="margin-bottom: 80px;">
-                <h2 class="degree-title" data-en="🎤 Lab Seminar Series" data-zh="🎤 实验室研讨会系列">🎤 Lab Seminar Series</h2>
-                
-                <div class="about-text" style="max-width: 900px; margin: 0 auto 40px;">
-                    <p data-en="Our laboratory hosts weekly seminars featuring presentations by lab members, invited speakers, and journal club discussions. All seminars are held on Fridays at 2:00 PM."
-                       data-zh="我们实验室每周举办研讨会，包括实验室成员报告、特邀演讲者讲座和文献讨论。所有研讨会在周五下午2点举行。">
-                        Our laboratory hosts weekly seminars featuring presentations by lab members, invited speakers, and journal club discussions. All seminars are held on Fridays at 2:00 PM.
-                    </p>
+            <div class="philosophy-grid">
+                <div class="philosophy-card" data-aos="fade-up">
+                    <div class="philosophy-card-icon">💡</div>
+                    <h4 data-en="Theory & Practice" data-zh="理论与实践">理论与实践</h4>
+                    <p data-en="Balance rigorous theory with practical applications"
+                       data-zh="平衡严谨的理论与实际应用">平衡严谨的理论与实际应用</p>
+                </div>
+                <div class="philosophy-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="philosophy-card-icon">👥</div>
+                    <h4 data-en="Collaborative Learning" data-zh="协作学习">协作学习</h4>
+                    <p data-en="Foster teamwork and peer learning"
+                       data-zh="培养团队合作和同伴学习">培养团队合作和同伴学习</p>
+                </div>
+                <div class="philosophy-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="philosophy-card-icon">🔬</div>
+                    <h4 data-en="Research-Oriented" data-zh="研究导向">研究导向</h4>
+                    <p data-en="Connect coursework to ongoing research"
+                       data-zh="将课程与正在进行的研究联系起来">将课程与正在进行的研究联系起来</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Content -->
+    <section class="courses-content">
+        <div class="container">
+            <!-- Graduate Courses -->
+            <div class="course-category">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-icon">🎓</div>
+                    <h2 class="category-title" data-en="Graduate Courses" data-zh="研究生课程">研究生课程</h2>
+                    <p class="category-description" data-en="Advanced courses for Master's and PhD students"
+                       data-zh="面向硕士和博士生的高级课程">面向硕士和博士生的高级课程</p>
                 </div>
 
-                <div class="news-grid">
-                    <div class="news-item">
-                        <div class="news-date">2025-01-17 | 14:00</div>
-                        <h3 data-en="Upcoming: Deep Learning for Genomic Data" data-zh="即将举行：基因组数据深度学习">Upcoming: Deep Learning for Genomic Data</h3>
-                        <p><strong data-en="Speaker:" data-zh="演讲者：">Speaker:</strong> 
-                           <span data-en="Prof. Zhang (Tsinghua University)" data-zh="张教授（清华大学）">Prof. Zhang (Tsinghua University)</span>
-                        </p>
-                        <p data-en="This talk will discuss recent advances in applying deep learning methods to genomic data analysis and interpretation."
-                           data-zh="本讲座将讨论应用深度学习方法进行基因组数据分析和解释的最新进展。">
-                            This talk will discuss recent advances in applying deep learning methods to genomic data analysis and interpretation.
-                        </p>
+                <div class="courses-grid">
+                    <!-- Course 1 -->
+                    <div class="course-card" data-aos="fade-up">
+                        <div class="course-header">
+                            <span class="course-level" data-en="Beginner" data-zh="基础">基础</span>
+                            <div class="course-code">STAT 5010</div>
+                            <h3 class="course-title" data-zh="生物统计学导论">生物统计学导论</h3>
+                            <p class="course-title-en">Introduction to Biostatistics</p>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description" data-en="Fundamental statistical concepts and methods for analyzing biomedical data. Topics include descriptive statistics, probability, hypothesis testing, and regression analysis."
+                               data-zh="分析生物医学数据的基本统计概念和方法。主题包括描述性统计、概率、假设检验和回归分析。">
+                                分析生物医学数据的基本统计概念和方法。主题包括描述性统计、概率、假设检验和回归分析。
+                            </p>
+                            <div class="course-meta">
+                                <span class="meta-item">
+                                    <span class="meta-icon">📅</span>
+                                    <span data-en="Fall Semester" data-zh="秋季学期">秋季学期</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">⏱️</span>
+                                    <span data-en="48 hours" data-zh="48学时">48学时</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">📖</span>
+                                    <span data-en="3 credits" data-zh="3学分">3学分</span>
+                                </span>
+                            </div>
+                            <div class="course-topics">
+                                <div class="topics-label" data-en="Key Topics" data-zh="主要内容">主要内容</div>
+                                <div class="topics-list">
+                                    <span class="topic-tag" data-en="Probability" data-zh="概率论">概率论</span>
+                                    <span class="topic-tag" data-en="Hypothesis Testing" data-zh="假设检验">假设检验</span>
+                                    <span class="topic-tag" data-en="Regression" data-zh="回归分析">回归分析</span>
+                                    <span class="topic-tag" data-en="R Programming" data-zh="R编程">R编程</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                        </div>
                     </div>
 
-                    <div class="news-item">
-                        <div class="news-date">2025-01-10 | 14:00</div>
-                        <h3 data-en="Journal Club: Recent Papers in Biostatistics" data-zh="文献讨论：生物统计学最新论文">Journal Club: Recent Papers in Biostatistics</h3>
-                        <p><strong data-en="Presenter:" data-zh="主讲人：">Presenter:</strong> 
-                           <span data-en="PhD Student A" data-zh="博士生A">PhD Student A</span>
-                        </p>
-                        <p data-en="Discussion of recent publications on novel biostatistical methods for survival analysis."
-                           data-zh="讨论关于生存分析新型生物统计方法的最新发表论文。">
-                            Discussion of recent publications on novel biostatistical methods for survival analysis.
-                        </p>
+                    <!-- Course 2 -->
+                    <div class="course-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="course-header">
+                            <span class="course-level course-level-intermediate" data-en="Intermediate" data-zh="中级">中级</span>
+                            <div class="course-code">STAT 6020</div>
+                            <h3 class="course-title" data-zh="高维数据统计分析">高维数据统计分析</h3>
+                            <p class="course-title-en">Statistical Analysis of High-Dimensional Data</p>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description" data-en="Advanced methods for analyzing genomic, proteomic, and other high-dimensional data. Covers variable selection, dimension reduction, and multiple testing."
+                               data-zh="分析基因组、蛋白质组和其他高维数据的高级方法。涵盖变量选择、降维和多重检验。">
+                                分析基因组、蛋白质组和其他高维数据的高级方法。涵盖变量选择、降维和多重检验。
+                            </p>
+                            <div class="course-meta">
+                                <span class="meta-item">
+                                    <span class="meta-icon">📅</span>
+                                    <span data-en="Spring Semester" data-zh="春季学期">春季学期</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">⏱️</span>
+                                    <span data-en="48 hours" data-zh="48学时">48学时</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">📖</span>
+                                    <span data-en="3 credits" data-zh="3学分">3学分</span>
+                                </span>
+                            </div>
+                            <div class="course-topics">
+                                <div class="topics-label" data-en="Key Topics" data-zh="主要内容">主要内容</div>
+                                <div class="topics-list">
+                                    <span class="topic-tag" data-en="Variable Selection" data-zh="变量选择">变量选择</span>
+                                    <span class="topic-tag" data-en="PCA" data-zh="主成分分析">主成分分析</span>
+                                    <span class="topic-tag" data-en="Lasso" data-zh="Lasso">Lasso</span>
+                                    <span class="topic-tag" data-en="Multiple Testing" data-zh="多重检验">多重检验</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                        </div>
                     </div>
 
-                    <div class="news-item">
-                        <div class="news-date">2024-12-20 | 14:00</div>
-                        <h3 data-en="Past: AI in Clinical Decision Support" data-zh="过往：临床决策支持中的人工智能">Past: AI in Clinical Decision Support</h3>
-                        <p><strong data-en="Speaker:" data-zh="演讲者：">Speaker:</strong> 
-                           <span data-en="Dr. Wang (Peking Union Medical College)" data-zh="王博士（北京协和医学院）">Dr. Wang (Peking Union Medical College)</span>
-                        </p>
-                        <p data-en="An overview of AI applications in clinical decision support systems with case studies."
-                           data-zh="人工智能在临床决策支持系统中的应用概述及案例研究。">
-                            An overview of AI applications in clinical decision support systems with case studies.
-                        </p>
+                    <!-- Course 3 -->
+                    <div class="course-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="course-header">
+                            <span class="course-level course-level-intermediate" data-en="Intermediate" data-zh="中级">中级</span>
+                            <div class="course-code">CS 6030</div>
+                            <h3 class="course-title" data-zh="医学机器学习">医学机器学习</h3>
+                            <p class="course-title-en">Machine Learning in Medicine</p>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description" data-en="Comprehensive introduction to machine learning techniques for medical applications. Includes supervised and unsupervised learning, neural networks, and model evaluation."
+                               data-zh="医学应用的机器学习技术综合介绍。包括监督和非监督学习、神经网络和模型评估。">
+                                医学应用的机器学习技术综合介绍。包括监督和非监督学习、神经网络和模型评估。
+                            </p>
+                            <div class="course-meta">
+                                <span class="meta-item">
+                                    <span class="meta-icon">📅</span>
+                                    <span data-en="Fall Semester" data-zh="秋季学期">秋季学期</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">⏱️</span>
+                                    <span data-en="64 hours" data-zh="64学时">64学时</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">📖</span>
+                                    <span data-en="4 credits" data-zh="4学分">4学分</span>
+                                </span>
+                            </div>
+                            <div class="course-topics">
+                                <div class="topics-label" data-en="Key Topics" data-zh="主要内容">主要内容</div>
+                                <div class="topics-list">
+                                    <span class="topic-tag" data-en="Classification" data-zh="分类">分类</span>
+                                    <span class="topic-tag" data-en="Neural Networks" data-zh="神经网络">神经网络</span>
+                                    <span class="topic-tag" data-en="Deep Learning" data-zh="深度学习">深度学习</span>
+                                    <span class="topic-tag" data-en="Python" data-zh="Python">Python</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                        </div>
+                    </div>
+
+                    <!-- Course 4 -->
+                    <div class="course-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="course-header">
+                            <span class="course-level course-level-advanced" data-en="Advanced" data-zh="高级">高级</span>
+                            <div class="course-code">STAT 7010</div>
+                            <h3 class="course-title" data-zh="生存分析">生存分析</h3>
+                            <p class="course-title-en">Survival Analysis</p>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description" data-en="Theory and methods for analyzing time-to-event data. Topics include Kaplan-Meier estimator, Cox regression, competing risks, and frailty models."
+                               data-zh="分析时间到事件数据的理论和方法。主题包括Kaplan-Meier估计、Cox回归、竞争风险和脆弱性模型。">
+                                分析时间到事件数据的理论和方法。主题包括Kaplan-Meier估计、Cox回归、竞争风险和脆弱性模型。
+                            </p>
+                            <div class="course-meta">
+                                <span class="meta-item">
+                                    <span class="meta-icon">📅</span>
+                                    <span data-en="Spring Semester" data-zh="春季学期">春季学期</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">⏱️</span>
+                                    <span data-en="48 hours" data-zh="48学时">48学时</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">📖</span>
+                                    <span data-en="3 credits" data-zh="3学分">3学分</span>
+                                </span>
+                            </div>
+                            <div class="course-topics">
+                                <div class="topics-label" data-en="Key Topics" data-zh="主要内容">主要内容</div>
+                                <div class="topics-list">
+                                    <span class="topic-tag" data-en="Cox Model" data-zh="Cox模型">Cox模型</span>
+                                    <span class="topic-tag" data-en="Time-Varying" data-zh="时变协变量">时变协变量</span>
+                                    <span class="topic-tag" data-en="Competing Risks" data-zh="竞争风险">竞争风险</span>
+                                    <span class="topic-tag" data-en="Censoring" data-zh="删失数据">删失数据</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                        </div>
+                    </div>
+
+                    <!-- Course 5 -->
+                    <div class="course-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="course-header">
+                            <span class="course-level course-level-advanced" data-en="Advanced" data-zh="高级">高级</span>
+                            <div class="course-code">STAT 7020</div>
+                            <h3 class="course-title" data-zh="因果推断">因果推断</h3>
+                            <p class="course-title-en">Causal Inference</p>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description" data-en="Methods for drawing causal conclusions from observational and experimental data. Covers potential outcomes, propensity scores, instrumental variables, and sensitivity analysis."
+                               data-zh="从观察性和实验数据中得出因果结论的方法。涵盖潜在结果、倾向得分、工具变量和敏感性分析。">
+                                从观察性和实验数据中得出因果结论的方法。涵盖潜在结果、倾向得分、工具变量和敏感性分析。
+                            </p>
+                            <div class="course-meta">
+                                <span class="meta-item">
+                                    <span class="meta-icon">📅</span>
+                                    <span data-en="Spring Semester" data-zh="春季学期">春季学期</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">⏱️</span>
+                                    <span data-en="48 hours" data-zh="48学时">48学时</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">📖</span>
+                                    <span data-en="3 credits" data-zh="3学分">3学分</span>
+                                </span>
+                            </div>
+                            <div class="course-topics">
+                                <div class="topics-label" data-en="Key Topics" data-zh="主要内容">主要内容</div>
+                                <div class="topics-list">
+                                    <span class="topic-tag" data-en="DAGs" data-zh="因果图">因果图</span>
+                                    <span class="topic-tag" data-en="Propensity Score" data-zh="倾向得分">倾向得分</span>
+                                    <span class="topic-tag" data-en="IV Methods" data-zh="工具变量">工具变量</span>
+                                    <span class="topic-tag" data-en="Mediation" data-zh="中介分析">中介分析</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                        </div>
+                    </div>
+
+                    <!-- Course 6 -->
+                    <div class="course-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="course-header">
+                            <span class="course-level course-level-advanced" data-en="Advanced" data-zh="高级">高级</span>
+                            <div class="course-code">CS 7030</div>
+                            <h3 class="course-title" data-zh="医学影像深度学习">医学影像深度学习</h3>
+                            <p class="course-title-en">Deep Learning for Medical Imaging</p>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description" data-en="Advanced deep learning techniques for medical image analysis. Includes CNNs, segmentation networks, object detection, and transfer learning."
+                               data-zh="用于医学图像分析的高级深度学习技术。包括CNN、分割网络、目标检测和迁移学习。">
+                                用于医学图像分析的高级深度学习技术。包括CNN、分割网络、目标检测和迁移学习。
+                            </p>
+                            <div class="course-meta">
+                                <span class="meta-item">
+                                    <span class="meta-icon">📅</span>
+                                    <span data-en="Fall Semester" data-zh="秋季学期">秋季学期</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">⏱️</span>
+                                    <span data-en="64 hours" data-zh="64学时">64学时</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-icon">📖</span>
+                                    <span data-en="4 credits" data-zh="4学分">4学分</span>
+                                </span>
+                            </div>
+                            <div class="course-topics">
+                                <div class="topics-label" data-en="Key Topics" data-zh="主要内容">主要内容</div>
+                                <div class="topics-list">
+                                    <span class="topic-tag" data-en="CNN" data-zh="卷积神经网络">卷积神经网络</span>
+                                    <span class="topic-tag" data-en="U-Net" data-zh="U-Net">U-Net</span>
+                                    <span class="topic-tag" data-en="Segmentation" data-zh="图像分割">图像分割</span>
+                                    <span class="topic-tag" data-en="PyTorch" data-zh="PyTorch">PyTorch</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Workshops and Training -->
-            <div>
-                <h2 class="degree-title" data-en="🛠️ Workshops and Training" data-zh="🛠️ 工作坊与培训">🛠️ Workshops and Training</h2>
-                
-                <div class="research-card" style="margin-bottom: 30px;">
-                    <h3 data-en="Introduction to Python for Data Science" data-zh="数据科学Python入门">Introduction to Python for Data Science</h3>
-                    <p><strong data-en="Schedule:" data-zh="时间：">Schedule:</strong> 
-                       <span data-en="Summer 2025" data-zh="2025年夏季">Summer 2025</span>
-                    </p>
-                    <p data-en="A 2-week intensive workshop covering Python basics, data manipulation with pandas, and machine learning with scikit-learn."
-                       data-zh="为期2周的密集工作坊，涵盖Python基础、使用pandas进行数据处理以及使用scikit-learn进行机器学习。">
-                        A 2-week intensive workshop covering Python basics, data manipulation with pandas, and machine learning with scikit-learn.
-                    </p>
+    <!-- Learning Resources -->
+    <section class="resources-section">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="section-subtitle" data-en="Additional Materials" data-zh="额外资源">额外资源</span>
+                <h2 class="section-title" data-en="Learning Resources" data-zh="学习资源">学习资源</h2>
+                <p class="section-description" data-en="Supplementary materials to support your learning journey"
+                   data-zh="支持您学习旅程的补充材料">支持您学习旅程的补充材料</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card" data-aos="fade-up">
+                    <div class="resource-icon">📚</div>
+                    <h3 data-en="Lecture Notes" data-zh="课程讲义">课程讲义</h3>
+                    <p data-en="Comprehensive lecture slides and notes for all courses"
+                       data-zh="所有课程的综合讲义和笔记">所有课程的综合讲义和笔记</p>
+                    <a href="#" class="resource-link" data-en="Access Materials →" data-zh="访问资料 →">访问资料 →</a>
                 </div>
 
-                <div class="research-card" style="margin-bottom: 30px;">
-                    <h3 data-en="High-Performance Computing for Bioinformatics" data-zh="生物信息学高性能计算">High-Performance Computing for Bioinformatics</h3>
-                    <p><strong data-en="Schedule:" data-zh="时间：">Schedule:</strong> 
-                       <span data-en="Spring 2025" data-zh="2025年春季">Spring 2025</span>
-                    </p>
-                    <p data-en="Learn to utilize HPC clusters for large-scale genomic data analysis and parallel computing."
-                       data-zh="学习利用高性能计算集群进行大规模基因组数据分析和并行计算。">
-                        Learn to utilize HPC clusters for large-scale genomic data analysis and parallel computing.
-                    </p>
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="resource-icon">💻</div>
+                    <h3 data-en="Code Repository" data-zh="代码仓库">代码仓库</h3>
+                    <p data-en="Example code, tutorials, and project templates"
+                       data-zh="示例代码、教程和项目模板">示例代码、教程和项目模板</p>
+                    <a href="#" class="resource-link" data-en="View on GitHub →" data-zh="在GitHub查看 →">在GitHub查看 →</a>
                 </div>
 
-                <div class="research-card">
-                    <h3 data-en="Scientific Writing and Presentation Skills" data-zh="科学写作与演讲技巧">Scientific Writing and Presentation Skills</h3>
-                    <p><strong data-en="Schedule:" data-zh="时间：">Schedule:</strong> 
-                       <span data-en="Fall 2025" data-zh="2025年秋季">Fall 2025</span>
-                    </p>
-                    <p data-en="Workshop on effective scientific communication, manuscript preparation, and conference presentations."
-                       data-zh="关于有效科学交流、手稿准备和会议演讲的工作坊。">
-                        Workshop on effective scientific communication, manuscript preparation, and conference presentations.
-                    </p>
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="resource-icon">📊</div>
+                    <h3 data-en="Datasets" data-zh="数据集">数据集</h3>
+                    <p data-en="Practice datasets for hands-on learning and projects"
+                       data-zh="用于实践学习和项目的练习数据集">用于实践学习和项目的练习数据集</p>
+                    <a href="#" class="resource-link" data-en="Download Data →" data-zh="下载数据 →">下载数据 →</a>
+                </div>
+
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="resource-icon">📖</div>
+                    <h3 data-en="Reading List" data-zh="阅读清单">阅读清单</h3>
+                    <p data-en="Curated list of essential papers and textbooks"
+                       data-zh="精选的重要论文和教科书清单">精选的重要论文和教科书清单</p>
+                    <a href="#" class="resource-link" data-en="View List →" data-zh="查看清单 →">查看清单 →</a>
+                </div>
+
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="resource-icon">🎥</div>
+                    <h3 data-en="Video Tutorials" data-zh="视频教程">视频教程</h3>
+                    <p data-en="Recorded lectures and software demonstrations"
+                       data-zh="录制的讲座和软件演示">录制的讲座和软件演示</p>
+                    <a href="#" class="resource-link" data-en="Watch Videos →" data-zh="观看视频 →">观看视频 →</a>
+                </div>
+
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="resource-icon">💬</div>
+                    <h3 data-en="Discussion Forum" data-zh="讨论论坛">讨论论坛</h3>
+                    <p data-en="Ask questions and collaborate with peers"
+                       data-zh="提问并与同学协作">提问并与同学协作</p>
+                    <a href="#" class="resource-link" data-en="Join Forum →" data-zh="加入论坛 →">加入论坛 →</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
-            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+            <div class="footer-content">
+                <div class="footer-col footer-col-main">
+                    <div class="footer-brand">
+                        <img src="../assets/images/logo.png" alt="Lei Laboratory" class="footer-logo">
+                        <h4 data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</h4>
+                    </div>
+                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</p>
+                    <p>📧 caolei@hrbmu.edu.cn</p>
+                    <p>📍 <span data-en="Harbin, Heilongjiang, China" data-zh="中国黑龙江省哈尔滨市">中国黑龙江省哈尔滨市</span></p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
+                    <ul>
+                        <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-zh="资源">资源</h4>
+                    <ul>
+                        <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                        <li><a href="resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                        <li><a href="join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" data-en="Privacy Policy" data-zh="隐私政策">隐私政策</a>
+                    <span>·</span>
+                    <a href="#" data-en="Terms of Use" data-zh="使用条款">使用条款</a>
+                </div>
+            </div>
         </div>
     </footer>
 
