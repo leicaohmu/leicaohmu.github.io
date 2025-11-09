@@ -1,254 +1,977 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Us | Lei Laboratory</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>加入我们 - 雷曹实验室 | Join Us - Lei Laboratory</title>
+    <meta name="description" content="加入雷曹实验室，开启您的生物统计与AI医学研究之旅。我们正在招募博士生和硕士生。Join Lei Laboratory for biostatistics and AI medicine research.">
+    <meta name="keywords" content="招聘,博士生,硕士生,研究机会,生物统计,AI医学,实验室招生">
+    
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    
+    <style>
+        /* 招聘页面特定样式 */
+        .join-hero {
+            background: linear-gradient(135deg, #8C1515 0%, #006B81 100%);
+            padding: 120px 0 100px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .join-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 50%);
+        }
+        
+        .join-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .join-hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+        
+        .join-hero p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        .join-hero .btn {
+            background: white;
+            color: var(--primary);
+            font-size: 17px;
+            padding: 18px 40px;
+        }
+        
+        .why-join-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .why-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: var(--bg-cream);
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        
+        .why-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 24px;
+        }
+        
+        .why-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        
+        .why-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .positions-section {
+            padding: 100px 0;
+            background: var(--bg-cream);
+        }
+        
+        .position-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 6px solid var(--primary);
+        }
+        
+        .position-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .position-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .position-title {
+            flex: 1;
+        }
+        
+        .position-title h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .position-subtitle {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+        
+        .position-badge {
+            padding: 10px 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 24px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .position-badge-open {
+            background: #28a745;
+        }
+        
+        .position-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        
+        .position-details h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+            margin-top: 24px;
+        }
+        
+        .position-details h4:first-child {
+            margin-top: 0;
+        }
+        
+        .position-details ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .position-details li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: var(--text-light);
+            line-height: 1.7;
+            position: relative;
+        }
+        
+        .position-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .position-sidebar {
+            background: var(--bg-cream);
+            padding: 30px;
+            border-radius: 16px;
+            height: fit-content;
+        }
+        
+        .position-info-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .position-info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .info-value {
+            font-size: 1.05rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .apply-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .apply-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .apply-steps {
+            margin-top: 50px;
+        }
+        
+        .apply-step {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        
+        .step-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        .contact-box {
+            background: var(--bg-cream);
+            padding: 50px;
+            border-radius: 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .contact-box h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+        
+        .contact-box p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .faq-section {
+            padding: 100px 0;
+            background: var(--bg-cream);
+        }
+        
+        .faq-list {
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-question {
+            padding: 30px 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-cream);
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 40px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 40px 30px;
+        }
+        
+        .faq-answer p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .join-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .position-card {
+                padding: 30px 24px;
+            }
+            
+            .position-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .position-header {
+                flex-direction: column;
+            }
+            
+            .apply-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin: 0 auto;
+            }
+            
+            .contact-box {
+                padding: 40px 30px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .faq-question,
+            .faq-answer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button id="lang-en" class="active">English</button>
-        <button id="lang-zh">中文</button>
+        <button id="lang-en" aria-label="Switch to English">EN</button>
+        <button id="lang-zh" class="active" aria-label="切换到中文">中文</button>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="返回顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
                 <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
-                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+                <div class="brand-info">
+                    <span class="brand-name" data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</span>
+                    <span class="brand-subtitle" data-en="Biostatistics & AI Medicine" data-zh="生物统计与AI医学">生物统计与AI医学</span>
+                </div>
             </div>
+            
+            <button class="mobile-menu-toggle" aria-label="菜单" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-menu">
-                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
-                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
-                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
-                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
-                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
-                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
-                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                <li><a href="../index.html" data-en="Home" data-zh="首页">首页</a></li>
+                <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                <li><a href="join.html" class="active" data-en="Join" data-zh="加入">加入</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Join Us Content -->
-    <section class="members-section">
+    <!-- Hero Section -->
+    <section class="join-hero">
         <div class="container">
-            <h1 class="section-title" data-en="Join Us" data-zh="加入我们">Join Us</h1>
+            <span class="section-subtitle" data-en="Career Opportunities" data-zh="职业机会">职业机会</span>
+            <h1 data-en="Join Our Team" data-zh="加入我们的团队">加入我们的团队</h1>
+            <p data-en="Embark on an exciting journey in biostatistics and AI medicine research. We are looking for passionate and motivated students to join our dynamic team."
+               data-zh="开启生物统计与AI医学研究的激动人心之旅。我们正在寻找充满热情和动力的学生加入我们充满活力的团队。">
+                开启生物统计与AI医学研究的激动人心之旅。我们正在寻找充满热情和动力的学生加入我们充满活力的团队。
+            </p>
+            <a href="#positions" class="btn btn-light">
+                <span data-en="View Open Positions" data-zh="查看招聘职位">查看招聘职位</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 5V15M5 10H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a>
+        </div>
+    </section>
 
-            <div class="about-text" style="max-width: 900px; margin: 0 auto 60px;">
-                <p data-en="We are always looking for motivated and talented individuals to join our team. If you are passionate about biostatistics, machine learning, and their applications in medicine, we would love to hear from you!"
-                   data-zh="我们一直在寻找积极进取、才华横溢的人才加入我们的团队。如果您对生物统计、机器学习及其在医学中的应用充满热情，我们很乐意听到您的声音！">
-                    We are always looking for motivated and talented individuals to join our team. If you are passionate about biostatistics, machine learning, and their applications in medicine, we would love to hear from you!
+    <!-- Why Join Section -->
+    <section class="why-join-section">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="section-subtitle" data-en="Benefits" data-zh="优势">优势</span>
+                <h2 class="section-title" data-en="Why Join Us" data-zh="为什么选择我们">为什么选择我们</h2>
+                <p class="section-description" data-en="Discover the advantages of being part of our research community"
+                   data-zh="了解成为我们研究团队一员的优势">
+                    了解成为我们研究团队一员的优势
                 </p>
             </div>
 
-            <!-- Positions Available -->
-            <div style="margin-bottom: 80px;">
-                <h2 class="degree-title" data-en="🎓 Open Positions" data-zh="🎓 招聘岗位">🎓 Open Positions</h2>
-
-                <div class="research-card" style="margin-bottom: 30px;">
-                    <h3 data-en="PhD Students" data-zh="博士研究生">PhD Students</h3>
-                    <p><strong data-en="Positions:" data-zh="名额：">Positions:</strong> 2-3 <span data-en="per year" data-zh="每年">per year</span></p>
-                    <p><strong data-en="Requirements:" data-zh="要求：">Requirements:</strong></p>
-                    <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li data-en="Master's degree in Statistics, Biostatistics, Computer Science, Mathematics, or related fields"
-                            data-zh="统计学、生物统计学、计算机科学、数学或相关领域的硕士学位">
-                            Master's degree in Statistics, Biostatistics, Computer Science, Mathematics, or related fields
-                        </li>
-                        <li data-en="Strong mathematical and programming skills (R, Python)"
-                            data-zh="扎实的数学和编程技能（R、Python）">
-                            Strong mathematical and programming skills (R, Python)
-                        </li>
-                        <li data-en="Research experience in biostatistics or machine learning (preferred)"
-                            data-zh="生物统计或机器学习研究经验（优先）">
-                            Research experience in biostatistics or machine learning (preferred)
-                        </li>
-                        <li data-en="Good English reading and writing abilities"
-                            data-zh="良好的英语阅读和写作能力">
-                            Good English reading and writing abilities
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="research-card" style="margin-bottom: 30px;">
-                    <h3 data-en="Master's Students" data-zh="硕士研究生">Master's Students</h3>
-                    <p><strong data-en="Positions:" data-zh="名额：">Positions:</strong> 3-4 <span data-en="per year" data-zh="每年">per year</span></p>
-                    <p><strong data-en="Requirements:" data-zh="要求：">Requirements:</strong></p>
-                    <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li data-en="Bachelor's degree in Statistics, Mathematics, Computer Science, Medicine, or related fields"
-                            data-zh="统计学、数学、计算机科学、医学或相关领域的学士学位">
-                            Bachelor's degree in Statistics, Mathematics, Computer Science, Medicine, or related fields
-                        </li>
-                        <li data-en="Interest in biostatistics and medical data analysis"
-                            data-zh="对生物统计和医学数据分析感兴趣">
-                            Interest in biostatistics and medical data analysis
-                        </li>
-                        <li data-en="Basic programming skills"
-                            data-zh="基本的编程技能">
-                            Basic programming skills
-                        </li>
-                        <li data-en="Strong motivation for research"
-                            data-zh="强烈的科研动机">
-                            Strong motivation for research
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="research-card">
-                    <h3 data-en="Postdoctoral Fellows" data-zh="博士后研究员">Postdoctoral Fellows</h3>
-                    <p><strong data-en="Positions:" data-zh="名额：">Positions:</strong> 1-2</p>
-                    <p><strong data-en="Requirements:" data-zh="要求：">Requirements:</strong></p>
-                    <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li data-en="PhD degree in Biostatistics, Statistics, Bioinformatics, or related fields"
-                            data-zh="生物统计学、统计学、生物信息学或相关领域的博士学位">
-                            PhD degree in Biostatistics, Statistics, Bioinformatics, or related fields
-                        </li>
-                        <li data-en="Strong publication record in peer-reviewed journals"
-                            data-zh="在同行评审期刊上有良好的发表记录">
-                            Strong publication record in peer-reviewed journals
-                        </li>
-                        <li data-en="Expertise in statistical methods or machine learning"
-                            data-zh="统计方法或机器学习专业知识">
-                            Expertise in statistical methods or machine learning
-                        </li>
-                        <li data-en="Ability to work independently and collaboratively"
-                            data-zh="具备独立工作和团队协作能力">
-                            Ability to work independently and collaboratively
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- What We Offer -->
-            <div style="margin-bottom: 80px;">
-                <h2 class="degree-title" data-en="💡 What We Offer" data-zh="💡 我们提供">💡 What We Offer</h2>
-
-                <div class="research-areas">
-                    <div class="research-card">
-                        <div class="research-icon">🔬</div>
-                        <h3 data-en="Cutting-edge Research" data-zh="前沿研究">Cutting-edge Research</h3>
-                        <p data-en="Work on innovative projects at the intersection of statistics, AI, and medicine"
-                           data-zh="从事统计学、人工智能和医学交叉领域的创新项目">
-                            Work on innovative projects at the intersection of statistics, AI, and medicine
-                        </p>
-                    </div>
-
-                    <div class="research-card">
-                        <div class="research-icon">👥</div>
-                        <h3 data-en="Collaborative Environment" data-zh="协作环境">Collaborative Environment</h3>
-                        <p data-en="Join a supportive team with diverse backgrounds and expertise"
-                           data-zh="加入一个背景多样、专业领域广泛的支持团队">
-                            Join a supportive team with diverse backgrounds and expertise
-                        </p>
-                    </div>
-
-                    <div class="research-card">
-                        <div class="research-icon">📚</div>
-                        <h3 data-en="Training Opportunities" data-zh="培训机会">Training Opportunities</h3>
-                        <p data-en="Access to courses, workshops, and conferences for professional development"
-                           data-zh="获得课程、工作坊和会议等专业发展机会">
-                            Access to courses, workshops, and conferences for professional development
-                        </p>
-                    </div>
-
-                    <div class="research-card">
-                        <div class="research-icon">🌐</div>
-                        <h3 data-en="Collaboration Network" data-zh="合作网络">Collaboration Network</h3>
-                        <p data-en="Opportunities to collaborate with leading institutions nationally and internationally"
-                           data-zh="与国内外领先机构合作的机会">
-                            Opportunities to collaborate with leading institutions nationally and internationally
-                        </p>
-                    </div>
-
-                    <div class="research-card">
-                        <div class="research-icon">💻</div>
-                        <h3 data-en="Resources" data-zh="资源">Resources</h3>
-                        <p data-en="Access to high-performance computing clusters and state-of-the-art software"
-                           data-zh="访问高性能计算集群和最先进的软件">
-                            Access to high-performance computing clusters and state-of-the-art software
-                        </p>
-                    </div>
-
-                    <div class="research-card">
-                        <div class="research-icon">🏆</div>
-                        <h3 data-en="Career Development" data-zh="职业发展">Career Development</h3>
-                        <p data-en="Mentorship and guidance for academic and industry career paths"
-                           data-zh="学术和工业职业道路的指导和辅导">
-                            Mentorship and guidance for academic and industry career paths
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Application Process -->
-            <div style="margin-bottom: 80px;">
-                <h2 class="degree-title" data-en="📧 How to Apply" data-zh="📧 如何申请">📧 How to Apply</h2>
-
-                <div class="about-text" style="max-width: 900px; margin: 0 auto;">
-                    <p data-en="If you are interested in joining our laboratory, please send the following materials to Dr. Lei Cao at caolei@hrbmu.edu.cn:"
-                       data-zh="如果您有兴趣加入我们的实验室，请将以下材料发送至曹雷博士邮箱 caolei@hrbmu.edu.cn：">
-                        If you are interested in joining our laboratory, please send the following materials to Dr. Lei Cao at <strong>caolei@hrbmu.edu.cn</strong>:
-                    </p>
-
-                    <ul style="margin-left: 20px; margin-top: 20px; line-height: 2;">
-                        <li data-en="CV/Resume with detailed education background and research experience"
-                            data-zh="包含详细教育背景和研究经历的简历">
-                            CV/Resume with detailed education background and research experience
-                        </li>
-                        <li data-en="Cover letter describing your research interests and career goals"
-                            data-zh="描述您研究兴趣和职业目标的求职信">
-                            Cover letter describing your research interests and career goals
-                        </li>
-                        <li data-en="Transcripts (for students)"
-                            data-zh="成绩单（学生）">
-                            Transcripts (for students)
-                        </li>
-                        <li data-en="Representative publications or manuscripts (if available)"
-                            data-zh="代表性论文或手稿（如有）">
-                            Representative publications or manuscripts (if available)
-                        </li>
-                        <li data-en="Contact information for 2-3 references"
-                            data-zh="2-3位推荐人的联系方式">
-                            Contact information for 2-3 references
-                        </li>
-                    </ul>
-
-                    <p style="margin-top: 30px;" data-en="Applications are reviewed on a rolling basis. Early application is encouraged."
-                       data-zh="申请采用滚动审核方式。鼓励尽早申请。">
-                        Applications are reviewed on a rolling basis. Early application is encouraged.
+            <div class="why-grid">
+                <div class="why-card" data-aos="fade-up">
+                    <div class="why-icon">🎓</div>
+                    <h3 data-en="World-Class Training" data-zh="世界级培训">世界级培训</h3>
+                    <p data-en="Receive comprehensive training in cutting-edge biostatistical methods and AI technologies"
+                       data-zh="接受前沿生物统计方法和人工智能技术的全面培训">
+                        接受前沿生物统计方法和人工智能技术的全面培训
                     </p>
                 </div>
-            </div>
 
-            <!-- Contact -->
-            <div class="pi-card" style="max-width: 700px;">
-                <div class="pi-info" style="text-align: center; width: 100%;">
-                    <h3 data-en="Contact Information" data-zh="联系方式">Contact Information</h3>
-                    <p style="margin-top: 20px;">
-                        <strong>Dr. Lei Cao</strong><br>
-                        <span data-en="Associate Researcher" data-zh="副研究员">Associate Researcher</span><br>
-                        <span data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</span>
+                <div class="why-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="why-icon">🔬</div>
+                    <h3 data-en="Innovative Research" data-zh="创新研究">创新研究</h3>
+                    <p data-en="Work on groundbreaking projects with real-world impact on healthcare"
+                       data-zh="从事对医疗保健有实际影响的开创性项目">
+                        从事对医疗保健有实际影响的开创性项目
                     </p>
-                    <p style="margin-top: 20px;">
-                        📧 <a href="mailto:caolei@hrbmu.edu.cn">caolei@hrbmu.edu.cn</a><br>
-                        🌐 <a href="https://leicaohmu.github.io">https://leicaohmu.github.io</a>
+                </div>
+
+                <div class="why-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="why-icon">🤝</div>
+                    <h3 data-en="Collaborative Environment" data-zh="协作环境">协作环境</h3>
+                    <p data-en="Join a supportive team of researchers and collaborate with leading institutions"
+                       data-zh="加入一支充满支持的研究团队，与领先机构合作">
+                        加入一支充满支持的研究团队，与领先机构合作
+                    </p>
+                </div>
+
+                <div class="why-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="why-icon">📚</div>
+                    <h3 data-en="Publication Opportunities" data-zh="发表机会">发表机会</h3>
+                    <p data-en="Publish in top-tier journals and present at international conferences"
+                       data-zh="在顶级期刊发表论文并在国际会议上展示">
+                        在顶级期刊发表论文并在国际会议上展示
+                    </p>
+                </div>
+
+                <div class="why-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="why-icon">💰</div>
+                    <h3 data-en="Competitive Funding" data-zh="有竞争力的资助">有竞争力的资助</h3>
+                    <p data-en="Receive competitive stipends and access to research grants"
+                       data-zh="获得有竞争力的津贴和研究经费">
+                        获得有竞争力的津贴和研究经费
+                    </p>
+                </div>
+
+                <div class="why-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="why-icon">🌍</div>
+                    <h3 data-en="Global Network" data-zh="全球网络">全球网络</h3>
+                    <p data-en="Build connections with researchers worldwide and access international opportunities"
+                       data-zh="与全球研究人员建立联系并获得国际机会">
+                        与全球研究人员建立联系并获得国际机会
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- Positions Section -->
+    <section class="positions-section" id="positions">
         <div class="container">
-            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
-            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+            <div class="section-header-center">
+                <span class="section-subtitle" data-en="Open Positions" data-zh="招聘职位">招聘职位</span>
+                <h2 class="section-title" data-en="Current Opportunities" data-zh="当前职位">当前职位</h2>
+            </div>
+
+            <!-- PhD Position -->
+            <div class="position-card" data-aos="fade-up">
+                <div class="position-header">
+                    <div class="position-title">
+                        <h3 data-en="PhD Student Positions" data-zh="博士研究生">博士研究生</h3>
+                        <p class="position-subtitle" data-en="Biostatistics and AI in Medicine" 
+                           data-zh="生物统计与医学人工智能">生物统计与医学人工智能</p>
+                    </div>
+                    <span class="position-badge position-badge-open" data-en="NOW HIRING" data-zh="正在招聘">正在招聘</span>
+                </div>
+
+                <div class="position-content">
+                    <div class="position-details">
+                        <h4 data-en="Research Areas" data-zh="研究方向">研究方向</h4>
+                        <ul>
+                            <li data-en="Biostatistical methodology development" data-zh="生物统计方法学发展">生物统计方法学发展</li>
+                            <li data-en="Machine learning and deep learning in healthcare" data-zh="医疗保健中的机器学习和深度学习">医疗保健中的机器学习和深度学习</li>
+                            <li data-en="Precision medicine and genomics" data-zh="精准医学和基因组学">精准医学和基因组学</li>
+                            <li data-en="Medical image analysis" data-zh="医学影像分析">医学影像分析</li>
+                            <li data-en="Clinical data science" data-zh="临床数据科学">临床数据科学</li>
+                        </ul>
+
+                        <h4 data-en="Qualifications" data-zh="申请条件">申请条件</h4>
+                        <ul>
+                            <li data-en="Master's degree in Statistics, Biostatistics, Computer Science, Mathematics, or related fields" 
+                                data-zh="统计学、生物统计学、计算机科学、数学或相关领域的硕士学位">
+                                统计学、生物统计学、计算机科学、数学或相关领域的硕士学位
+                            </li>
+                            <li data-en="Strong programming skills (R, Python, or similar)" data-zh="较强的编程能力（R、Python或类似语言）">
+                                较强的编程能力（R、Python或类似语言）
+                            </li>
+                            <li data-en="Good English communication skills" data-zh="良好的英语沟通能力">良好的英语沟通能力</li>
+                            <li data-en="Passion for research and problem-solving" data-zh="对研究和解决问题充满热情">对研究和解决问题充满热情</li>
+                        </ul>
+
+                        <h4 data-en="What We Offer" data-zh="我们提供">我们提供</h4>
+                        <ul>
+                            <li data-en="Fully funded PhD position with competitive stipend" data-zh="全额资助的博士职位，附带有竞争力的津贴">
+                                全额资助的博士职位，附带有竞争力的津贴
+                            </li>
+                            <li data-en="State-of-the-art research facilities and computational resources" 
+                                data-zh="最先进的研究设施和计算资源">最先进的研究设施和计算资源</li>
+                            <li data-en="Opportunities to attend international conferences" data-zh="参加国际会议的机会">参加国际会议的机会</li>
+                            <li data-en="Mentorship from experienced researchers" data-zh="经验丰富的研究人员的指导">经验丰富的研究人员的指导</li>
+                            <li data-en="Access to collaborative research network" data-zh="接触协作研究网络">接触协作研究网络</li>
+                        </ul>
+                    </div>
+
+                    <div class="position-sidebar">
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Duration" data-zh="学制">学制</div>
+                            <div class="info-value" data-en="3-5 Years" data-zh="3-5年">3-5年</div>
+                        </div>
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Start Date" data-zh="入学时间">入学时间</div>
+                            <div class="info-value" data-en="September 2025" data-zh="2025年9月">2025年9月</div>
+                        </div>
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Positions" data-zh="名额">名额</div>
+                            <div class="info-value" data-en="2-3 Positions" data-zh="2-3个名额">2-3个名额</div>
+                        </div>
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Application Deadline" data-zh="申请截止">申请截止</div>
+                            <div class="info-value" data-en="Rolling" data-zh="滚动招生">滚动招生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Master Position -->
+            <div class="position-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="position-header">
+                    <div class="position-title">
+                        <h3 data-en="Master Student Positions" data-zh="硕士研究生">硕士研究生</h3>
+                        <p class="position-subtitle" data-en="Biostatistics and AI in Medicine" 
+                           data-zh="生物统计与医学人工智能">生物统计与医学人工智能</p>
+                    </div>
+                    <span class="position-badge position-badge-open" data-en="NOW HIRING" data-zh="正在招聘">正在招聘</span>
+                </div>
+
+                <div class="position-content">
+                    <div class="position-details">
+                        <h4 data-en="Research Focus" data-zh="研究重点">研究重点</h4>
+                        <ul>
+                            <li data-en="Statistical methods for biomedical data analysis" data-zh="生物医学数据分析的统计方法">
+                                生物医学数据分析的统计方法
+                            </li>
+                            <li data-en="Machine learning applications in healthcare" data-zh="机器学习在医疗保健中的应用">
+                                机器学习在医疗保健中的应用
+                            </li>
+                            <li data-en="Clinical trial design and analysis" data-zh="临床试验设计与分析">临床试验设计与分析</li>
+                            <li data-en="Biomarker discovery" data-zh="生物标志物发现">生物标志物发现</li>
+                        </ul>
+
+                        <h4 data-en="Qualifications" data-zh="申请条件">申请条件</h4>
+                        <ul>
+                            <li data-en="Bachelor's degree in Statistics, Mathematics, Computer Science, Biology, or related fields" 
+                                data-zh="统计学、数学、计算机科学、生物学或相关领域的学士学位">
+                                统计学、数学、计算机科学、生物学或相关领域的学士学位
+                            </li>
+                            <li data-en="Strong analytical and quantitative skills" data-zh="较强的分析和定量能力">较强的分析和定量能力</li>
+                            <li data-en="Basic programming knowledge (R, Python, or similar)" data-zh="基本编程知识（R、Python或类似语言）">
+                                基本编程知识（R、Python或类似语言）
+                            </li>
+                            <li data-en="Motivation to learn and contribute to research" data-zh="有学习和参与研究的动力">
+                                有学习和参与研究的动力
+                            </li>
+                        </ul>
+
+                        <h4 data-en="What We Offer" data-zh="我们提供">我们提供</h4>
+                        <ul>
+                            <li data-en="Comprehensive training in biostatistics and AI" data-zh="生物统计和人工智能的全面培训">
+                                生物统计和人工智能的全面培训
+                            </li>
+                            <li data-en="Opportunities to work on real-world medical data" data-zh="处理真实医学数据的机会">
+                                处理真实医学数据的机会
+                            </li>
+                            <li data-en="Support for conference presentations and publications" data-zh="会议展示和论文发表的支持">
+                                会议展示和论文发表的支持
+                            </li>
+                            <li data-en="Pathway to PhD program" data-zh="攻读博士学位的途径">攻读博士学位的途径</li>
+                        </ul>
+                    </div>
+
+                    <div class="position-sidebar">
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Duration" data-zh="学制">学制</div>
+                            <div class="info-value" data-en="2-3 Years" data-zh="2-3年">2-3年</div>
+                        </div>
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Start Date" data-zh="入学时间">入学时间</div>
+                            <div class="info-value" data-en="September 2025" data-zh="2025年9月">2025年9月</div>
+                        </div>
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Positions" data-zh="名额">名额</div>
+                            <div class="info-value" data-en="3-5 Positions" data-zh="3-5个名额">3-5个名额</div>
+                        </div>
+                        <div class="position-info-item">
+                            <div class="info-label" data-en="Application Deadline" data-zh="申请截止">申请截止</div>
+                            <div class="info-value" data-en="Rolling" data-zh="滚动招生">滚动招生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process -->
+    <section class="apply-section">
+        <div class="container">
+            <div class="apply-content">
+                <div class="section-header-center">
+                    <span class="section-subtitle" data-en="How to Apply" data-zh="如何申请">如何申请</span>
+                    <h2 class="section-title" data-en="Application Process" data-zh="申请流程">申请流程</h2>
+                    <p class="section-description" data-en="Follow these simple steps to join our team"
+                       data-zh="按照以下简单步骤加入我们的团队">
+                        按照以下简单步骤加入我们的团队
+                    </p>
+                </div>
+
+                <div class="apply-steps">
+                    <div class="apply-step" data-aos="fade-up">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4 data-en="Prepare Your Materials" data-zh="准备材料">准备材料</h4>
+                            <p data-en="Gather your CV/resume, transcripts, research statement, and letters of recommendation"
+                               data-zh="准备您的简历、成绩单、研究陈述和推荐信">
+                                准备您的简历、成绩单、研究陈述和推荐信
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="apply-step" data-aos="fade-up" data-aos-delay="100">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4 data-en="Send Your Application" data-zh="提交申请">提交申请</h4>
+                            <p data-en="Email your application materials to Dr. Lei Cao at caolei@hrbmu.edu.cn"
+                               data-zh="将您的申请材料发送至曹雷博士邮箱：caolei@hrbmu.edu.cn">
+                                将您的申请材料发送至曹雷博士邮箱：caolei@hrbmu.edu.cn
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="apply-step" data-aos="fade-up" data-aos-delay="200">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4 data-en="Initial Review" data-zh="初步审核">初步审核</h4>
+                            <p data-en="Your application will be reviewed, and qualified candidates will be contacted for an interview"
+                               data-zh="我们将审核您的申请，符合条件的候选人将被联系面试">
+                                我们将审核您的申请，符合条件的候选人将被联系面试
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="apply-step" data-aos="fade-up" data-aos-delay="300">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4 data-en="Interview" data-zh="面试">面试</h4>
+                            <p data-en="Discuss your research interests and goals with Dr. Cao and the team"
+                               data-zh="与曹博士和团队讨论您的研究兴趣和目标">
+                                与曹博士和团队讨论您的研究兴趣和目标
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="apply-step" data-aos="fade-up" data-aos-delay="400">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4 data-en="Final Decision" data-zh="最终决定">最终决定</h4>
+                            <p data-en="Receive admission decision and begin your journey with us!"
+                               data-zh="收到录取决定，开始您的研究之旅！">
+                                收到录取决定，开始您的研究之旅！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Box -->
+                <div class="contact-box" data-aos="fade-up">
+                    <h3 data-en="Ready to Apply?" data-zh="准备好申请了吗？">准备好申请了吗？</h3>
+                    <p data-en="Contact us today to discuss opportunities and learn more about our research"
+                       data-zh="立即联系我们讨论机会并了解更多关于我们的研究">
+                        立即联系我们讨论机会并了解更多关于我们的研究
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <span>caolei@hrbmu.edu.cn</span>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <span data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</span>
+                        </div>
+                    </div>
+                    <a href="mailto:caolei@hrbmu.edu.cn" class="btn btn-primary">
+                        <span data-en="Contact Us" data-zh="联系我们">联系我们</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="section-subtitle" data-en="Questions" data-zh="常见问题">常见问题</span>
+                <h2 class="section-title" data-en="Frequently Asked Questions" data-zh="常见问题解答">常见问题解答</h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span data-en="What is the application deadline?" data-zh="申请截止日期是什么时候？">申请截止日期是什么时候？</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-en="We accept applications on a rolling basis. However, we recommend applying early as positions may fill quickly. For fall admission, we suggest applying by March."
+                           data-zh="我们采用滚动招生方式接受申请。但是，我们建议尽早申请，因为职位可能很快就会满额。对于秋季入学，我们建议在3月前申请。">
+                            我们采用滚动招生方式接受申请。但是，我们建议尽早申请，因为职位可能很快就会满额。对于秋季入学，我们建议在3月前申请。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <span data-en="Do I need prior research experience?" data-zh="我需要有研究经验吗？">我需要有研究经验吗？</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-en="While research experience is beneficial, especially for PhD positions, it is not strictly required. We value enthusiasm, strong analytical skills, and willingness to learn. Master's students are particularly welcome to apply even without extensive research background."
+                           data-zh="虽然研究经验是有益的，特别是对于博士职位，但并不是严格要求。我们看重热情、强大的分析能力和学习意愿。特别欢迎硕士生申请，即使没有广泛的研究背景。">
+                            虽然研究经验是有益的，特别是对于博士职位，但并不是严格要求。我们看重热情、强大的分析能力和学习意愿。特别欢迎硕士生申请，即使没有广泛的研究背景。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <span data-en="What funding is available?" data-zh="有哪些资助？">有哪些资助？</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-en="All admitted PhD students receive full funding including tuition waiver and competitive monthly stipend. Master's students receive support according to university policies. Additional funding may be available for conference travel and research expenses."
+                           data-zh="所有被录取的博士生都将获得全额资助，包括学费减免和有竞争力的月津贴。硕士生根据大学政策获得支持。会议差旅和研究费用可能有额外的资助。">
+                            所有被录取的博士生都将获得全额资助，包括学费减免和有竞争力的月津贴。硕士生根据大学政策获得支持。会议差旅和研究费用可能有额外的资助。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <span data-en="Can international students apply?" data-zh="国际学生可以申请吗？">国际学生可以申请吗？</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-en="Yes, we welcome applications from international students. Please ensure you meet the university's language requirements and have the necessary documentation for student visa application."
+                           data-zh="是的，我们欢迎国际学生申请。请确保您符合大学的语言要求并具有学生签证申请所需的文件。">
+                            是的，我们欢迎国际学生申请。请确保您符合大学的语言要求并具有学生签证申请所需的文件。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <span data-en="What programming languages should I know?" data-zh="我应该掌握哪些编程语言？">我应该掌握哪些编程语言？</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-en="Proficiency in R or Python is highly desirable. Familiarity with statistical computing, data manipulation, and basic machine learning libraries would be advantageous. We provide training and support to help you develop these skills further."
+                           data-zh="精通R或Python是非常理想的。熟悉统计计算、数据处理和基本的机器学习库将是有利的。我们提供培训和支持来帮助您进一步发展这些技能。">
+                            精通R或Python是非常理想的。熟悉统计计算、数据处理和基本的机器学习库将是有利的。我们提供培训和支持来帮助您进一步发展这些技能。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col footer-col-main">
+                    <div class="footer-brand">
+                        <img src="../assets/images/logo.png" alt="Lei Laboratory" class="footer-logo">
+                        <h4 data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</h4>
+                    </div>
+                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</p>
+                    <p>📧 caolei@hrbmu.edu.cn</p>
+                    <p>📍 <span data-en="Harbin, Heilongjiang, China" data-zh="中国黑龙江省哈尔滨市">中国黑龙江省哈尔滨市</span></p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
+                    <ul>
+                        <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-zh="资源">资源</h4>
+                    <ul>
+                        <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                        <li><a href="resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                        <li><a href="join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" data-en="Privacy Policy" data-zh="隐私政策">隐私政策</a>
+                    <span>·</span>
+                    <a href="#" data-en="Terms of Use" data-zh="使用条款">使用条款</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="../assets/js/main.js"></script>
+    <script>
+        // FAQ 折叠功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // 关闭其他打开的FAQ
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // 切换当前FAQ
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
