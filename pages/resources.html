@@ -1,245 +1,1079 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources | Lei Laboratory</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>学习资源 - 雷曹实验室 | Resources - Lei Laboratory</title>
+    <meta name="description" content="雷曹实验室提供的学习资源、软件工具、数据集和教程。Learning resources, software tools, datasets, and tutorials from Lei Laboratory.">
+    <meta name="keywords" content="学习资源,数据集,软件工具,教程,生物统计,机器学习,开源资源">
+    
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    
     <style>
-        .resources-section {
+        /* 资源页面特定样式 */
+        .resources-hero {
+            background: linear-gradient(135deg, #8C1515 0%, #006B81 100%);
+            padding: 100px 0 80px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resources-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        .resources-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resources-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .resources-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .resources-content {
             padding: 80px 0;
+            background: var(--bg-cream);
         }
         
         .resource-category {
-            background: white;
-            border-radius: 10px;
-            padding: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
             margin-bottom: 40px;
-            box-shadow: var(--shadow);
         }
         
-        .resource-category h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--secondary-color);
+        .category-icon-large {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
         }
         
-        .resource-list {
-            list-style: none;
-            padding: 0;
+        .category-header-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .category-header-text p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
         }
         
         .resource-item {
-            padding: 15px;
-            margin: 10px 0;
-            background: var(--light-bg);
-            border-radius: 5px;
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .resource-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .resource-item-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-cream);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .resource-item-title {
+            flex: 1;
+        }
+        
+        .resource-item-title h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        
+        .resource-type {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .resource-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+        
+        .resource-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-light);
+        }
+        
+        .resource-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .resource-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .resource-tag {
+            padding: 5px 12px;
+            background: var(--bg-cream);
+            color: var(--text);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .resource-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .resource-link {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .resource-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .resource-link-secondary {
+            background: var(--bg-light);
+            color: var(--text);
+        }
+        
+        .resource-link-secondary:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .featured-resource {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            border-left: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             align-items: center;
         }
         
-        .resource-item.locked::before {
-            content: "🔒 ";
+        .featured-resource .resource-item-header {
+            margin-bottom: 16px;
         }
         
-        .resource-item.open::before {
-            content: "📂 ";
+        .featured-resource .resource-icon {
+            background: rgba(255,255,255,0.2);
         }
         
-        .access-form {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: var(--secondary-color);
+        .featured-resource h3,
+        .featured-resource .resource-type,
+        .featured-resource .resource-description,
+        .featured-resource .resource-meta-item {
             color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s;
         }
         
-        .submit-btn:hover {
-            background: #2980b9;
+        .featured-resource .resource-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        
+        .featured-resource .resource-link {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .featured-resource .resource-link:hover {
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .featured-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .tutorials-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .tutorial-card {
+            background: var(--bg-cream);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        .tutorial-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .tutorial-header {
+            display: flex;
+            align-items: center;
+            padding: 25px 30px;
+            background: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .tutorial-header:hover {
+            background: var(--bg-cream);
+        }
+        
+        .tutorial-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .tutorial-title {
+            flex: 1;
+        }
+        
+        .tutorial-title h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        
+        .tutorial-duration {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .tutorial-expand {
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .tutorial-card.active .tutorial-expand {
+            transform: rotate(180deg);
+        }
+        
+        .tutorial-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 30px;
+        }
+        
+        .tutorial-card.active .tutorial-content {
+            max-height: 1000px;
+            padding: 0 30px 30px;
+        }
+        
+        .tutorial-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .tutorial-content ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .tutorial-content li {
+            padding-left: 24px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            position: relative;
+        }
+        
+        .tutorial-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .resources-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-resource {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .category-header-text h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation (same structure as other pages) -->
+    <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button id="lang-en" class="active">English</button>
-        <button id="lang-zh">中文</button>
+        <button id="lang-en" aria-label="Switch to English">EN</button>
+        <button id="lang-zh" class="active" aria-label="切换到中文">中文</button>
     </div>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="返回顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
                 <img src="../assets/images/logo.png" alt="Lei Laboratory Logo" class="logo">
-                <a href="../index.html" class="lab-name" data-en="Lei Laboratory" data-zh="雷曹实验室">Lei Laboratory</a>
+                <div class="brand-info">
+                    <span class="brand-name" data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</span>
+                    <span class="brand-subtitle" data-en="Biostatistics & AI Medicine" data-zh="生物统计与AI医学">生物统计与AI医学</span>
+                </div>
             </div>
+            
+            <button class="mobile-menu-toggle" aria-label="菜单" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-menu">
-                <li><a href="../index.html" data-en="Home" data-zh="首页">Home</a></li>
-                <li><a href="members.html" data-en="Members" data-zh="成员">Members</a></li>
-                <li><a href="research.html" data-en="Research" data-zh="研究">Research</a></li>
-                <li><a href="publications.html" data-en="Publications" data-zh="论文">Publications</a></li>
-                <li><a href="news.html" data-en="News" data-zh="动态">News</a></li>
-                <li><a href="courses.html" data-en="Courses" data-zh="课程">Courses</a></li>
-                <li><a href="resources.html" data-en="Resources" data-zh="资源">Resources</a></li>
-                <li><a href="join.html" data-en="Join Us" data-zh="加入我们">Join Us</a></li>
+                <li><a href="../index.html" data-en="Home" data-zh="首页">首页</a></li>
+                <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                <li><a href="join.html" data-en="Join" data-zh="加入">加入</a></li>
             </ul>
         </div>
     </nav>
 
-    <section class="resources-section">
+    <!-- Hero Section -->
+    <section class="resources-hero">
         <div class="container">
-            <h1 class="section-title" data-en="Resources" data-zh="资源中心">Resources</h1>
+            <span class="section-subtitle" data-en="Tools & Materials" data-zh="工具与材料">工具与材料</span>
+            <h1 data-en="Learning Resources" data-zh="学习资源">学习资源</h1>
+            <p data-en="Open-source tools, datasets, tutorials, and materials for biostatistics and AI in medicine"
+               data-zh="生物统计和医学人工智能的开源工具、数据集、教程和材料">
+                生物统计和医学人工智能的开源工具、数据集、教程和材料
+            </p>
+        </div>
+    </section>
 
-            <!-- Open Resources -->
+    <!-- Resources Content -->
+    <section class="resources-content">
+        <div class="container">
+            <!-- Software & Tools -->
             <div class="resource-category">
-                <h2 data-en="📂 Open Resources" data-zh="📂 公开资源">📂 Open Resources</h2>
-                <p data-en="These resources are publicly available for download and use." 
-                   data-zh="这些资源公开可用，可直接下载使用。">
-                    These resources are publicly available for download and use.
-                </p>
-                <ul class="resource-list">
-                    <li class="resource-item open">
-                        <span data-en="Tutorial: Introduction to Biostatistics" data-zh="教程：生物统计学入门">Tutorial: Introduction to Biostatistics</span>
-                        <a href="#" class="btn">Download</a>
-                    </li>
-                    <li class="resource-item open">
-                        <span data-en="Sample Datasets for Practice" data-zh="练习数据集">Sample Datasets for Practice</span>
-                        <a href="#" class="btn">Download</a>
-                    </li>
-                </ul>
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-icon-large">💻</div>
+                    <div class="category-header-text">
+                        <h2 data-en="Software & Tools" data-zh="软件与工具">软件与工具</h2>
+                        <p data-en="Open-source software packages and tools developed by our lab"
+                           data-zh="我们实验室开发的开源软件包和工具">我们实验室开发的开源软件包和工具</p>
+                    </div>
+                </div>
+
+                <div class="resources-grid">
+                    <!-- Featured Tool -->
+                    <div class="featured-resource" data-aos="fade-up">
+                        <div>
+                            <span class="featured-badge" data-en="Featured" data-zh="特别推荐">特别推荐</span>
+                            <div class="resource-item-header">
+                                <div class="resource-icon">📦</div>
+                                <div class="resource-item-title">
+                                    <h3>SurvivalML</h3>
+                                    <span class="resource-type">R Package</span>
+                                </div>
+                            </div>
+                            <p class="resource-description" data-en="An R package for machine learning-based survival analysis with high-dimensional data. Implements novel algorithms for feature selection and prediction."
+                               data-zh="用于高维数据机器学习生存分析的R包。实现了用于特征选择和预测的新算法。">
+                                用于高维数据机器学习生存分析的R包。实现了用于特征选择和预测的新算法。
+                            </p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">R</span>
+                                <span class="resource-tag" data-en="Survival Analysis" data-zh="生存分析">生存分析</span>
+                                <span class="resource-tag" data-en="Machine Learning" data-zh="机器学习">机器学习</span>
+                            </div>
+                            <div class="resource-meta">
+                                <span class="resource-meta-item">
+                                    <span>⭐</span>
+                                    <span>150+ Stars</span>
+                                </span>
+                                <span class="resource-meta-item">
+                                    <span>📥</span>
+                                    <span>5000+ Downloads</span>
+                                </span>
+                                <span class="resource-meta-item">
+                                    <span>📅</span>
+                                    <span data-en="Updated: 2025-01" data-zh="更新：2025-01">更新：2025-01</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="resource-links">
+                                <a href="#" class="resource-link">
+                                    <span>💻</span>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="#" class="resource-link">
+                                    <span>📖</span>
+                                    <span data-en="Documentation" data-zh="文档">文档</span>
+                                </a>
+                                <a href="#" class="resource-link">
+                                    <span>📦</span>
+                                    <span>CRAN</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 1 -->
+                    <div class="resource-item" data-aos="fade-up">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">🐍</div>
+                            <div class="resource-item-title">
+                                <h3>MedImageAI</h3>
+                                <span class="resource-type">Python Package</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Deep learning toolkit for medical image analysis with pre-trained models for segmentation and classification."
+                           data-zh="用于医学图像分析的深度学习工具包，包含用于分割和分类的预训练模型。">
+                            用于医学图像分析的深度学习工具包，包含用于分割和分类的预训练模型。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Python</span>
+                            <span class="resource-tag">PyTorch</span>
+                            <span class="resource-tag" data-en="Deep Learning" data-zh="深度学习">深度学习</span>
+                        </div>
+                        <div class="resource-meta">
+                            <span class="resource-meta-item">
+                                <span>⭐</span>
+                                <span>80+ Stars</span>
+                            </span>
+                            <span class="resource-meta-item">
+                                <span>📅</span>
+                                <span data-en="Updated: 2024-12" data-zh="更新：2024-12">更新：2024-12</span>
+                            </span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>💻</span>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📖</span>
+                                <span data-en="Docs" data-zh="文档">文档</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 2 -->
+                    <div class="resource-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">📊</div>
+                            <div class="resource-item-title">
+                                <h3>CausalTools</h3>
+                                <span class="resource-type">R Package</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Comprehensive toolkit for causal inference from observational data, including propensity score methods and instrumental variables."
+                           data-zh="从观察性数据进行因果推断的综合工具包，包括倾向得分方法和工具变量。">
+                            从观察性数据进行因果推断的综合工具包，包括倾向得分方法和工具变量。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag">R</span>
+                            <span class="resource-tag" data-en="Causal Inference" data-zh="因果推断">因果推断</span>
+                        </div>
+                        <div class="resource-meta">
+                            <span class="resource-meta-item">
+                                <span>⭐</span>
+                                <span>45+ Stars</span>
+                            </span>
+                            <span class="resource-meta-item">
+                                <span>📅</span>
+                                <span data-en="Updated: 2024-11" data-zh="更新：2024-11">更新：2024-11</span>
+                            </span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>💻</span>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📖</span>
+                                <span data-en="Vignettes" data-zh="教程">教程</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 3 -->
+                    <div class="resource-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">🧬</div>
+                            <div class="resource-item-title">
+                                <h3>GenomicsKit</h3>
+                                <span class="resource-type">Python Package</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Tools for genomic data analysis, including variant calling, gene expression analysis, and pathway enrichment."
+                           data-zh="基因组数据分析工具，包括变异检测、基因表达分析和通路富集。">
+                            基因组数据分析工具，包括变异检测、基因表达分析和通路富集。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Python</span>
+                            <span class="resource-tag" data-en="Genomics" data-zh="基因组学">基因组学</span>
+                        </div>
+                        <div class="resource-meta">
+                            <span class="resource-meta-item">
+                                <span>⭐</span>
+                                <span>60+ Stars</span>
+                            </span>
+                            <span class="resource-meta-item">
+                                <span>📅</span>
+                                <span data-en="Updated: 2024-10" data-zh="更新：2024-10">更新：2024-10</span>
+                            </span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>💻</span>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📖</span>
+                                <span data-en="Docs" data-zh="文档">文档</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Restricted Resources -->
+            <!-- Datasets -->
             <div class="resource-category">
-                <h2 data-en="🔒 Restricted Resources" data-zh="🔒 受限资源">🔒 Restricted Resources</h2>
-                <p data-en="Access to these resources requires approval. Please fill out the application form below." 
-                   data-zh="访问这些资源需要申请批准。请填写下方申请表。">
-                    Access to these resources requires approval. Please fill out the application form below.
-                </p>
-                <ul class="resource-list">
-                    <li class="resource-item locked">
-                        <span data-en="Literature Reading Notes (Internal)" data-zh="文献抄读笔记（内部）">Literature Reading Notes (Internal)</span>
-                        <span data-en="Requires Access" data-zh="需要申请">Requires Access</span>
-                    </li>
-                    <li class="resource-item locked">
-                        <span data-en="Project Code Repository" data-zh="项目代码库">Project Code Repository</span>
-                        <span data-en="Requires Access" data-zh="需要申请">Requires Access</span>
-                    </li>
-                    <li class="resource-item locked">
-                        <span data-en="Research Data Archive" data-zh="研究数据档案">Research Data Archive</span>
-                        <span data-en="Requires Access" data-zh="需要申请">Requires Access</span>
-                    </li>
-                </ul>
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-icon-large">📊</div>
+                    <div class="category-header-text">
+                        <h2 data-en="Datasets" data-zh="数据集">数据集</h2>
+                        <p data-en="Curated datasets for research and education"
+                           data-zh="用于研究和教育的精选数据集">用于研究和教育的精选数据集</p>
+                    </div>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-item" data-aos="fade-up">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">🫀</div>
+                            <div class="resource-item-title">
+                                <h3 data-en="Cardiovascular Risk Dataset" data-zh="心血管风险数据集">心血管风险数据集</h3>
+                                <span class="resource-type" data-en="Clinical Data" data-zh="临床数据">临床数据</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Longitudinal data from 5,000+ patients with cardiovascular risk factors, including demographics, lab results, and outcomes."
+                           data-zh="来自5000多名心血管危险因素患者的纵向数据，包括人口统计学、实验室结果和预后。">
+                            来自5000多名心血管危险因素患者的纵向数据，包括人口统计学、实验室结果和预后。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag" data-en="Clinical" data-zh="临床">临床</span>
+                            <span class="resource-tag" data-en="Longitudinal" data-zh="纵向">纵向</span>
+                            <span class="resource-tag">CSV</span>
+                        </div>
+                        <div class="resource-meta">
+                            <span class="resource-meta-item">
+                                <span>👥</span>
+                                <span>5000+ <span data-en="Samples" data-zh="样本">样本</span></span>
+                            </span>
+                            <span class="resource-meta-item">
+                                <span>📏</span>
+                                <span>50 <span data-en="Features" data-zh="特征">特征</span></span>
+                            </span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>📥</span>
+                                <span data-en="Download" data-zh="下载">下载</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📖</span>
+                                <span data-en="Description" data-zh="说明">说明</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">🧬</div>
+                            <div class="resource-item-title">
+                                <h3 data-en="Cancer Genomics Dataset" data-zh="癌症基因组学数据集">癌症基因组学数据集</h3>
+                                <span class="resource-type" data-en="Genomic Data" data-zh="基因组数据">基因组数据</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Multi-omics data from cancer patients including RNA-seq, methylation, and clinical outcomes."
+                           data-zh="来自癌症患者的多组学数据，包括RNA-seq、甲基化和临床结局。">
+                            来自癌症患者的多组学数据，包括RNA-seq、甲基化和临床结局。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag" data-en="Genomics" data-zh="基因组">基因组</span>
+                            <span class="resource-tag">RNA-seq</span>
+                            <span class="resource-tag" data-en="High-Dimensional" data-zh="高维">高维</span>
+                        </div>
+                        <div class="resource-meta">
+                            <span class="resource-meta-item">
+                                <span>👥</span>
+                                <span>800+ <span data-en="Samples" data-zh="样本">样本</span></span>
+                            </span>
+                            <span class="resource-meta-item">
+                                <span>📏</span>
+                                <span>20000+ <span data-en="Genes" data-zh="基因">基因</span></span>
+                            </span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>📥</span>
+                                <span data-en="Download" data-zh="下载">下载</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📖</span>
+                                <span data-en="Description" data-zh="说明">说明</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">🖼️</div>
+                            <div class="resource-item-title">
+                                <h3 data-en="Medical Image Collection" data-zh="医学影像集合">医学影像集合</h3>
+                                <span class="resource-type" data-en="Image Data" data-zh="影像数据">影像数据</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Annotated medical images for training and testing deep learning models, including X-ray, CT, and MRI scans."
+                           data-zh="用于训练和测试深度学习模型的标注医学图像，包括X光、CT和MRI扫描。">
+                            用于训练和测试深度学习模型的标注医学图像，包括X光、CT和MRI扫描。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag" data-en="Images" data-zh="图像">图像</span>
+                            <span class="resource-tag" data-en="Annotated" data-zh="已标注">已标注</span>
+                            <span class="resource-tag">CT/MRI</span>
+                        </div>
+                        <div class="resource-meta">
+                            <span class="resource-meta-item">
+                                <span>🖼️</span>
+                                <span>2000+ <span data-en="Images" data-zh="图像">图像</span></span>
+                            </span>
+                            <span class="resource-meta-item">
+                                <span>💾</span>
+                                <span>5GB</span>
+                            </span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>📥</span>
+                                <span data-en="Download" data-zh="下载">下载</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📖</span>
+                                <span data-en="Description" data-zh="说明">说明</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Access Application Form -->
-            <div class="access-form">
-                <h2 data-en="Apply for Resource Access" data-zh="资源访问申请">Apply for Resource Access</h2>
-                <p data-en="Please complete this form to request access to restricted resources." 
-                   data-zh="请填写此表格以申请访问受限资源。">
-                    Please complete this form to request access to restricted resources.
-                </p>
-                
-                <form id="access-form" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST">
-                    <div class="form-group">
-                        <label data-en="Full Name *" data-zh="姓名 *">Full Name *</label>
-                        <input type="text" name="entry.name" required>
+            <!-- Code Examples -->
+            <div class="resource-category">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-icon-large">💻</div>
+                    <div class="category-header-text">
+                        <h2 data-en="Code Examples" data-zh="代码示例">代码示例</h2>
+                        <p data-en="Reproducible code and analysis scripts"
+                           data-zh="可重现的代码和分析脚本">可重现的代码和分析脚本</p>
+                    </div>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-item" data-aos="fade-up">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">📝</div>
+                            <div class="resource-item-title">
+                                <h3 data-en="Survival Analysis Tutorial" data-zh="生存分析教程">生存分析教程</h3>
+                                <span class="resource-type">R Markdown</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Complete workflow for survival analysis from data preprocessing to model interpretation."
+                           data-zh="从数据预处理到模型解释的完整生存分析工作流程。">
+                            从数据预处理到模型解释的完整生存分析工作流程。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag">R</span>
+                            <span class="resource-tag" data-en="Tutorial" data-zh="教程">教程</span>
+                            <span class="resource-tag" data-en="Survival" data-zh="生存分析">生存分析</span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>💻</span>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📄</span>
+                                <span>HTML</span>
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label data-en="Email *" data-zh="邮箱 *">Email *</label>
-                        <input type="email" name="entry.email" required>
+                    <div class="resource-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">🤖</div>
+                            <div class="resource-item-title">
+                                <h3 data-en="ML Pipeline Examples" data-zh="机器学习流程示例">机器学习流程示例</h3>
+                                <span class="resource-type">Jupyter Notebook</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="End-to-end machine learning pipelines for medical data analysis."
+                           data-zh="用于医学数据分析的端到端机器学习流程。">
+                            用于医学数据分析的端到端机器学习流程。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Python</span>
+                            <span class="resource-tag" data-en="ML" data-zh="机器学习">机器学习</span>
+                            <span class="resource-tag">Scikit-learn</span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>💻</span>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>🚀</span>
+                                <span>Colab</span>
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label data-en="Institution/Organization *" data-zh="单位/机构 *">Institution/Organization *</label>
-                        <input type="text" name="entry.institution" required>
+                    <div class="resource-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="resource-item-header">
+                            <div class="resource-icon">📊</div>
+                            <div class="resource-item-title">
+                                <h3 data-en="Data Visualization Gallery" data-zh="数据可视化图库">数据可视化图库</h3>
+                                <span class="resource-type">R / Python</span>
+                            </div>
+                        </div>
+                        <p class="resource-description" data-en="Collection of publication-ready plots and visualization techniques."
+                           data-zh="可用于发表的图表和可视化技术集合。">
+                            可用于发表的图表和可视化技术集合。
+                        </p>
+                        <div class="resource-tags">
+                            <span class="resource-tag">ggplot2</span>
+                            <span class="resource-tag">matplotlib</span>
+                            <span class="resource-tag" data-en="Visualization" data-zh="可视化">可视化</span>
+                        </div>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>💻</span>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>🎨</span>
+                                <span data-en="Gallery" data-zh="图库">图库</span>
+                            </a>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label data-en="GitHub Username (if applicable)" data-zh="GitHub 用户名（如有）">GitHub Username (if applicable)</label>
-                        <input type="text" name="entry.github">
-                    </div>
-
-                    <div class="form-group">
-                        <label data-en="Resource Requested *" data-zh="申请的资源 *">Resource Requested *</label>
-                        <select name="entry.resource" required>
-                            <option value="">-- Select --</option>
-                            <option value="reading-notes" data-en="Literature Reading Notes" data-zh="文献抄读笔记">Literature Reading Notes</option>
-                            <option value="code-repo" data-en="Project Code Repository" data-zh="项目代码库">Project Code Repository</option>
-                            <option value="data-archive" data-en="Research Data Archive" data-zh="研究数据档案">Research Data Archive</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label data-en="Purpose of Use *" data-zh="使用目的 *">Purpose of Use *</label>
-                        <textarea name="entry.purpose" required placeholder="Please describe how you plan to use the requested resources"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label data-en="Expected Outcomes" data-zh="预期成果">Expected Outcomes</label>
-                        <textarea name="entry.outcomes" placeholder="Optional: Describe any expected research outcomes or publications"></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn" data-en="Submit Application" data-zh="提交申请">Submit Application</button>
-                </form>
-
-                <p style="margin-top: 20px; color: #666; font-size: 0.9rem;">
-                    <span data-en="Note: Applications are typically reviewed within 3-5 business days. You will receive an email notification once your application is processed." 
-                          data-zh="注意：申请通常在3-5个工作日内审核。申请处理完成后您将收到邮件通知。">
-                        Note: Applications are typically reviewed within 3-5 business days. You will receive an email notification once your application is processed.
-                    </span>
-                </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <!-- Tutorials Section -->
+    <section class="tutorials-section">
         <div class="container">
-            <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
-            <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">Harbin Medical University</p>
+            <div class="section-header-center">
+                <span class="section-subtitle" data-en="Step-by-Step" data-zh="循序渐进">循序渐进</span>
+                <h2 class="section-title" data-en="Video Tutorials" data-zh="视频教程">视频教程</h2>
+                <p class="section-description" data-en="Comprehensive video guides for getting started"
+                   data-zh="全面的入门视频指南">全面的入门视频指南</p>
+            </div>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="tutorial-card" data-aos="fade-up">
+                    <div class="tutorial-header">
+                        <div class="tutorial-number">1</div>
+                        <div class="tutorial-title">
+                            <h3 data-en="Introduction to R for Biostatistics" data-zh="生物统计学R语言入门">生物统计学R语言入门</h3>
+                            <span class="tutorial-duration">⏱️ 45 <span data-en="minutes" data-zh="分钟">分钟</span></span>
+                        </div>
+                        <span class="tutorial-expand">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <p data-en="Learn the basics of R programming for biostatistical analysis, including data manipulation, visualization, and basic statistical tests."
+                           data-zh="学习用于生物统计分析的R编程基础，包括数据处理、可视化和基本统计检验。">
+                            学习用于生物统计分析的R编程基础，包括数据处理、可视化和基本统计检验。
+                        </p>
+                        <ul>
+                            <li data-en="R basics and RStudio setup" data-zh="R基础和RStudio设置">R基础和RStudio设置</li>
+                            <li data-en="Data import and manipulation" data-zh="数据导入和处理">数据导入和处理</li>
+                            <li data-en="Creating plots with ggplot2" data-zh="使用ggplot2创建图表">使用ggplot2创建图表</li>
+                            <li data-en="Basic statistical tests" data-zh="基本统计检验">基本统计检验</li>
+                        </ul>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>▶️</span>
+                                <span data-en="Watch Video" data-zh="观看视频">观看视频</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📥</span>
+                                <span data-en="Download Materials" data-zh="下载材料">下载材料</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tutorial-header">
+                        <div class="tutorial-number">2</div>
+                        <div class="tutorial-title">
+                            <h3 data-en="Python for Medical Data Science" data-zh="医学数据科学Python">医学数据科学Python</h3>
+                            <span class="tutorial-duration">⏱️ 60 <span data-en="minutes" data-zh="分钟">分钟</span></span>
+                        </div>
+                        <span class="tutorial-expand">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <p data-en="Comprehensive introduction to Python for medical data analysis and machine learning."
+                           data-zh="用于医学数据分析和机器学习的Python综合介绍。">
+                            用于医学数据分析和机器学习的Python综合介绍。
+                        </p>
+                        <ul>
+                            <li data-en="Python environment setup" data-zh="Python环境设置">Python环境设置</li>
+                            <li data-en="NumPy and Pandas basics" data-zh="NumPy和Pandas基础">NumPy和Pandas基础</li>
+                            <li data-en="Scikit-learn introduction" data-zh="Scikit-learn入门">Scikit-learn入门</li>
+                            <li data-en="Model evaluation" data-zh="模型评估">模型评估</li>
+                        </ul>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>▶️</span>
+                                <span data-en="Watch Video" data-zh="观看视频">观看视频</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📥</span>
+                                <span data-en="Download Materials" data-zh="下载材料">下载材料</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tutorial-header">
+                        <div class="tutorial-number">3</div>
+                        <div class="tutorial-title">
+                            <h3 data-en="Deep Learning for Medical Imaging" data-zh="医学影像深度学习">医学影像深度学习</h3>
+                            <span class="tutorial-duration">⏱️ 90 <span data-en="minutes" data-zh="分钟">分钟</span></span>
+                        </div>
+                        <span class="tutorial-expand">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <p data-en="Learn to build and train deep learning models for medical image analysis using PyTorch."
+                           data-zh="学习使用PyTorch构建和训练用于医学图像分析的深度学习模型。">
+                            学习使用PyTorch构建和训练用于医学图像分析的深度学习模型。
+                        </p>
+                        <ul>
+                            <li data-en="CNN architecture basics" data-zh="CNN架构基础">CNN架构基础</li>
+                            <li data-en="Transfer learning" data-zh="迁移学习">迁移学习</li>
+                            <li data-en="Image preprocessing" data-zh="图像预处理">图像预处理</li>
+                            <li data-en="Model deployment" data-zh="模型部署">模型部署</li>
+                        </ul>
+                        <div class="resource-links">
+                            <a href="#" class="resource-link">
+                                <span>▶️</span>
+                                <span data-en="Watch Video" data-zh="观看视频">观看视频</span>
+                            </a>
+                            <a href="#" class="resource-link-secondary">
+                                <span>📥</span>
+                                <span data-en="Download Materials" data-zh="下载材料">下载材料</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col footer-col-main">
+                    <div class="footer-brand">
+                        <img src="../assets/images/logo.png" alt="Lei Laboratory" class="footer-logo">
+                        <h4 data-en="Lei Laboratory" data-zh="曹雷实验室">曹雷实验室</h4>
+                    </div>
+                    <p data-en="Harbin Medical University" data-zh="哈尔滨医科大学">哈尔滨医科大学</p>
+                    <p>📧 caolei@hrbmu.edu.cn</p>
+                    <p>📍 <span data-en="Harbin, Heilongjiang, China" data-zh="中国黑龙江省哈尔滨市">中国黑龙江省哈尔滨市</span></p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
+                    <ul>
+                        <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-zh="资源">资源</h4>
+                    <ul>
+                        <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                        <li><a href="resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                        <li><a href="join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023-2025 Lei Laboratory. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" data-en="Privacy Policy" data-zh="隐私政策">隐私政策</a>
+                    <span>·</span>
+                    <a href="#" data-en="Terms of Use" data-zh="使用条款">使用条款</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="../assets/js/main.js"></script>
+    <script>
+        // Tutorial 折叠功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tutorialCards = document.querySelectorAll('.tutorial-card');
+            
+            tutorialCards.forEach(card => {
+                const header = card.querySelector('.tutorial-header');
+                
+                header.addEventListener('click', function() {
+                    // 关闭其他打开的教程
+                    tutorialCards.forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
+                    });
+                    
+                    // 切换当前教程
+                    card.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
