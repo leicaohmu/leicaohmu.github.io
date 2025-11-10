@@ -379,6 +379,244 @@
             }
         }
     </style>
+    /* 模态框样式 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.syllabus-modal {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.modal-overlay.active .syllabus-modal {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 40px 40px 30px;
+    background: linear-gradient(135deg, #8C1515 0%, #006B81 100%);
+    color: white;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    color: white;
+    font-size: 24px;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.modal-course-code {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.modal-course-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.modal-course-title-en {
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.modal-body {
+    padding: 40px;
+    overflow-y: auto;
+    max-height: calc(85vh - 180px);
+}
+
+.syllabus-section {
+    margin-bottom: 35px;
+}
+
+.syllabus-section:last-child {
+    margin-bottom: 0;
+}
+
+.syllabus-section h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.syllabus-section h3::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.syllabus-section p {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.syllabus-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.syllabus-section li {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 10px;
+    padding-left: 24px;
+    position: relative;
+}
+
+.syllabus-section li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.syllabus-weeks {
+    display: grid;
+    gap: 12px;
+}
+
+.week-item {
+    padding: 16px 20px;
+    background: var(--bg-cream);
+    border-radius: 12px;
+    border-left: 4px solid var(--secondary);
+}
+
+.week-item strong {
+    color: var(--text);
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+}
+
+.week-item span {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.syllabus-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-cream);
+    border-radius: 12px;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.info-text {
+    flex: 1;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .syllabus-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        padding: 30px 25px 20px;
+    }
+    
+    .modal-course-title {
+        font-size: 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 25px;
+        max-height: calc(90vh - 150px);
+    }
+    
+    .syllabus-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </head>
 <body>
     <!-- Language Toggle -->
@@ -528,7 +766,8 @@
                             </div>
                         </div>
                         <div class="course-footer">
-                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                            <!-- 课程1 -->
+                            <a href="#" class="course-btn view-syllabus" data-course="stat5010" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
                         </div>
                     </div>
 
@@ -570,7 +809,9 @@
                             </div>
                         </div>
                         <div class="course-footer">
-                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                            <!-- 课程2 -->
+                            <a href="#" class="course-btn view-syllabus" data-course="stat6020" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+
                         </div>
                     </div>
 
@@ -612,7 +853,8 @@
                             </div>
                         </div>
                         <div class="course-footer">
-                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                            <!-- 课程3 -->
+                            <a href="#" class="course-btn view-syllabus" data-course="cs6030" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
                         </div>
                     </div>
 
@@ -654,7 +896,8 @@
                             </div>
                         </div>
                         <div class="course-footer">
-                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                            <!-- 课程4 -->
+                            <a href="#" class="course-btn view-syllabus" data-course="stat7010" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
                         </div>
                     </div>
 
@@ -696,7 +939,8 @@
                             </div>
                         </div>
                         <div class="course-footer">
-                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                            <!-- 课程5 -->
+                            <a href="#" class="course-btn view-syllabus" data-course="stat7020" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
                         </div>
                     </div>
 
@@ -738,7 +982,8 @@
                             </div>
                         </div>
                         <div class="course-footer">
-                            <a href="#" class="course-btn" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
+                            <!-- 课程6 -->
+                            <a href="#" class="course-btn view-syllabus" data-course="cs7030" data-en="View Syllabus" data-zh="查看大纲">查看大纲</a>
                         </div>
                     </div>
                 </div>
@@ -851,5 +1096,569 @@
     </footer>
 
     <script src="../assets/js/main.js"></script>
+    <script>
+// 课程大纲数据
+const syllabusData = {
+    'stat5010': {
+        code: 'STAT 5010',
+        title: {
+            zh: '生物统计学导论',
+            en: 'Introduction to Biostatistics'
+        },
+        info: {
+            instructor: { zh: '曹雷', en: 'Lei Cao' },
+            semester: { zh: '秋季学期', en: 'Fall Semester' },
+            hours: { zh: '48学时', en: '48 hours' },
+            credits: { zh: '3学分', en: '3 credits' }
+        },
+        overview: {
+            zh: '本课程介绍生物统计学的基本概念和方法，包括描述性统计、概率论、统计推断、假设检验和回归分析。学生将学习如何使用R语言进行数据分析。',
+            en: 'This course introduces fundamental concepts and methods in biostatistics, including descriptive statistics, probability theory, statistical inference, hypothesis testing, and regression analysis. Students will learn to perform data analysis using R.'
+        },
+        objectives: {
+            zh: [
+                '理解生物统计学的基本概念和原理',
+                '掌握常用的统计分析方法',
+                '能够使用R语言进行数据分析',
+                '学会解释和报告统计分析结果',
+                '培养批判性思维和数据素养'
+            ],
+            en: [
+                'Understand fundamental concepts and principles of biostatistics',
+                'Master commonly used statistical analysis methods',
+                'Perform data analysis using R programming',
+                'Interpret and report statistical results',
+                'Develop critical thinking and data literacy'
+            ]
+        },
+        schedule: {
+            zh: [
+                { week: '第1-2周', topic: '描述性统计与数据可视化' },
+                { week: '第3-4周', topic: '概率论基础' },
+                { week: '第5-6周', topic: '常见概率分布' },
+                { week: '第7-8周', topic: '统计推断与置信区间' },
+                { week: '第9-10周', topic: '假设检验' },
+                { week: '第11-12周', topic: '方差分析' },
+                { week: '第13-14周', topic: '简单线性回归' },
+                { week: '第15-16周', topic: '多元回归与综合应用' }
+            ],
+            en: [
+                { week: 'Week 1-2', topic: 'Descriptive Statistics & Data Visualization' },
+                { week: 'Week 3-4', topic: 'Probability Fundamentals' },
+                { week: 'Week 5-6', topic: 'Common Probability Distributions' },
+                { week: 'Week 7-8', topic: 'Statistical Inference & Confidence Intervals' },
+                { week: 'Week 9-10', topic: 'Hypothesis Testing' },
+                { week: 'Week 11-12', topic: 'Analysis of Variance' },
+                { week: 'Week 13-14', topic: 'Simple Linear Regression' },
+                { week: 'Week 15-16', topic: 'Multiple Regression & Applications' }
+            ]
+        },
+        assessment: {
+            zh: [
+                '作业：30%',
+                '期中考试：30%',
+                '期末考试：40%'
+            ],
+            en: [
+                'Homework: 30%',
+                'Midterm Exam: 30%',
+                'Final Exam: 40%'
+            ]
+        }
+    },
+    'stat6020': {
+        code: 'STAT 6020',
+        title: {
+            zh: '高维数据统计分析',
+            en: 'Statistical Analysis of High-Dimensional Data'
+        },
+        info: {
+            instructor: { zh: '曹雷', en: 'Lei Cao' },
+            semester: { zh: '春季学期', en: 'Spring Semester' },
+            hours: { zh: '48学时', en: '48 hours' },
+            credits: { zh: '3学分', en: '3 credits' }
+        },
+        overview: {
+            zh: '本课程涵盖高维数据分析的理论和方法，包括变量选择、降维、多重检验和正则化方法。重点关注基因组学和其他高通量数据的分析。',
+            en: 'This course covers theory and methods for analyzing high-dimensional data, including variable selection, dimension reduction, multiple testing, and regularization methods. Focus on genomic and other high-throughput data analysis.'
+        },
+        objectives: {
+            zh: [
+                '理解高维数据的统计挑战',
+                '掌握变量选择和降维技术',
+                '学习正则化回归方法（Lasso, Ridge等）',
+                '了解多重检验问题及其解决方案',
+                '应用方法分析基因组学数据'
+            ],
+            en: [
+                'Understand statistical challenges in high-dimensional data',
+                'Master variable selection and dimension reduction techniques',
+                'Learn regularization regression methods (Lasso, Ridge, etc.)',
+                'Address multiple testing problems',
+                'Apply methods to genomic data analysis'
+            ]
+        },
+        schedule: {
+            zh: [
+                { week: '第1-2周', topic: '高维数据概述与挑战' },
+                { week: '第3-4周', topic: '主成分分析（PCA）' },
+                { week: '第5-6周', topic: 'Ridge回归与Lasso' },
+                { week: '第7-8周', topic: 'Elastic Net与其他正则化方法' },
+                { week: '第9-10周', topic: '变量选择方法' },
+                { week: '第11-12周', topic: '多重检验与FDR控制' },
+                { week: '第13-14周', topic: '基因组数据分析' },
+                { week: '第15-16周', topic: '综合案例与项目展示' }
+            ],
+            en: [
+                { week: 'Week 1-2', topic: 'High-Dimensional Data Overview' },
+                { week: 'Week 3-4', topic: 'Principal Component Analysis (PCA)' },
+                { week: 'Week 5-6', topic: 'Ridge Regression & Lasso' },
+                { week: 'Week 7-8', topic: 'Elastic Net & Other Regularization' },
+                { week: 'Week 9-10', topic: 'Variable Selection Methods' },
+                { week: 'Week 11-12', topic: 'Multiple Testing & FDR Control' },
+                { week: 'Week 13-14', topic: 'Genomic Data Analysis' },
+                { week: 'Week 15-16', topic: 'Case Studies & Project Presentations' }
+            ]
+        },
+        assessment: {
+            zh: [
+                '作业：40%',
+                '期中项目：25%',
+                '期末项目：35%'
+            ],
+            en: [
+                'Homework: 40%',
+                'Midterm Project: 25%',
+                'Final Project: 35%'
+            ]
+        }
+    },
+    'cs6030': {
+        code: 'CS 6030',
+        title: {
+            zh: '医学机器学习',
+            en: 'Machine Learning in Medicine'
+        },
+        info: {
+            instructor: { zh: '曹雷', en: 'Lei Cao' },
+            semester: { zh: '秋季学期', en: 'Fall Semester' },
+            hours: { zh: '64学时', en: '64 hours' },
+            credits: { zh: '4学分', en: '4 credits' }
+        },
+        overview: {
+            zh: '系统介绍机器学习在医学领域的应用，包括监督学习、非监督学习、深度学习等方法。学生将使用Python实现和评估各种机器学习模型。',
+            en: 'Comprehensive introduction to machine learning applications in medicine, including supervised learning, unsupervised learning, and deep learning. Students will implement and evaluate various models using Python.'
+        },
+        objectives: {
+            zh: [
+                '掌握机器学习的基本原理和算法',
+                '学习深度学习和神经网络',
+                '理解模型评估和验证方法',
+                '应用机器学习解决医学问题',
+                '熟练使用Python和相关库'
+            ],
+            en: [
+                'Master fundamental principles and algorithms of machine learning',
+                'Learn deep learning and neural networks',
+                'Understand model evaluation and validation',
+                'Apply machine learning to medical problems',
+                'Proficient use of Python and related libraries'
+            ]
+        },
+        schedule: {
+            zh: [
+                { week: '第1-2周', topic: '机器学习概述与Python基础' },
+                { week: '第3-4周', topic: '线性回归与逻辑回归' },
+                { week: '第5-6周', topic: '决策树与随机森林' },
+                { week: '第7-8周', topic: '支持向量机' },
+                { week: '第9-10周', topic: '聚类与降维' },
+                { week: '第11-12周', topic: '神经网络基础' },
+                { week: '第13-14周', topic: '深度学习与CNN' },
+                { week: '第15-16周', topic: '医学应用案例与项目' }
+            ],
+            en: [
+                { week: 'Week 1-2', topic: 'ML Overview & Python Basics' },
+                { week: 'Week 3-4', topic: 'Linear & Logistic Regression' },
+                { week: 'Week 5-6', topic: 'Decision Trees & Random Forests' },
+                { week: 'Week 7-8', topic: 'Support Vector Machines' },
+                { week: 'Week 9-10', topic: 'Clustering & Dimension Reduction' },
+                { week: 'Week 11-12', topic: 'Neural Network Fundamentals' },
+                { week: 'Week 13-14', topic: 'Deep Learning & CNN' },
+                { week: 'Week 15-16', topic: 'Medical Applications & Projects' }
+            ]
+        },
+        assessment: {
+            zh: [
+                '编程作业：40%',
+                '期中考试：25%',
+                '期末项目：35%'
+            ],
+            en: [
+                'Programming Assignments: 40%',
+                'Midterm Exam: 25%',
+                'Final Project: 35%'
+            ]
+        }
+    },
+    'stat7010': {
+        code: 'STAT 7010',
+        title: {
+            zh: '生存分析',
+            en: 'Survival Analysis'
+        },
+        info: {
+            instructor: { zh: '曹雷', en: 'Lei Cao' },
+            semester: { zh: '春季学期', en: 'Spring Semester' },
+            hours: { zh: '48学时', en: '48 hours' },
+            credits: { zh: '3学分', en: '3 credits' }
+        },
+        overview: {
+            zh: '深入讲解生存分析的理论和方法，包括Kaplan-Meier估计、Cox比例风险模型、竞争风险模型等。重点关注临床试验和流行病学研究中的应用。',
+            en: 'In-depth coverage of survival analysis theory and methods, including Kaplan-Meier estimation, Cox proportional hazards model, and competing risks. Focus on applications in clinical trials and epidemiology.'
+        },
+        objectives: {
+            zh: [
+                '理解生存数据的特点和分析方法',
+                '掌握Kaplan-Meier估计和对数秩检验',
+                '学习Cox回归模型及其扩展',
+                '处理竞争风险和删失数据',
+                '分析真实临床研究数据'
+            ],
+            en: [
+                'Understand characteristics of survival data and analysis methods',
+                'Master Kaplan-Meier estimation and log-rank test',
+                'Learn Cox regression and its extensions',
+                'Handle competing risks and censored data',
+                'Analyze real clinical research data'
+            ]
+        },
+        schedule: {
+            zh: [
+                { week: '第1-2周', topic: '生存数据概述' },
+                { week: '第3-4周', topic: 'Kaplan-Meier估计' },
+                { week: '第5-6周', topic: 'Cox比例风险模型' },
+                { week: '第7-8周', topic: '时变协变量' },
+                { week: '第9-10周', topic: '模型诊断' },
+                { week: '第11-12周', topic: '竞争风险模型' },
+                { week: '第13-14周', topic: '参数生存模型' },
+                { week: '第15-16周', topic: '高级主题与应用' }
+            ],
+            en: [
+                { week: 'Week 1-2', topic: 'Survival Data Overview' },
+                { week: 'Week 3-4', topic: 'Kaplan-Meier Estimation' },
+                { week: 'Week 5-6', topic: 'Cox Proportional Hazards Model' },
+                { week: 'Week 7-8', topic: 'Time-Varying Covariates' },
+                { week: 'Week 9-10', topic: 'Model Diagnostics' },
+                { week: 'Week 11-12', topic: 'Competing Risks Models' },
+                { week: 'Week 13-14', topic: 'Parametric Survival Models' },
+                { week: 'Week 15-16', topic: 'Advanced Topics & Applications' }
+            ]
+        },
+        assessment: {
+            zh: [
+                '作业：35%',
+                '期中考试：30%',
+                '期末项目：35%'
+            ],
+            en: [
+                'Homework: 35%',
+                'Midterm Exam: 30%',
+                'Final Project: 35%'
+            ]
+        }
+    },
+    'stat7020': {
+        code: 'STAT 7020',
+        title: {
+            zh: '因果推断',
+            en: 'Causal Inference'
+        },
+        info: {
+            instructor: { zh: '曹雷', en: 'Lei Cao' },
+            semester: { zh: '春季学期', en: 'Spring Semester' },
+            hours: { zh: '48学时', en: '48 hours' },
+            credits: { zh: '3学分', en: '3 credits' }
+        },
+        overview: {
+            zh: '系统介绍因果推断的理论框架和方法，包括潜在结果模型、倾向得分、工具变量、敏感性分析等。强调在观察性研究中的应用。',
+            en: 'Systematic introduction to causal inference theory and methods, including potential outcomes framework, propensity scores, instrumental variables, and sensitivity analysis. Emphasis on applications in observational studies.'
+        },
+        objectives: {
+            zh: [
+                '理解因果推断的基本概念',
+                '掌握倾向得分方法',
+                '学习工具变量和差分方法',
+                '进行敏感性分析',
+                '设计和分析观察性研究'
+            ],
+            en: [
+                'Understand fundamental concepts of causal inference',
+                'Master propensity score methods',
+                'Learn instrumental variables and difference-in-differences',
+                'Conduct sensitivity analysis',
+                'Design and analyze observational studies'
+            ]
+        },
+        schedule: {
+            zh: [
+                { week: '第1-2周', topic: '因果推断概述' },
+                { week: '第3-4周', topic: '潜在结果框架' },
+                { week: '第5-6周', topic: '倾向得分匹配' },
+                { week: '第7-8周', topic: '工具变量方法' },
+                { week: '第9-10周', topic: '差分法' },
+                { week: '第11-12周', topic: '中介分析' },
+                { week: '第13-14周', topic: '敏感性分析' },
+                { week: '第15-16周', topic: '因果图与综合应用' }
+            ],
+            en: [
+                { week: 'Week 1-2', topic: 'Causal Inference Overview' },
+                { week: 'Week 3-4', topic: 'Potential Outcomes Framework' },
+                { week: 'Week 5-6', topic: 'Propensity Score Matching' },
+                { week: 'Week 7-8', topic: 'Instrumental Variables' },
+                { week: 'Week 9-10', topic: 'Difference-in-Differences' },
+                { week: 'Week 11-12', topic: 'Mediation Analysis' },
+                { week: 'Week 13-14', topic: 'Sensitivity Analysis' },
+                { week: 'Week 15-16', topic: 'Causal Graphs & Applications' }
+            ]
+        },
+        assessment: {
+            zh: [
+                '作业：40%',
+                '论文阅读报告：25%',
+                '期末项目：35%'
+            ],
+            en: [
+                'Homework: 40%',
+                'Paper Review: 25%',
+                'Final Project: 35%'
+            ]
+        }
+    },
+    'cs7030': {
+        code: 'CS 7030',
+        title: {
+            zh: '医学影像深度学习',
+            en: 'Deep Learning for Medical Imaging'
+        },
+        info: {
+            instructor: { zh: '曹雷', en: 'Lei Cao' },
+            semester: { zh: '秋季学期', en: 'Fall Semester' },
+            hours: { zh: '64学时', en: '64 hours' },
+            credits: { zh: '4学分', en: '4 credits' }
+        },
+        overview: {
+            zh: '深入讲解深度学习在医学影像分析中的应用，包括CNN、U-Net、目标检测、图像分割等技术。学生将使用PyTorch实现和训练深度学习模型。',
+            en: 'In-depth coverage of deep learning applications in medical imaging, including CNN, U-Net, object detection, and image segmentation. Students will implement and train models using PyTorch.'
+        },
+        objectives: {
+            zh: [
+                '理解深度学习在医学影像中的应用',
+                '掌握CNN和图像分割网络',
+                '学习迁移学习和数据增强',
+                '处理不平衡医学影像数据',
+                '评估和优化深度学习模型'
+            ],
+            en: [
+                'Understand deep learning applications in medical imaging',
+                'Master CNN and image segmentation networks',
+                'Learn transfer learning and data augmentation',
+                'Handle imbalanced medical imaging data',
+                'Evaluate and optimize deep learning models'
+            ]
+        },
+        schedule: {
+            zh: [
+                { week: '第1-2周', topic: '深度学习与PyTorch基础' },
+                { week: '第3-4周', topic: 'CNN架构与图像分类' },
+                { week: '第5-6周', topic: 'U-Net与图像分割' },
+                { week: '第7-8周', topic: '目标检测' },
+                { week: '第9-10周', topic: '迁移学习' },
+                { week: '第11-12周', topic: '数据增强与正则化' },
+                { week: '第13-14周', topic: '模型解释性' },
+                { week: '第15-16周', topic: '临床应用与项目' }
+            ],
+            en: [
+                { week: 'Week 1-2', topic: 'Deep Learning & PyTorch Basics' },
+                { week: 'Week 3-4', topic: 'CNN Architecture & Image Classification' },
+                { week: 'Week 5-6', topic: 'U-Net & Image Segmentation' },
+                { week: 'Week 7-8', topic: 'Object Detection' },
+                { week: 'Week 9-10', topic: 'Transfer Learning' },
+                { week: 'Week 11-12', topic: 'Data Augmentation & Regularization' },
+                { week: 'Week 13-14', topic: 'Model Interpretability' },
+                { week: 'Week 15-16', topic: 'Clinical Applications & Projects' }
+            ]
+        },
+        assessment: {
+            zh: [
+                '编程作业：45%',
+                '期中项目：25%',
+                '期末项目：30%'
+            ],
+            en: [
+                'Programming Assignments: 45%',
+                'Midterm Project: 25%',
+                'Final Project: 30%'
+            ]
+        }
+    }
+};
+
+// 获取模态框元素
+const modal = document.getElementById('syllabusModal');
+const modalClose = document.getElementById('modalClose');
+const modalBody = document.getElementById('modalBody');
+const modalCourseCode = document.getElementById('modalCourseCode');
+const modalCourseTitle = document.getElementById('modalCourseTitle');
+const modalCourseTitleEn = document.getElementById('modalCourseTitleEn');
+
+// 获取当前语言
+function getCurrentLang() {
+    return localStorage.getItem('lang') || 'zh';
+}
+
+// 渲染课程大纲
+function renderSyllabus(courseId) {
+    const course = syllabusData[courseId];
+    if (!course) return;
+    
+    const lang = getCurrentLang();
+    
+    // 更新标题
+    modalCourseCode.textContent = course.code;
+    modalCourseTitle.textContent = course.title[lang];
+    modalCourseTitleEn.textContent = course.title[lang === 'zh' ? 'en' : 'zh'];
+    
+    // 构建课程信息
+    const infoHTML = `
+        <div class="syllabus-info-grid">
+            <div class="info-item">
+                <div class="info-icon">👨‍🏫</div>
+                <div class="info-text">
+                    <div class="info-label" data-en="Instructor" data-zh="授课教师">${lang === 'zh' ? '授课教师' : 'Instructor'}</div>
+                    <div class="info-value">${course.info.instructor[lang]}</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📅</div>
+                <div class="info-text">
+                    <div class="info-label" data-en="Semester" data-zh="学期">${lang === 'zh' ? '学期' : 'Semester'}</div>
+                    <div class="info-value">${course.info.semester[lang]}</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">⏱️</div>
+                <div class="info-text">
+                    <div class="info-label" data-en="Hours" data-zh="学时">${lang === 'zh' ? '学时' : 'Hours'}</div>
+                    <div class="info-value">${course.info.hours[lang]}</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📖</div>
+                <div class="info-text">
+                    <div class="info-label" data-en="Credits" data-zh="学分">${lang === 'zh' ? '学分' : 'Credits'}</div>
+                    <div class="info-value">${course.info.credits[lang]}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // 构建课程概述
+    const overviewHTML = `
+        <div class="syllabus-section">
+            <h3>${lang === 'zh' ? '课程概述' : 'Course Overview'}</h3>
+            <p>${course.overview[lang]}</p>
+        </div>
+    `;
+    
+    // 构建学习目标
+    const objectivesHTML = `
+        <div class="syllabus-section">
+            <h3>${lang === 'zh' ? '学习目标' : 'Learning Objectives'}</h3>
+            <ul>
+                ${course.objectives[lang].map(obj => `<li>${obj}</li>`).join('')}
+            </ul>
+        </div>
+    `;
+    
+    // 构建课程安排
+    const scheduleHTML = `
+        <div class="syllabus-section">
+            <h3>${lang === 'zh' ? '课程安排' : 'Course Schedule'}</h3>
+            <div class="syllabus-weeks">
+                ${course.schedule[lang].map(item => `
+                    <div class="week-item">
+                        <strong>${item.week}</strong>
+                        <span>${item.topic}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    // 构建考核方式
+    const assessmentHTML = `
+        <div class="syllabus-section">
+            <h3>${lang === 'zh' ? '考核方式' : 'Assessment'}</h3>
+            <ul>
+                ${course.assessment[lang].map(item => `<li>${item}</li>`).join('')}
+            </ul>
+        </div>
+    `;
+    
+    // 组合所有内容
+    modalBody.innerHTML = infoHTML + overviewHTML + objectivesHTML + scheduleHTML + assessmentHTML;
+}
+
+// 打开模态框
+function openModal(courseId) {
+    renderSyllabus(courseId);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// 关闭模态框
+function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// 绑定事件
+document.querySelectorAll('.view-syllabus').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const courseId = btn.getAttribute('data-course');
+        openModal(courseId);
+    });
+});
+
+modalClose.addEventListener('click', closeModal);
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+// ESC键关闭
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+    }
+});
+</script>
+    <!-- 课程大纲模态框 -->
+<div class="modal-overlay" id="syllabusModal">
+    <div class="syllabus-modal">
+        <div class="modal-header">
+            <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+            <div class="modal-course-code" id="modalCourseCode">STAT 5010</div>
+            <h2 class="modal-course-title" id="modalCourseTitle">生物统计学导论</h2>
+            <p class="modal-course-title-en" id="modalCourseTitleEn">Introduction to Biostatistics</p>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <!-- 课程大纲内容将通过 JavaScript 动态加载 -->
+        </div>
+    </div>
+</div>
 </body>
 </html>
