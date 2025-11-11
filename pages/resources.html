@@ -212,6 +212,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
         }
         
         .resource-link:hover {
@@ -393,6 +394,121 @@
             color: var(--primary);
             font-weight: bold;
         }
+
+        /* 密码保护模态框样式 */
+        .password-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .password-modal-content {
+            position: relative;
+            background: white;
+            margin: 10% auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .password-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .password-modal-close:hover {
+            color: #333;
+        }
+
+        .password-modal-content h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .password-modal-content p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .password-modal-content input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .password-modal-content input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .password-modal-content button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .password-modal-content button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(140, 21, 21, 0.3);
+        }
+
+        .password-error {
+            color: #d73a49;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .lock-icon {
+            color: #f39c12;
+            font-size: 1rem;
+            margin-left: 5px;
+        }
         
         /* 响应式 */
         @media (max-width: 768px) {
@@ -416,6 +532,11 @@
             
             .category-header-text h2 {
                 font-size: 2rem;
+            }
+
+            .password-modal-content {
+                margin: 20% auto;
+                padding: 30px 20px;
             }
         }
     </style>
@@ -463,6 +584,22 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="password-modal">
+        <div class="password-modal-content">
+            <span class="password-modal-close">&times;</span>
+            <h2 data-en="🔒 Access Restricted" data-zh="🔒 访问受限">🔒 访问受限</h2>
+            <p data-en="This resource is for lab members only. Please enter the password to access."
+               data-zh="此资源仅供课题组成员访问，请输入密码。">
+                此资源仅供课题组成员访问，请输入密码。
+            </p>
+            <input type="password" id="passwordInput" placeholder="输入密码 / Enter Password">
+            <button id="verifyPassword" data-en="Verify" data-zh="验证">验证</button>
+            <div class="password-error" id="passwordError" data-en="Incorrect password. Please try again."
+                 data-zh="密码错误，请重试。">密码错误，请重试。</div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="resources-hero">
@@ -676,11 +813,14 @@
                 </div>
 
                 <div class="resources-grid">
+                    <!-- Protected Dataset 1 -->
                     <div class="resource-item" data-aos="fade-up">
                         <div class="resource-item-header">
                             <div class="resource-icon">🫀</div>
                             <div class="resource-item-title">
-                                <h3 data-en="Cardiovascular Risk Dataset" data-zh="心血管风险数据集">心血管风险数据集</h3>
+                                <h3 data-en="Cardiovascular Risk Dataset" data-zh="心血管风险数据集">
+                                    心血管风险数据集 <span class="lock-icon">🔒</span>
+                                </h3>
                                 <span class="resource-type" data-en="Clinical Data" data-zh="临床数据">临床数据</span>
                             </div>
                         </div>
@@ -704,7 +844,7 @@
                             </span>
                         </div>
                         <div class="resource-links">
-                            <a href="#" class="resource-link">
+                            <a href="#" class="resource-link" data-protected="true" data-url="https://example.com/dataset1.zip">
                                 <span>📥</span>
                                 <span data-en="Download" data-zh="下载">下载</span>
                             </a>
@@ -715,11 +855,14 @@
                         </div>
                     </div>
 
+                    <!-- Protected Dataset 2 -->
                     <div class="resource-item" data-aos="fade-up" data-aos-delay="100">
                         <div class="resource-item-header">
                             <div class="resource-icon">🧬</div>
                             <div class="resource-item-title">
-                                <h3 data-en="Cancer Genomics Dataset" data-zh="癌症基因组学数据集">癌症基因组学数据集</h3>
+                                <h3 data-en="Cancer Genomics Dataset" data-zh="癌症基因组学数据集">
+                                    癌症基因组学数据集 <span class="lock-icon">🔒</span>
+                                </h3>
                                 <span class="resource-type" data-en="Genomic Data" data-zh="基因组数据">基因组数据</span>
                             </div>
                         </div>
@@ -743,7 +886,7 @@
                             </span>
                         </div>
                         <div class="resource-links">
-                            <a href="#" class="resource-link">
+                            <a href="#" class="resource-link" data-protected="true" data-url="https://example.com/dataset2.zip">
                                 <span>📥</span>
                                 <span data-en="Download" data-zh="下载">下载</span>
                             </a>
@@ -754,11 +897,14 @@
                         </div>
                     </div>
 
+                    <!-- Protected Dataset 3 -->
                     <div class="resource-item" data-aos="fade-up" data-aos-delay="200">
                         <div class="resource-item-header">
                             <div class="resource-icon">🖼️</div>
                             <div class="resource-item-title">
-                                <h3 data-en="Medical Image Collection" data-zh="医学影像集合">医学影像集合</h3>
+                                <h3 data-en="Medical Image Collection" data-zh="医学影像集合">
+                                    医学影像集合 <span class="lock-icon">🔒</span>
+                                </h3>
                                 <span class="resource-type" data-en="Image Data" data-zh="影像数据">影像数据</span>
                             </div>
                         </div>
@@ -782,7 +928,7 @@
                             </span>
                         </div>
                         <div class="resource-links">
-                            <a href="#" class="resource-link">
+                            <a href="#" class="resource-link" data-protected="true" data-url="https://example.com/dataset3.zip">
                                 <span>📥</span>
                                 <span data-en="Download" data-zh="下载">下载</span>
                             </a>
@@ -921,7 +1067,7 @@
                     <div class="tutorial-content">
                         <p data-en="Learn the basics of R programming for biostatistical analysis, including data manipulation, visualization, and basic statistical tests."
                            data-zh="学习用于生物统计分析的R编程基础，包括数据处理、可视化和基本统计检验。">
-                            学习用于生物统计分析的R编程基础，包括数据处理、可视化和基本统计检验。
+                            学习用于生物统计分析的R编程基础,包括数据处理、可视化和基本统计检验。
                         </p>
                         <ul>
                             <li data-en="R basics and RStudio setup" data-zh="R基础和RStudio设置">R基础和RStudio设置</li>
@@ -1027,18 +1173,18 @@
                 <div class="footer-col">
                     <h4 data-en="Quick Links" data-zh="快速链接">快速链接</h4>
                     <ul>
-                        <li><a href="research.html" data-en="Research" data-zh="研究">研究</a></li>
-                        <li><a href="publications.html" data-en="Publications" data-zh="论文">论文</a></li>
-                        <li><a href="members.html" data-en="Team" data-zh="团队">团队</a></li>
-                        <li><a href="news.html" data-en="News" data-zh="动态">动态</a></li>
+                        <li><a href="/pages/research.html" data-en="Research" data-zh="研究">研究</a></li>
+                        <li><a href="/pages/publications.html" data-en="Publications" data-zh="论文">论文</a></li>
+                        <li><a href="/pages/members.html" data-en="Team" data-zh="团队">团队</a></li>
+                        <li><a href="/pages/news.html" data-en="News" data-zh="动态">动态</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4 data-en="Resources" data-zh="资源">资源</h4>
                     <ul>
-                        <li><a href="courses.html" data-en="Courses" data-zh="课程">课程</a></li>
-                        <li><a href="resources.html" data-en="Resources" data-zh="资源">资源</a></li>
-                        <li><a href="join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
+                        <li><a href="/pages/courses.html" data-en="Courses" data-zh="课程">课程</a></li>
+                        <li><a href="/pages/resources.html" data-en="Resources" data-zh="资源">资源</a></li>
+                        <li><a href="/pages/join.html" data-en="Join Us" data-zh="加入我们">加入我们</a></li>
                     </ul>
                 </div>
             </div>
@@ -1054,25 +1200,144 @@
     </footer>
 
     <script src="../assets/js/main.js"></script>
+    
+    <!-- Password Protection Script -->
     <script>
-        // Tutorial 折叠功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const tutorialCards = document.querySelectorAll('.tutorial-card');
+        // 密码哈希 - 当前密码: "leicao2025"
+        const correctPasswordHash = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
+        
+        // 密码哈希函数
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // 检查是否已验证
+        function checkAuthentication() {
+            const authenticated = sessionStorage.getItem('labResourceAuth');
+            const authTime = sessionStorage.getItem('labResourceAuthTime');
             
-            tutorialCards.forEach(card => {
-                const header = card.querySelector('.tutorial-header');
+            if (authenticated === 'true' && authTime) {
+                const elapsed = Date.now() - parseInt(authTime);
+                // 2小时有效期 (7200000 毫秒)
+                if (elapsed < 7200000) {
+                    return true;
+                } else {
+                    // 清除过期的认证
+                    sessionStorage.removeItem('labResourceAuth');
+                    sessionStorage.removeItem('labResourceAuthTime');
+                }
+            }
+            return false;
+        }
+
+        // 保存认证状态
+        function saveAuthentication() {
+            sessionStorage.setItem('labResourceAuth', 'true');
+            sessionStorage.setItem('labResourceAuthTime', Date.now().toString());
+        }
+
+        // 获取模态框元素
+        const modal = document.getElementById('passwordModal');
+        const closeBtn = document.querySelector('.password-modal-close');
+        const verifyBtn = document.getElementById('verifyPassword');
+        const passwordInput = document.getElementById('passwordInput');
+        const errorMsg = document.getElementById('passwordError');
+        let pendingResourceUrl = null;
+
+        // 为所有受保护的资源添加点击事件
+        document.querySelectorAll('[data-protected="true"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                header.addEventListener('click', function() {
-                    // 关闭其他打开的教程
-                    tutorialCards.forEach(otherCard => {
-                        if (otherCard !== card) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-                    
-                    // 切换当前教程
-                    card.classList.toggle('active');
-                });
+                // 检查是否已验证
+                if (checkAuthentication()) {
+                    // 已验证，直接访问
+                    const url = this.getAttribute('data-url') || this.getAttribute('href');
+                    if (url && url !== '#') {
+                        window.location.href = url;
+                    } else {
+                        alert('资源正在准备中 / Resource is being prepared');
+                    }
+                } else {
+                    // 未验证，显示密码输入框
+                    pendingResourceUrl = this.getAttribute('data-url') || this.getAttribute('href');
+                    modal.style.display = 'block';
+                    passwordInput.value = '';
+                    errorMsg.style.display = 'none';
+                    setTimeout(() => passwordInput.focus(), 100);
+                }
+            });
+        });
+
+        // 关闭模态框
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+            pendingResourceUrl = null;
+        };
+
+        // 点击外部关闭
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                pendingResourceUrl = null;
+            }
+        };
+
+        // 验证密码
+        async function verifyPassword() {
+            const inputPassword = passwordInput.value;
+            
+            if (!inputPassword) {
+                errorMsg.textContent = document.documentElement.lang === 'en' ? 
+                    'Please enter a password' : '请输入密码';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            const hashedInput = await hashPassword(inputPassword);
+            
+            if (hashedInput === correctPasswordHash) {
+                // 密码正确
+                saveAuthentication();
+                modal.style.display = 'none';
+                
+                // 访问资源
+                if (pendingResourceUrl && pendingResourceUrl !== '#') {
+                    window.location.href = pendingResourceUrl;
+                } else {
+                    alert('资源正在准备中 / Resource is being prepared');
+                }
+                
+                pendingResourceUrl = null;
+            } else {
+                // 密码错误
+                errorMsg.textContent = document.documentElement.lang === 'en' ? 
+                    'Incorrect password. Please try again.' : '密码错误，请重试。';
+                errorMsg.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        // 点击验证按钮
+        verifyBtn.onclick = verifyPassword;
+
+        // 支持 Enter 键提交
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+
+        // 教程展开/收起功能
+        document.querySelectorAll('.tutorial-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const card = this.parentElement;
+                card.classList.toggle('active');
             });
         });
     </script>
