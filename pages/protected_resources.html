@@ -1,0 +1,189 @@
+````markdown
+---
+layout: default
+title: Protected Resources
+permalink: /protected-resources/
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .auth-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0256c7;
+        }
+        .error {
+            color: #d73a49;
+            margin-top: 10px;
+        }
+        .protected-content {
+            display: none;
+            margin-top: 30px;
+        }
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+        .resource-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-left: 4px solid #0366d6;
+            border-radius: 4px;
+        }
+        .resource-list a {
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container" id="loginForm">
+        <h2>🔒 访问受限资源</h2>
+        <p>此页面仅供课题组成员访问，请输入密码</p>
+        <input type="password" id="passwordInput" placeholder="请输入密码" onkeypress="if(event.key==='Enter') checkPassword()">
+        <button onclick="checkPassword()">验证并访问</button>
+        <p class="error" id="error"></p>
+    </div>
+
+    <div class="protected-content" id="protectedContent">
+        <h2>📚 课题组内部资源</h2>
+        
+        <h3>研究数据集</h3>
+        <ul class="resource-list">
+            <li>
+                <strong>数据集 A</strong> - 心血管疾病预测模型训练数据<br>
+                <a href="#" onclick="downloadResource('dataset-a')">下载数据集</a> | 
+                <small>更新时间: 2025-01-10</small>
+            </li>
+            <li>
+                <strong>数据集 B</strong> - AI 医学影像分析数据<br>
+                <a href="#" onclick="downloadResource('dataset-b')">下载数据集</a> | 
+                <small>更新时间: 2025-01-05</small>
+            </li>
+        </ul>
+
+        <h3>内部文档</h3>
+        <ul class="resource-list">
+            <li>
+                <strong>研究方法手册</strong><br>
+                <a href="#" onclick="downloadResource('methodology')">查看文档</a>
+            </li>
+            <li>
+                <strong>实验记录模板</strong><br>
+                <a href="#" onclick="downloadResource('template')">下载模板</a>
+            </li>
+        </ul>
+
+        <h3>代码仓库（私有）</h3>
+        <ul class="resource-list">
+            <li>
+                <strong>模型训练代码</strong><br>
+                <a href="https://github.com/leicaohmu/private-repo" target="_blank">访问仓库</a>
+                <small>（需要 GitHub 授权）</small>
+            </li>
+        </ul>
+        
+        <button onclick="logout()" style="background-color: #6c757d; margin-top: 20px;">退出登录</button>
+    </div>
+
+    <script>
+        // 密码哈希值（SHA-256）- 请修改为您自己的密码
+        // 当前示例密码: "leicao2025"
+        const correctPasswordHash = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
+
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        async function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            
+            if (!input) {
+                document.getElementById('error').textContent = '请输入密码';
+                return;
+            }
+            
+            const hashedInput = await hashPassword(input);
+            
+            if (hashedInput === correctPasswordHash) {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('protectedContent').style.display = 'block';
+                sessionStorage.setItem('labAuthenticated', 'true');
+                sessionStorage.setItem('authTime', Date.now());
+            } else {
+                document.getElementById('error').textContent = '密码错误，请重试';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('labAuthenticated');
+            sessionStorage.removeItem('authTime');
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('protectedContent').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('error').textContent = '';
+        }
+
+        function downloadResource(resourceId) {
+            // 这里可以添加具体的下载逻辑
+            alert('正在准备下载资源: ' + resourceId);
+            // 实际使用时可以链接到云存储的文件
+        }
+
+        // 页面加载时检查认证状态
+        window.onload = function() {
+            const authenticated = sessionStorage.getItem('labAuthenticated');
+            const authTime = sessionStorage.getItem('authTime');
+            
+            // 验证状态有效期：2小时
+            if (authenticated === 'true' && authTime && (Date.now() - authTime < 7200000)) {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('protectedContent').style.display = 'block';
+            } else {
+                // 清除过期的认证
+                sessionStorage.removeItem('labAuthenticated');
+                sessionStorage.removeItem('authTime');
+            }
+        }
+    </script>
+</body>
+</html>
